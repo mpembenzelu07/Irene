@@ -106,6 +106,7 @@
             background: none;
             border: none;
             cursor: pointer;
+            color: var(--dark);
         }
         
         /* === HERO SECTION === */
@@ -190,6 +191,11 @@
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
+            opacity: 0;
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
         }
         
         .feature-card:hover {
@@ -420,6 +426,19 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
             }
             
             .mobile-menu-btn {
@@ -452,7 +471,7 @@
         }
         
         .fade-in {
-            animation: fadeIn 0.8s ease-out;
+            animation: fadeIn 0.8s ease-out forwards;
         }
     </style>
 </head>
@@ -480,7 +499,7 @@
                 </ul>
             </nav>
             
-            <button class="cta-button">Download App</button>
+            <button class="cta-button" id="downloadBtn">Download App</button>
         </div>
     </header>
 
@@ -491,19 +510,19 @@
             <p>Tanzania's first digital food ecosystem where you can order from multiple restaurants in one seamless checkout. Experience the future of food delivery.</p>
             
             <div class="hero-buttons">
-                <button class="cta-button" style="background-color: var(--accent); color: var(--dark);">Order Now</button>
-                <button class="cta-button" style="background-color: transparent; border: 2px solid white;">Learn More</button>
+                <button class="cta-button" id="orderNowBtn" style="background-color: var(--accent); color: var(--dark);">Order Now</button>
+                <button class="cta-button" id="learnMoreBtn" style="background-color: transparent; border: 2px solid white;">Learn More</button>
             </div>
             
             <div class="app-badges">
-                <a href="#" class="app-badge">
+                <a href="#" class="app-badge" id="appStoreBtn">
                     <i class="fab fa-apple"></i>
                     <div>
                         <div style="font-size: 0.8rem;">Download on the</div>
                         <div>App Store</div>
                     </div>
                 </a>
-                <a href="#" class="app-badge">
+                <a href="#" class="app-badge" id="googlePlayBtn">
                     <i class="fab fa-google-play"></i>
                     <div>
                         <div style="font-size: 0.8rem;">Get it on</div>
@@ -523,7 +542,7 @@
             </div>
             
             <div class="features-grid">
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
@@ -531,7 +550,7 @@
                     <p>Order from multiple restaurants in one seamless checkout. Mix and match your favorite dishes from different kitchens.</p>
                 </div>
                 
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
@@ -539,7 +558,7 @@
                     <p>Our AI remembers your preferences, allergies, and spice tolerance to suggest perfect meals automatically.</p>
                 </div>
                 
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-flag"></i>
                     </div>
@@ -547,7 +566,7 @@
                     <p>Explore authentic Tanzanian dishes by region - from Nyama Choma Combos to Zanzibar Spice Specials.</p>
                 </div>
                 
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -555,7 +574,7 @@
                     <p>Share orders with friends, family, or colleagues and split payments automatically. Perfect for offices and parties.</p>
                 </div>
                 
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
@@ -563,7 +582,7 @@
                     <p>Track every dish in your cart separately, even if they come from different kitchens, with live ETA for each item.</p>
                 </div>
                 
-                <div class="feature-card fade-in">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
@@ -632,7 +651,7 @@
                 <div class="game-result" id="gameResult">
                     <h4>🎉 Perfect Match!</h4>
                     <p id="resultText">Based on your selection, we recommend trying <strong>Nyama Choma with Kachumbari</strong> from Grill House and <strong>Pilau Rice</strong> from Swahili Delights. Add both to your cart for a 15% combo discount!</p>
-                    <button class="cta-button" style="margin-top: 15px;">View Recommendations</button>
+                    <button class="cta-button" id="viewRecsBtn" style="margin-top: 15px;">View Recommendations</button>
                 </div>
             </div>
         </div>
@@ -646,10 +665,10 @@
                     <h2>Pamoja<span style="color: var(--accent);">Eats</span></h2>
                     <p>Tanzania's first digital food ecosystem. Your taste, your way.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" id="facebookLink"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" id="twitterLink"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="instagramLink"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="linkedinLink"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -658,7 +677,7 @@
                     <ul>
                         <li><a href="how-it-works.html">How It Works</a></li>
                         <li><a href="restaurants.html">Browse Restaurants</a></li>
-                        <li><a href="#">Download App</a></li>
+                        <li><a href="#" id="downloadLinkFooter">Download App</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Gift Cards</a></li>
                     </ul>
@@ -694,26 +713,29 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navMenu.style.flexDirection = 'column';
-            navMenu.style.position = 'absolute';
-            navMenu.style.top = '70px';
-            navMenu.style.left = '0';
-            navMenu.style.width = '100%';
-            navMenu.style.backgroundColor = 'white';
-            navMenu.style.padding = '20px';
-            navMenu.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        // Mobile Menu Toggle - FIXED
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
         });
 
-        // Taste Matching Game
-        document.querySelectorAll('.flavor-btn').forEach(button => {
+        // Close mobile menu when clicking outside - ADDED FOR BETTER UX
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        // Taste Matching Game - FIXED
+        const flavorButtons = document.querySelectorAll('.flavor-btn');
+        const gameResult = document.getElementById('gameResult');
+        const resultText = document.getElementById('resultText');
+        
+        flavorButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const flavor = this.getAttribute('data-flavor');
-                const resultText = document.getElementById('resultText');
-                const gameResult = document.getElementById('gameResult');
                 
                 const recommendations = {
                     spicy: "🌶️ <strong>Zanzibar Spice Special</strong> from Spice Island Restaurant with <strong>Mango Chili Salad</strong> from Tropical Bites. Perfect for spice lovers!",
@@ -725,26 +747,91 @@
                 
                 resultText.innerHTML = `Based on your selection, we recommend trying ${recommendations[flavor]} Add both to your cart for a 10% combo discount!`;
                 gameResult.style.display = 'block';
-                gameResult.scrollIntoView({behavior: 'smooth'});
+                
+                // Scroll to result smoothly
+                setTimeout(() => {
+                    gameResult.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 100);
             });
         });
 
-        // Fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
-
+        // Fade-in animation on scroll - FIXED
+        const featureCards = document.querySelectorAll('.feature-card');
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
         // Observe all feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
+        featureCards.forEach(card => {
             observer.observe(card);
+        });
+
+        // Button click handlers - FIXED
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            alert('Redirecting to download page...');
+        });
+        
+        document.getElementById('orderNowBtn').addEventListener('click', function() {
+            alert('Opening order menu...');
+        });
+        
+        document.getElementById('learnMoreBtn').addEventListener('click', function() {
+            alert('Scrolling to features section...');
+            document.querySelector('.features').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        document.getElementById('viewRecsBtn').addEventListener('click', function() {
+            alert('Showing recommended dishes...');
+        });
+        
+        // App store buttons
+        document.getElementById('appStoreBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecting to App Store...');
+        });
+        
+        document.getElementById('googlePlayBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecting to Google Play Store...');
+        });
+        
+        // Footer links
+        document.getElementById('downloadLinkFooter').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecting to download page...');
+        });
+        
+        // Social media links
+        document.getElementById('facebookLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Facebook page...');
+        });
+        
+        document.getElementById('twitterLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Twitter page...');
+        });
+        
+        document.getElementById('instagramLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Instagram page...');
+        });
+        
+        document.getElementById('linkedinLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening LinkedIn page...');
         });
     </script>
 </body>
