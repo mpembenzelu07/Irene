@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja Eats - Your Taste, Your Way | Tanzania's Food Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === GLOBAL STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B35;
+            --secondary: #1A535C;
+            --accent: #FFE66D;
+            --light: #F7FFF7;
+            --dark: #292F36;
+            --gray: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* === HEADER & NAVIGATION === */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* === HERO SECTION === */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .app-badges {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .app-badge {
+            background-color: white;
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .app-badge:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* === FEATURES SECTION === */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* === HOW IT WORKS === */
+        .how-it-works {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            text-align: center;
+            max-width: 250px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        /* === RESTAURANT SHOWCASE === */
+        .restaurant-showcase {
+            padding: 80px 0;
+        }
+        
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .restaurant-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .restaurant-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .restaurant-img {
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .restaurant-info {
+            padding: 20px;
+        }
+        
+        .restaurant-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .rating {
+            color: #FFC107;
+            margin-bottom: 10px;
+        }
+        
+        /* === TASTE GAME === */
+        .taste-game {
+            padding: 80px 0;
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+        }
+        
+        .game-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+            background-color: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+        }
+        
+        .flavor-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .flavor-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .flavor-btn:hover {
+            background-color: white;
+            transform: scale(1.05);
+        }
+        
+        .game-result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            display: none;
+        }
+        
+        /* === FOOTER === */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: var(--gray);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* === ANIMATIONS === */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-utensils" style="font-size: 2rem; color: var(--primary);"></i>
+                <h1>Pamoja<span>Eats</span></h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="restaurants.html">Restaurants</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-restaurants.html">For Restaurants</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <button class="cta-button">Download App</button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h2>Your Taste, <span style="color: var(--accent);">Your Way</span></h2>
+            <p>Tanzania's first digital food ecosystem where you can order from multiple restaurants in one seamless checkout. Experience the future of food delivery.</p>
+            
+            <div class="hero-buttons">
+                <button class="cta-button" style="background-color: var(--accent); color: var(--dark);">Order Now</button>
+                <button class="cta-button" style="background-color: transparent; border: 2px solid white;">Learn More</button>
+            </div>
+            
+            <div class="app-badges">
+                <a href="#" class="app-badge">
+                    <i class="fab fa-apple"></i>
+                    <div>
+                        <div style="font-size: 0.8rem;">Download on the</div>
+                        <div>App Store</div>
+                    </div>
+                </a>
+                <a href="#" class="app-badge">
+                    <i class="fab fa-google-play"></i>
+                    <div>
+                        <div style="font-size: 0.8rem;">Get it on</div>
+                        <div>Google Play</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Unique Features</h2>
+                <p>Experience food delivery like never before</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Multi-Restaurant Cart</h3>
+                    <p>Order from multiple restaurants in one seamless checkout. Mix and match your favorite dishes from different kitchens.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Taste Profiles</h3>
+                    <p>Our AI remembers your preferences, allergies, and spice tolerance to suggest perfect meals automatically.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3>Cultural Menus</h3>
+                    <p>Explore authentic Tanzanian dishes by region - from Nyama Choma Combos to Zanzibar Spice Specials.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Group Orders</h3>
+                    <p>Share orders with friends, family, or colleagues and split payments automatically. Perfect for offices and parties.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Real-Time Tracking</h3>
+                    <p>Track every dish in your cart separately, even if they come from different kitchens, with live ETA for each item.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Gamified Loyalty</h3>
+                    <p>Earn points, unlock badges, and level up to get discounts, free meals, and exclusive deals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How Pamoja Eats Works</h2>
+                <p>Get your favorite meals in 4 simple steps</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up & Set Preferences</h3>
+                    <p>Create your profile and tell us about your taste preferences, dietary restrictions, and favorite cuisines.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Browse & Build Your Cart</h3>
+                    <p>Select dishes from multiple restaurants, customize each item, and add them to your multi-restaurant cart.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Checkout & Pay</h3>
+                    <p>Pay via M-Pesa, Tigo Pesa, Airtel Money, card, or wallet. Schedule delivery or set up recurring orders.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Track & Enjoy</h3>
+                    <p>Track each dish in real-time, receive live updates, and enjoy your meal from multiple restaurants!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TASTE MATCHING GAME -->
+    <section class="taste-game">
+        <div class="container">
+            <div class="section-title">
+                <h2>Find Your Perfect Meal</h2>
+                <p>Play our taste matching game and let AI suggest dishes from multiple restaurants</p>
+            </div>
+            
+            <div class="game-container">
+                <h3>What's your flavor mood today?</h3>
+                
+                <div class="flavor-options">
+                    <button class="flavor-btn" data-flavor="spicy">🌶️ Spicy & Hot</button>
+                    <button class="flavor-btn" data-flavor="sweet">🍬 Sweet & Comforting</button>
+                    <button class="flavor-btn" data-flavor="savory">🍖 Savory & Hearty</button>
+                    <button class="flavor-btn" data-flavor="fresh">🥗 Fresh & Healthy</button>
+                    <button class="flavor-btn" data-flavor="adventurous">🌍 Adventurous</button>
+                </div>
+                
+                <div class="game-result" id="gameResult">
+                    <h4>🎉 Perfect Match!</h4>
+                    <p id="resultText">Based on your selection, we recommend trying <strong>Nyama Choma with Kachumbari</strong> from Grill House and <strong>Pilau Rice</strong> from Swahili Delights. Add both to your cart for a 15% combo discount!</p>
+                    <button class="cta-button" style="margin-top: 15px;">View Recommendations</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Pamoja<span style="color: var(--accent);">Eats</span></h2>
+                    <p>Tanzania's first digital food ecosystem. Your taste, your way.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>For Customers</h3>
+                    <ul>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="restaurants.html">Browse Restaurants</a></li>
+                        <li><a href="#">Download App</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>For Restaurants</h3>
+                    <ul>
+                        <li><a href="for-restaurants.html">Partner With Us</a></li>
+                        <li><a href="#">Restaurant Dashboard</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Terms & Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pamoja Eats. Built by I&G Technologies. CEO: Irene Mgimba | Director: George William</p>
+                <p style="margin-top: 10px;">"Your Taste, Your Way" - Tanzania's Digital Food Ecosystem</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '70px';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.backgroundColor = 'white';
+            navMenu.style.padding = '20px';
+            navMenu.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        });
+
+        // Taste Matching Game
+        document.querySelectorAll('.flavor-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const flavor = this.getAttribute('data-flavor');
+                const resultText = document.getElementById('resultText');
+                const gameResult = document.getElementById('gameResult');
+                
+                const recommendations = {
+                    spicy: "🌶️ <strong>Zanzibar Spice Special</strong> from Spice Island Restaurant with <strong>Mango Chili Salad</strong> from Tropical Bites. Perfect for spice lovers!",
+                    sweet: "🍯 <strong>Mandazi with Coconut Dip</strong> from Swahili Sweets and <strong>Banana Pudding</strong> from Dessert Corner. A sweet treat combo!",
+                    savory: "🍖 <strong>Nyama Choma Platter</strong> from Grill Masters with <strong>Ugali & Sukuma Wiki</strong> from Mama's Kitchen. Classic Tanzanian comfort food.",
+                    fresh: "🥗 <strong>Avocado Salad Bowl</strong> from Green Leaf Cafe with <strong>Fresh Fruit Smoothie</strong> from Juice Bar. Healthy and refreshing!",
+                    adventurous: "🌍 <strong>Octopus Curry</strong> from Coastal Delights and <strong>Cactus Salad</strong> from Adventure Foods. For the culinary explorer!"
+                };
+                
+                resultText.innerHTML = `Based on your selection, we recommend trying ${recommendations[flavor]} Add both to your cart for a 10% combo discount!`;
+                gameResult.style.display = 'block';
+                gameResult.scrollIntoView({behavior: 'smooth'});
+            });
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
