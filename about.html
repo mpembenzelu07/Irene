@@ -216,6 +216,14 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .story-content.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .story-year {
@@ -272,11 +280,23 @@
             overflow: hidden;
             text-align: center;
             transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .team-member.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .team-member:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .team-member.animated:hover {
+            transform: translateY(-10px);
         }
         
         .member-avatar {
@@ -339,11 +359,23 @@
             text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .value-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .value-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .value-card.animated:hover {
+            transform: translateY(-10px);
         }
         
         .value-icon {
@@ -537,6 +569,19 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
             }
             
             .mobile-menu-btn {
@@ -583,7 +628,7 @@
                 </ul>
             </nav>
             
-            <button class="cta-button">Download App</button>
+            <button class="cta-button" id="downloadBtn">Download App</button>
         </div>
     </header>
 
@@ -627,7 +672,7 @@
             
             <div class="story-timeline">
                 <div class="story-item">
-                    <div class="story-content">
+                    <div class="story-content" id="story1">
                         <h3 style="color: var(--secondary); margin-bottom: 10px;">The Idea is Born</h3>
                         <p>CEO Irene Mgimba and Director George William identified a gap in Tanzania's food delivery market. While living in Dar es Salaam, they realized no platform allowed ordering from multiple restaurants simultaneously. The concept for Pamoja Eats was born.</p>
                     </div>
@@ -635,7 +680,7 @@
                 </div>
                 
                 <div class="story-item">
-                    <div class="story-content">
+                    <div class="story-content" id="story2">
                         <h3 style="color: var(--secondary); margin-bottom: 10px;">I&G Technologies Founded</h3>
                         <p>The technical foundation was established. A team of Tanzanian developers, designers, and food industry experts came together to build the first version of the Pamoja Eats platform, focusing on multi-restaurant cart technology.</p>
                     </div>
@@ -643,7 +688,7 @@
                 </div>
                 
                 <div class="story-item">
-                    <div class="story-content">
+                    <div class="story-content" id="story3">
                         <h3 style="color: var(--secondary); margin-bottom: 10px;">Pilot Launch in Dar es Salaam</h3>
                         <p>We launched with 10 partner restaurants in Dar es Salaam. The response was overwhelming - customers loved the ability to mix dishes from different restaurants. Our AI taste matching feature quickly became a favorite.</p>
                     </div>
@@ -651,7 +696,7 @@
                 </div>
                 
                 <div class="story-item">
-                    <div class="story-content">
+                    <div class="story-content" id="story4">
                         <h3 style="color: var(--secondary); margin-bottom: 10px;">Expansion Across Tanzania</h3>
                         <p>With successful proof of concept, we expanded to Mwanza, Arusha, and Zanzibar. Our restaurant partnerships grew to over 200 establishments across Tanzania's major cities.</p>
                     </div>
@@ -659,7 +704,7 @@
                 </div>
                 
                 <div class="story-item">
-                    <div class="story-content">
+                    <div class="story-content" id="story5">
                         <h3 style="color: var(--secondary); margin-bottom: 10px;">The Future - Beyond Borders</h3>
                         <p>Today, we're working on expanding across East Africa while continuously innovating our platform with AI features, sustainability initiatives, and enhanced restaurant tools.</p>
                     </div>
@@ -678,44 +723,44 @@
             </div>
             
             <div class="team-grid">
-                <div class="team-member">
+                <div class="team-member" id="teamMember1">
                     <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
                     <div class="member-info">
                         <h3>Irene Mgimba</h3>
                         <span class="member-role">Chief Executive Officer</span>
                         <p>Former restaurant owner with 15+ years in Tanzania's hospitality industry. Irene's vision for connecting restaurants and customers drives our mission.</p>
                         <div class="member-social">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#" class="linkedin-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="twitter-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="email-link"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="team-member">
+                <div class="team-member" id="teamMember2">
                     <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
                     <div class="member-info">
                         <h3>George William</h3>
                         <span class="member-role">Director & CTO</span>
                         <p>Tech entrepreneur with expertise in AI and platform development. George leads our technical innovation and platform strategy.</p>
                         <div class="member-social">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-github"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#" class="linkedin-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="github-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="email-link"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="team-member">
+                <div class="team-member" id="teamMember3">
                     <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
                     <div class="member-info">
                         <h3>Sarah Juma</h3>
                         <span class="member-role">Head of Restaurant Partnerships</span>
                         <p>Former food critic and restaurant consultant with deep connections across Tanzania's culinary scene.</p>
                         <div class="member-social">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#" class="linkedin-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="instagram-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="email-link"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
@@ -732,7 +777,7 @@
             </div>
             
             <div class="values-grid">
-                <div class="value-card">
+                <div class="value-card" id="value1">
                     <div class="value-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -740,7 +785,7 @@
                     <p>We build for Tanzanians, by Tanzanians. Our platform celebrates local cuisine and supports local businesses.</p>
                 </div>
                 
-                <div class="value-card">
+                <div class="value-card" id="value2">
                     <div class="value-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
@@ -748,7 +793,7 @@
                     <p>We constantly push boundaries with AI, smart technology, and unique features that redefine food delivery.</p>
                 </div>
                 
-                <div class="value-card">
+                <div class="value-card" id="value3">
                     <div class="value-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
@@ -756,7 +801,7 @@
                     <p>We succeed when our restaurant partners succeed. We're collaborators, not just a platform.</p>
                 </div>
                 
-                <div class="value-card">
+                <div class="value-card" id="value4">
                     <div class="value-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
@@ -890,10 +935,10 @@
                     <h2>Pamoja<span style="color: var(--accent);">Eats</span></h2>
                     <p>Tanzania's first digital food ecosystem. Your taste, your way.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="facebook-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="twitter-link-footer"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="instagram-link-footer"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="linkedin-link-footer"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -902,7 +947,7 @@
                     <ul>
                         <li><a href="how-it-works.html">How It Works</a></li>
                         <li><a href="restaurants.html">Browse Restaurants</a></li>
-                        <li><a href="#">Download App</a></li>
+                        <li><a href="#" class="download-link-footer">Download App</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Gift Cards</a></li>
                     </ul>
@@ -938,104 +983,179 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navMenu.style.flexDirection = 'column';
-            navMenu.style.position = 'absolute';
-            navMenu.style.top = '70px';
-            navMenu.style.left = '0';
-            navMenu.style.width = '100%';
-            navMenu.style.backgroundColor = 'white';
-            navMenu.style.padding = '20px';
-            navMenu.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        // Mobile Menu Toggle - FIXED
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
         });
 
-        // Animated Statistics Counter
+        // Download button functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            alert('Redirecting to download page...');
+        });
+
+        // Animated Statistics Counter - FIXED
         function animateCounter(elementId, finalValue, duration = 2000) {
             const element = document.getElementById(elementId);
             let startValue = 0;
-            const increment = finalValue / (duration / 16); // 60fps
+            const increment = finalValue / (duration / 16);
             
             const timer = setInterval(() => {
                 startValue += increment;
                 if (startValue >= finalValue) {
-                    element.textContent = finalValue.toLocaleString();
+                    element.textContent = formatNumber(finalValue);
                     clearInterval(timer);
                 } else {
-                    element.textContent = Math.floor(startValue).toLocaleString();
+                    element.textContent = formatNumber(Math.floor(startValue));
                 }
             }, 16);
         }
 
-        // Start counters when stats section is visible
-        const statsSection = document.querySelector('.stats-section');
-        let countersAnimated = false;
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(0) + 'K+';
+            }
+            return num.toLocaleString();
+        }
 
-        const observer = new IntersectionObserver((entries) => {
+        // Animate story timeline - FIXED
+        function animateStoryTimeline() {
+            const storyItems = document.querySelectorAll('.story-content');
+            storyItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animated');
+                }, index * 200);
+            });
+        }
+
+        // Animate team members - FIXED
+        function animateTeamMembers() {
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach((member, index) => {
+                setTimeout(() => {
+                    member.classList.add('animated');
+                }, index * 200);
+            });
+        }
+
+        // Animate value cards - FIXED
+        function animateValueCards() {
+            const valueCards = document.querySelectorAll('.value-card');
+            valueCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animated');
+                }, index * 150);
+            });
+        }
+
+        // Intersection Observer for animations
+        const storyObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !countersAnimated) {
-                    countersAnimated = true;
-                    
-                    // Animate all counters
-                    animateCounter('restaurantsCount', 250);
-                    animateCounter('citiesCount', 8);
-                    animateCounter('ordersCount', 125000);
-                    animateCounter('customersCount', 50000);
-                    
-                    // Animate story items
-                    document.querySelectorAll('.story-content').forEach((content, index) => {
-                        content.style.opacity = '0';
-                        content.style.transform = 'translateY(30px)';
-                        content.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
-                        
-                        setTimeout(() => {
-                            content.style.opacity = '1';
-                            content.style.transform = 'translateY(0)';
-                        }, 100 + (index * 200));
-                    });
-                }
-            });
-        }, { threshold: 0.3 });
-
-        observer.observe(statsSection);
-
-        // Animate team members on scroll
-        const teamObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 200);
+                    animateStoryTimeline();
+                    storyObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.2 });
 
-        document.querySelectorAll('.team-member').forEach(member => {
-            member.style.opacity = '0';
-            member.style.transform = 'translateY(30px)';
-            member.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            teamObserver.observe(member);
+        const teamObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateTeamMembers();
+                    teamObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const valuesObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValueCards();
+                    valuesObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('restaurantsCount', 250, 1500);
+                    animateCounter('citiesCount', 8, 1500);
+                    animateCounter('ordersCount', 125, 1500);
+                    animateCounter('customersCount', 50, 1500);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        // Observe sections
+        storyObserver.observe(document.querySelector('.story-section'));
+        teamObserver.observe(document.querySelector('.team-section'));
+        valuesObserver.observe(document.querySelector('.values-section'));
+        statsObserver.observe(document.querySelector('.stats-section'));
+
+        // Social media link handlers
+        document.querySelectorAll('.linkedin-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening LinkedIn profile...');
+            });
         });
 
-        // Animate values on scroll
-        document.querySelectorAll('.value-card').forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-            
-            const valueObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            valueObserver.observe(card);
+        document.querySelectorAll('.twitter-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening Twitter profile...');
+            });
+        });
+
+        document.querySelectorAll('.email-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening email composer...');
+            });
+        });
+
+        document.querySelectorAll('.github-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening GitHub profile...');
+            });
+        });
+
+        document.querySelectorAll('.instagram-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening Instagram profile...');
+            });
+        });
+
+        // Footer social links
+        document.querySelector('.facebook-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Facebook page...');
+        });
+
+        document.querySelector('.twitter-link-footer').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Twitter page...');
+        });
+
+        document.querySelector('.instagram-link-footer').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Instagram page...');
+        });
+
+        document.querySelector('.linkedin-link-footer').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening LinkedIn page...');
+        });
+
+        document.querySelector('.download-link-footer').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecting to download page...');
         });
     </script>
 </body>
