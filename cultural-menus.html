@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzanian Cultural Menus | Pamoja Eats - Explore Authentic Flavors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B35;
+            --secondary: #1A535C;
+            --accent: #FFE66D;
+            --light: #F7FFF7;
+            --dark: #292F36;
+            --gray: #6C757D;
+            --coastal: #38B2AC;
+            --highlands: #4C51BF;
+            --savannah: #D69E2E;
+            --zanzibar: #805AD5;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fdf6e3 0%, #faf3e0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, .active {
+            color: var(--primary) !important;
+        }
+        
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        /* Cultural Journey */
+        .cultural-journey {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .journey-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .journey-header h2 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .journey-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Region Navigation */
+        .region-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .region-tab {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .region-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Region Content */
+        .region-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .region-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .region-hero {
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .region-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+        
+        .region-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .dish-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .dish-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dish-content {
+            padding: 25px;
+        }
+        
+        .dish-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .dish-tag {
+            background: #f0f7ff;
+            color: var(--secondary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Cultural Stories */
+        .cultural-stories {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .stories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .story-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        /* Cooking Classes */
+        .cooking-classes {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .class-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .class-header {
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+        }
+        
+        .class-content {
+            padding: 30px;
+        }
+        
+        .class-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .class-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Cultural Calendar */
+        .cultural-calendar {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #fdf6e3 0%, #faf3e0 100%);
+        }
+        
+        .calendar-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .calendar-event {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .calendar-event:hover {
+            background: #f0f7ff;
+            transform: translateY(-5px);
+        }
+        
+        .event-date {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        /* Chef Spotlight */
+        .chef-spotlight {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .chef-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .chef-profile {
+            text-align: center;
+        }
+        
+        .chef-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background-size: cover;
+            background-position: center;
+            border: 5px solid var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-links h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            background: var(--gray);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .region-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .region-tab {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .dishes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .classes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .region-hero {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-utensils" style="font-size: 2rem; color: var(--primary);"></i>
+                <h1>Pamoja<span>Eats</span></h1>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="taste-profile.html">Taste Profile</a></li>
+                    <li><a href="cultural-menus.html" class="active">Cultural Menus</a></li>
+                    <li><a href="restaurants.html">Restaurants</a></li>
+                    <li><a href="group-orders.html">Group Orders</a></li>
+                </ul>
+            </nav>
+            
+            <button class="cta-button" onclick="exploreRegions()">
+                <i class="fas fa-compass"></i> Explore Regions
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Taste Tanzania's Cultural Heritage</h1>
+            <p>Journey through Tanzania's diverse regions and discover authentic dishes that tell stories of tradition, community, and flavor.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px; flex-wrap: wrap;">
+                <button class="cta-button" onclick="showRegion('zanzibar')">
+                    <i class="fas fa-umbrella-beach"></i> Zanzibar Coast
+                </button>
+                <button class="cta-button" style="background: transparent; border: 2px solid white;">
+                    <i class="fas fa-mountain"></i> Northern Highlands
+                </button>
+                <button class="cta-button" style="background: transparent; border: 2px solid white;">
+                    <i class="fas fa-tree"></i> Southern Plains
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Journey -->
+    <section class="cultural-journey">
+        <div class="container">
+            <div class="journey-header">
+                <h2>A Culinary Journey Through Tanzania</h2>
+                <p>Each region of Tanzania offers unique flavors, ingredients, and cooking traditions. Explore them all through our partnered restaurants.</p>
+            </div>
+            
+            <!-- Region Navigation -->
+            <div class="region-nav">
+                <div class="region-tab active" data-region="zanzibar" onclick="showRegion('zanzibar')">
+                    <i class="fas fa-umbrella-beach" style="color: var(--zanzibar);"></i>
+                    Zanzibar & Coast
+                </div>
+                <div class="region-tab" data-region="northern" onclick="showRegion('northern')">
+                    <i class="fas fa-mountain" style="color: var(--highlands);"></i>
+                    Northern Highlands
+                </div>
+                <div class="region-tab" data-region="southern" onclick="showRegion('southern')">
+                    <i class="fas fa-tree" style="color: var(--savannah);"></i>
+                    Southern Plains
+                </div>
+                <div class="region-tab" data-region="central" onclick="showRegion('central')">
+                    <i class="fas fa-city" style="color: var(--primary);"></i>
+                    Central & Urban
+                </div>
+                <div class="region-tab" data-region="lake" onclick="showRegion('lake')">
+                    <i class="fas fa-water" style="color: var(--coastal);"></i>
+                    Lake Regions
+                </div>
+            </div>
+            
+            <!-- Zanzibar & Coast Region -->
+            <div class="region-content active" id="zanzibar-region">
+                <div class="region-hero" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="region-hero-content">
+                        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Zanzibar & Coastal Cuisine</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 30px;">Influenced by Arabian, Indian, and Portuguese traders, Zanzibari cuisine features fragrant spices, coconut, and fresh seafood.</p>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; backdrop-filter: blur(10px);">
+                                <i class="fas fa-fish"></i> Fresh Seafood
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; backdrop-filter: blur(10px);">
+                                <i class="fas fa-pepper-hot"></i> Exotic Spices
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; backdrop-filter: blur(10px);">
+                                <i class="fas fa-coconut"></i> Coconut
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color: var(--secondary); margin-bottom: 30px;">Signature Dishes</h3>
+                
+                <div class="dishes-grid">
+                    <div class="dish-card">
+                        <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="dish-content">
+                            <div class="dish-tags">
+                                <span class="dish-tag">Signature</span>
+                                <span class="dish-tag">Spicy</span>
+                                <span class="dish-tag">Seafood</span>
+                            </div>
+                            <h4 style="margin-bottom: 10px;">Zanzibar Pilau</h4>
+                            <p style="color: var(--gray); margin-bottom: 15px;">Fragrant rice cooked with cloves, cinnamon, cardamom, and served with grilled fish or chicken.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: var(--primary);">TZS 14,500</span>
+                                <button class="cta-button" style="padding: 8px 20px;">
+                                    <i class="fas fa-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="dish-content">
+                            <div class="dish-tags">
+                                <span class="dish-tag">Traditional</span>
+                                <span class="dish-tag">Seafood</span>
+                                <span class="dish-tag">Coconut</span>
+                            </div>
+                            <h4 style="margin-bottom: 10px;">Octopus Curry</h4>
+                            <p style="color: var(--gray); margin-bottom: 15px;">Tender octopus cooked in rich coconut curry with Zanzibari spices, served with rice.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: var(--primary);">TZS 18,000</span>
+                                <button class="cta-button" style="padding: 8px 20px;">
+                                    <i class="fas fa-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="dish-content">
+                            <div class="dish-tags">
+                                <span class="dish-tag">Street Food</span>
+                                <span class="dish-tag">Snack</span>
+                                <span class="dish-tag">Vegetarian</span>
+                            </div>
+                            <h4 style="margin-bottom: 10px;">Zanzibar Pizza</h4>
+                            <p style="color: var(--gray); margin-bottom: 15px;">Thin dough stuffed with meat, vegetables, and egg, fried to crispy perfection.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: var(--primary);">TZS 6,500</span>
+                                <button class="cta-button" style="padding: 8px 20px;">
+                                    <i class="fas fa-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f0f7ff; padding: 30px; border-radius: 15px; margin-top: 40px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 15px;">
+                        <i class="fas fa-lightbulb"></i> Cultural Insight
+                    </h4>
+                    <p style="color: var(--gray);">
+                        Zanzibar's cuisine reflects its history as the "Spice Islands." For centuries, cloves, cinnamon, and cardamom grown here traveled the world. 
+                        The blend of African, Arabic, Indian, and European influences creates uniquely complex flavors found nowhere else.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Northern Highlands Region -->
+            <div class="region-content" id="northern-region">
+                <div class="region-hero" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="region-hero-content">
+                        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Northern Highlands</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 30px;">Home to Mount Kilimanjaro and the Maasai people, this region features hearty, protein-rich dishes perfect for the cooler climate.</p>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; backdrop-filter: blur(10px);">
+                                <i class="fas fa-drumstick-bite"></i> Grilled Meats
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; backdrop-filter: blur(10px);">
+                                <i class="fas fa-seedling"></i> Maize & Beans
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 20px; backdrop-filter: blur(10px);">
+                                <i class="fas fa-cheese"></i> Dairy
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color: var(--secondary); margin-bottom: 30px;">Highland Specialties</h3>
+                
+                <div class="dishes-grid">
+                    <div class="dish-card">
+                        <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="dish-content">
+                            <div class="dish-tags">
+                                <span class="dish-tag">Traditional</span>
+                                <span class="dish-tag">Maasai</span>
+                                <span class="dish-tag">Protein</span>
+                            </div>
+                            <h4 style="margin-bottom: 10px;">Nyama Choma</h4>
+                            <p style="color: var(--gray); margin-bottom: 15px;">Perfectly grilled goat or beef, marinated with local herbs, served with ugali and kachumbari.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: var(--primary);">TZS 22,000</span>
+                                <button class="cta-button" style="padding: 8px 20px;">
+                                    <i class="fas fa-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="dish-content">
+                            <div class="dish-tags">
+                                <span class="dish-tag">Comfort Food</span>
+                                <span class="dish-tag">Vegetarian</span>
+                                <span class="dish-tag">Staple</span>
+                            </div>
+                            <h4 style="margin-bottom: 10px;">Makande</h4>
+                            <p style="color: var(--gray); margin-bottom: 15px;">Maize and beans slow-cooked with coconut milk, a hearty highland stew.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: var(--primary);">TZS 8,500</span>
+                                <button class="cta-button" style="padding: 8px 20px;">
+                                    <i class="fas fa-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="dish-content">
+                            <div class="dish-tags">
+                                <span class="dish-tag">Breakfast</span>
+                                <span class="dish-tag">Dairy</span>
+                                <span class="dish-tag">Traditional</span>
+                            </div>
+                            <h4 style="margin-bottom: 10px;">Maziwa ya Mtindi</h4>
+                            <p style="color: var(--gray); margin-bottom: 15px;">Fermented milk drink, a traditional Maasai breakfast, served with honey.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: bold; color: var(--primary);">TZS 3,500</span>
+                                <button class="cta-button" style="padding: 8px 20px;">
+                                    <i class="fas fa-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More regions would continue here... -->
+            
+        </div>
+    </section>
+
+    <!-- Cultural Stories -->
+    <section class="cultural-stories">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px;">Stories Behind The Dishes</h2>
+            
+            <div class="stories-container">
+                <div class="story-card">
+                    <div class="story-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Spice Trade Legacy</h3>
+                    <p>Zanzibar's position on ancient trade routes brought cloves from Indonesia, cinnamon from Sri Lanka, and cooking techniques from Arabia, creating the unique Swahili cuisine.</p>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Community Cooking</h3>
+                    <p>In Tanzanian villages, meals are often prepared communally. Large pots of ugali or pilau serve entire communities during celebrations and gatherings.</p>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Seasonal Wisdom</h3>
+                    <p>Traditional Tanzanian cooking follows seasonal cycles. Rainy season brings fresh greens, while dry season means preserved foods and dried fish take center stage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cooking Classes -->
+    <section class="cooking-classes">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--secondary); margin-bottom: 20px;">Learn Traditional Cooking</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 50px;">Join our virtual cooking classes led by Tanzanian grandmothers and master chefs</p>
+            
+            <div class="classes-grid">
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Swahili Coastal Cooking</h3>
+                        <p>Learn authentic Zanzibari dishes</p>
+                    </div>
+                    <div class="class-content">
+                        <p style="color: var(--gray); margin-bottom: 20px;">2-hour virtual class with Chef Asha from Stone Town</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Make perfect pilau rice</li>
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Prepare coconut fish curry</li>
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Create Zanzibar mix spices</li>
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Live Q&A session</li>
+                        </ul>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+                            <div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">TZS 25,000</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">per person</div>
+                            </div>
+                            <button class="cta-button">
+                                <i class="fas fa-calendar-plus"></i> Book Class
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Maasai Traditional Foods</h3>
+                        <p>Highland cooking with Mama Naserian</p>
+                    </div>
+                    <div class="class-content">
+                        <p style="color: var(--gray); margin-bottom: 20px;">Learn Maasai culinary traditions</p>
+                        <ul class="class-features">
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Perfect nyama choma</li>
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Traditional ugali techniques</li>
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Medicinal herb knowledge</li>
+                            <li><i class="fas fa-check" style="color: var(--primary);"></i> Cultural storytelling</li>
+                        </ul>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+                            <div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">TZS 20,000</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">per person</div>
+                            </div>
+                            <button class="cta-button">
+                                <i class="fas fa-calendar-plus"></i> Book Class
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Calendar -->
+    <section class="cultural-calendar">
+        <div class="container">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h2 style="color: var(--secondary);">Cultural Food Calendar</h2>
+                    <button class="cta-button">
+                        <i class="fas fa-calendar-alt"></i> View Full Calendar
+                    </button>
+                </div>
+                
+                <p style="color: var(--gray); margin-bottom: 30px;">Discover seasonal dishes and food festivals across Tanzania</p>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-event">
+                        <div class="event-date">January 12</div>
+                        <h4 style="margin-bottom: 10px;">Zanzibar Food Festival</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Stone Town comes alive with spice demonstrations and seafood feasts.</p>
+                    </div>
+                    
+                    <div class="calendar-event">
+                        <div class="event-date">March 15-20</div>
+                        <h4 style="margin-bottom: 10px;">Mango Season Launch</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Taste fresh mango varieties from different regions in special menus.</p>
+                    </div>
+                    
+                    <div class="calendar-event">
+                        <div class="event-date">June 1-7</div>
+                        <h4 style="margin-bottom: 10px;">Maasai Cultural Week</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Traditional highland dishes and cooking demonstrations.</p>
+                    </div>
+                    
+                    <div class="calendar-event">
+                        <div class="event-date">August 8</div>
+                        <h4 style="margin-bottom: 10px;">Farmers' Market Day</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Direct from farm to table - fresh produce and traditional dishes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chef Spotlight -->
+    <section class="chef-spotlight">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--secondary); margin-bottom: 50px;">Meet Our Cultural Ambassadors</h2>
+            
+            <div class="chef-container">
+                <div class="chef-profile">
+                    <div class="chef-avatar" style="background-image: url('https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 style="margin-bottom: 10px;">Chef Asha Mohamed</h3>
+                    <p style="color: var(--primary); margin-bottom: 15px;">Zanzibari Cuisine Expert</p>
+                    <p style="color: var(--gray);">5th generation spice trader and chef, preserving Swahili coastal recipes passed down through her family.</p>
+                </div>
+                
+                <div class="chef-profile">
+                    <div class="chef-avatar" style="background-image: url('https://images.unsplash.com/photo-1595475038784-bbe439ff41e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <h3 style="margin-bottom: 10px;">Mama Naserian</h3>
+                    <p style="color: var(--primary); margin-bottom: 15px;">Maasai Culinary Elder</p>
+                    <p style="color: var(--gray);">From the highlands of Arusha, she shares traditional Maasai cooking methods and medicinal plant knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2 style="color: white; margin-bottom: 15px;">Pamoja<span style="color: var(--accent);">Eats</span></h2>
+                    <p style="color: #ccc; margin-bottom: 20px;">Preserving Tanzania's culinary heritage through technology.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Cultural Exploration</h3>
+                    <ul>
+                        <li><a href="cultural-menus.html">Regional Menus</a></li>
+                        <li><a href="#">Seasonal Dishes</a></li>
+                        <li><a href="#">Traditional Recipes</a></li>
+                        <li><a href="#">Food Stories</a></li>
+                        <li><a href="#">Cooking Classes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>For Restaurants</h3>
+                    <ul>
+                        <li><a href="for-restaurants.html">Cultural Partnerships</a></li>
+                        <li><a href="#">Traditional Recipe Archive</a></li>
+                        <li><a href="#">Cultural Certification</a></li>
+                        <li><a href="#">Heritage Menu Development</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Food Blog</a></li>
+                        <li><a href="careers.html">Cultural Researchers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Cultural Partnerships</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pamoja Eats. Celebrating Tanzania's Culinary Diversity</p>
+                <p style="margin-top: 10px;">"Preserving Tradition Through Taste" - Tanzania's Digital Food Heritage Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Region Navigation
+        function showRegion(regionId) {
+            // Update active tab
+            document.querySelectorAll('.region-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`.region-tab[data-region="${regionId}"]`).classList.add('active');
+            
+            // Show selected region content
+            document.querySelectorAll('.region-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${regionId}-region`).classList.add('active');
+            
+            // Scroll to region
+            document.getElementById(`${regionId}-region`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Explore regions button
+        function exploreRegions() {
+            document.querySelector('.cultural-journey').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Initialize with Zanzibar region
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved region preference
+            const savedRegion = localStorage.getItem('preferredRegion');
+            if (savedRegion) {
+                showRegion(savedRegion);
+            }
+            
+            // Add click handlers for dish cards
+            document.querySelectorAll('.dish-card .cta-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const dishName = this.closest('.dish-card').querySelector('h4').textContent;
+                    const dishPrice = this.closest('.dish-card').querySelector('span').textContent;
+                    
+                    // Show added to cart notification
+                    showNotification(`${dishName} added to your multi-restaurant cart!`, 'success');
+                    
+                    // Simulate adding to cart
+                    addToMultiCart(dishName, dishPrice);
+                });
+            });
+        });
+        
+        // Notification system
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : '#FF6B35'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+            
+            // Add animation styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Simulate adding to multi-cart
+        function addToMultiCart(dishName, price) {
+            // Get existing cart or create new
+            let cart = JSON.parse(localStorage.getItem('pamojaMultiCart')) || [];
+            
+            // Add item
+            cart.push({
+                name: dishName,
+                price: price,
+                region: document.querySelector('.region-tab.active').dataset.region,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('pamojaMultiCart', JSON.stringify(cart));
+            
+            // Update cart count in header if exists
+            updateCartCount();
+        }
+        
+        // Update cart count in header
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('pamojaMultiCart')) || [];
+            const cartCount = cart.length;
+            
+            // Find or create cart indicator
+            let cartIndicator = document.querySelector('.cart-indicator');
+            if (!cartIndicator) {
+                cartIndicator = document.createElement('span');
+                cartIndicator.className = 'cart-indicator';
+                cartIndicator.style.cssText = `
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    background: var(--accent);
+                    color: var(--dark);
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    font-size: 0.8rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                `;
+                
+                const ctaButton = document.querySelector('.cta-button');
+                if (ctaButton) {
+                    ctaButton.style.position = 'relative';
+                    ctaButton.appendChild(cartIndicator);
+                }
+            }
+            
+            cartIndicator.textContent = cartCount;
+            cartIndicator.style.display = cartCount > 0 ? 'flex' : 'none';
+        }
+        
+        // Initialize cart count on load
+        window.addEventListener('load', updateCartCount);
+        
+        // Save region preference
+        document.querySelectorAll('.region-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const region = this.dataset.region;
+                localStorage.setItem('preferredRegion', region);
+            });
+        });
+    </script>
+</body>
+</html>
