@@ -6,7 +6,6 @@
     <title>Pamoja Eats - Your Taste, Your Way | Tanzania's Food Ecosystem</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* === GLOBAL STYLES === */
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +35,6 @@
             padding: 0 20px;
         }
         
-        /* === HEADER & NAVIGATION === */
         header {
             background-color: white;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
@@ -109,7 +107,6 @@
             color: var(--dark);
         }
         
-        /* === HERO SECTION === */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
@@ -162,7 +159,6 @@
             transform: translateY(-5px);
         }
         
-        /* === FEATURES SECTION === */
         .features {
             padding: 80px 0;
             background-color: white;
@@ -192,13 +188,19 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
             opacity: 0;
+            transform: translateY(20px);
         }
         
         .feature-card.visible {
             opacity: 1;
+            transform: translateY(0);
         }
         
         .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card.visible:hover {
             transform: translateY(-10px);
         }
         
@@ -214,7 +216,6 @@
             color: var(--secondary);
         }
         
-        /* === HOW IT WORKS === */
         .how-it-works {
             padding: 80px 0;
             background-color: #f9f9f9;
@@ -247,51 +248,6 @@
             margin: 0 auto 20px;
         }
         
-        /* === RESTAURANT SHOWCASE === */
-        .restaurant-showcase {
-            padding: 80px 0;
-        }
-        
-        .restaurant-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .restaurant-card {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        
-        .restaurant-card:hover {
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .restaurant-img {
-            height: 200px;
-            background-color: #ddd;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .restaurant-info {
-            padding: 20px;
-        }
-        
-        .restaurant-info h3 {
-            margin-bottom: 10px;
-        }
-        
-        .rating {
-            color: #FFC107;
-            margin-bottom: 10px;
-        }
-        
-        /* === TASTE GAME === */
         .taste-game {
             padding: 80px 0;
             background-color: var(--secondary);
@@ -339,7 +295,6 @@
             display: none;
         }
         
-        /* === FOOTER === */
         footer {
             background-color: var(--dark);
             color: white;
@@ -412,7 +367,6 @@
             font-size: 0.9rem;
         }
         
-        /* === RESPONSIVE DESIGN === */
         @media (max-width: 992px) {
             .hero h2 {
                 font-size: 2.8rem;
@@ -463,20 +417,9 @@
                 align-items: center;
             }
         }
-        
-        /* === ANIMATIONS === */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -503,7 +446,6 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="container">
             <h2>Your Taste, <span style="color: var(--accent);">Your Way</span></h2>
@@ -533,7 +475,6 @@
         </div>
     </section>
 
-    <!-- FEATURES -->
     <section class="features">
         <div class="container">
             <div class="section-title">
@@ -593,7 +534,6 @@
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
     <section class="how-it-works">
         <div class="container">
             <div class="section-title">
@@ -629,7 +569,6 @@
         </div>
     </section>
 
-    <!-- TASTE MATCHING GAME -->
     <section class="taste-game">
         <div class="container">
             <div class="section-title">
@@ -657,7 +596,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -713,29 +651,28 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle - FIXED
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuBtn.addEventListener('click', function() {
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
             navMenu.classList.toggle('show');
         });
 
-        // Close mobile menu when clicking outside - ADDED FOR BETTER UX
+        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
-            if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+            const navMenu = document.getElementById('navMenu');
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navMenu.contains(event.target) && !menuBtn.contains(event.target)) {
                 navMenu.classList.remove('show');
             }
         });
 
-        // Taste Matching Game - FIXED
-        const flavorButtons = document.querySelectorAll('.flavor-btn');
-        const gameResult = document.getElementById('gameResult');
-        const resultText = document.getElementById('resultText');
-        
-        flavorButtons.forEach(button => {
+        // Taste Matching Game
+        document.querySelectorAll('.flavor-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const flavor = this.getAttribute('data-flavor');
+                const gameResult = document.getElementById('gameResult');
+                const resultText = document.getElementById('resultText');
                 
                 const recommendations = {
                     spicy: "🌶️ <strong>Zanzibar Spice Special</strong> from Spice Island Restaurant with <strong>Mango Chili Salad</strong> from Tropical Bites. Perfect for spice lovers!",
@@ -745,58 +682,51 @@
                     adventurous: "🌍 <strong>Octopus Curry</strong> from Coastal Delights and <strong>Cactus Salad</strong> from Adventure Foods. For the culinary explorer!"
                 };
                 
-                resultText.innerHTML = `Based on your selection, we recommend trying ${recommendations[flavor]} Add both to your cart for a 10% combo discount!`;
-                gameResult.style.display = 'block';
-                
-                // Scroll to result smoothly
-                setTimeout(() => {
-                    gameResult.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }, 100);
-            });
-        });
-
-        // Fade-in animation on scroll - FIXED
-        const featureCards = document.querySelectorAll('.feature-card');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
+                if (recommendations[flavor]) {
+                    resultText.innerHTML = `Based on your selection, we recommend trying ${recommendations[flavor]} Add both to your cart for a 10% combo discount!`;
+                    gameResult.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        gameResult.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 100);
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
         });
 
-        // Observe all feature cards
-        featureCards.forEach(card => {
-            observer.observe(card);
-        });
+        // Animate feature cards on scroll
+        const featureCards = document.querySelectorAll('.feature-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
 
-        // Button click handlers - FIXED
+        featureCards.forEach(card => observer.observe(card));
+
+        // All button click handlers
         document.getElementById('downloadBtn').addEventListener('click', function() {
-            alert('Redirecting to download page...');
+            alert('Opening download options...');
         });
         
         document.getElementById('orderNowBtn').addEventListener('click', function() {
-            alert('Opening order menu...');
+            alert('Opening order page...');
         });
         
         document.getElementById('learnMoreBtn').addEventListener('click', function() {
-            alert('Scrolling to features section...');
-            document.querySelector('.features').scrollIntoView({ behavior: 'smooth' });
+            alert('Showing more information...');
         });
         
         document.getElementById('viewRecsBtn').addEventListener('click', function() {
-            alert('Showing recommended dishes...');
+            alert('Displaying recommended dishes...');
         });
         
-        // App store buttons
         document.getElementById('appStoreBtn').addEventListener('click', function(e) {
             e.preventDefault();
             alert('Redirecting to App Store...');
@@ -804,16 +734,14 @@
         
         document.getElementById('googlePlayBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('Redirecting to Google Play Store...');
+            alert('Redirecting to Google Play...');
         });
         
-        // Footer links
         document.getElementById('downloadLinkFooter').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('Redirecting to download page...');
+            alert('Opening download options...');
         });
         
-        // Social media links
         document.getElementById('facebookLink').addEventListener('click', function(e) {
             e.preventDefault();
             alert('Opening Facebook page...');
