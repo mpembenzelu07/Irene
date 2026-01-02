@@ -6,7 +6,6 @@
     <title>Browse Restaurants | Pamoja Eats - Order from Multiple Restaurants</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* === GLOBAL STYLES === */
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +35,6 @@
             padding: 0 20px;
         }
         
-        /* === HEADER & NAVIGATION === */
         header {
             background-color: white;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
@@ -110,9 +108,9 @@
             background: none;
             border: none;
             cursor: pointer;
+            color: var(--dark);
         }
         
-        /* === PAGE HEADER === */
         .page-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -125,7 +123,6 @@
             margin-bottom: 15px;
         }
         
-        /* === RESTAURANT FILTERS === */
         .filters-section {
             background-color: white;
             padding: 30px 0;
@@ -172,7 +169,6 @@
             align-items: flex-end;
         }
         
-        /* === RESTAURANT GRID === */
         .restaurants-section {
             padding: 60px 0;
         }
@@ -302,7 +298,6 @@
             font-size: 0.9rem;
         }
         
-        /* === CATEGORY SECTIONS === */
         .category-section {
             margin-top: 80px;
         }
@@ -323,13 +318,13 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
+            cursor: pointer;
         }
         
         .view-all:hover {
             text-decoration: underline;
         }
         
-        /* === REGIONAL CUISINES === */
         .regional-cuisines {
             padding: 60px 0;
             background-color: #f9f9f9;
@@ -366,7 +361,6 @@
         .coastal { color: #4ECDC4; }
         .highlands { color: #45B7D1; }
         
-        /* === PAGINATION === */
         .pagination {
             display: flex;
             justify-content: center;
@@ -398,7 +392,6 @@
             border-color: var(--primary);
         }
         
-        /* === FOOTER === */
         footer {
             background-color: var(--dark);
             color: white;
@@ -472,7 +465,6 @@
             font-size: 0.9rem;
         }
         
-        /* === RESTAURANT MODAL === */
         .restaurant-modal {
             display: none;
             position: fixed;
@@ -508,7 +500,6 @@
             z-index: 10;
         }
         
-        /* === RESPONSIVE DESIGN === */
         @media (max-width: 992px) {
             .restaurant-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -518,6 +509,19 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
             }
             
             .mobile-menu-btn {
@@ -540,7 +544,6 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -563,11 +566,10 @@
                 </ul>
             </nav>
             
-            <button class="cta-button">Start Order</button>
+            <button class="cta-button" id="startOrderBtn">Start Order</button>
         </div>
     </header>
 
-    <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container">
             <h1>Browse Restaurants</h1>
@@ -575,7 +577,6 @@
         </div>
     </section>
 
-    <!-- FILTERS -->
     <section class="filters-section">
         <div class="container">
             <div class="filters-container">
@@ -621,26 +622,22 @@
                 </div>
                 
                 <div class="filter-buttons">
-                    <button class="cta-button" onclick="applyFilters()">Apply Filters</button>
-                    <button class="cta-button" style="background-color: var(--gray);" onclick="resetFilters()">Reset</button>
+                    <button class="cta-button" id="applyFiltersBtn">Apply Filters</button>
+                    <button class="cta-button" style="background-color: var(--gray);" id="resetFiltersBtn">Reset</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RESTAURANTS GRID -->
     <section class="restaurants-section">
         <div class="container">
             <div class="section-title">
                 <h2>All Restaurants</h2>
-                <p class="restaurant-count" id="restaurantCount">Showing 24 restaurants</p>
+                <p class="restaurant-count" id="restaurantCount">Showing 6 restaurants</p>
             </div>
             
-            <div class="restaurant-grid" id="restaurantGrid">
-                <!-- RESTAURANT CARDS WILL BE GENERATED BY JS -->
-            </div>
+            <div class="restaurant-grid" id="restaurantGrid"></div>
             
-            <!-- PAGINATION -->
             <div class="pagination">
                 <button class="page-btn active">1</button>
                 <button class="page-btn">2</button>
@@ -651,17 +648,16 @@
         </div>
     </section>
 
-    <!-- FEATURED CATEGORIES -->
     <section class="restaurants-section">
         <div class="container">
             <div class="category-section">
                 <div class="category-header">
                     <h3 class="category-title">Featured: Multi-Restaurant Combos</h3>
-                    <a href="#" class="view-all">View All Combos →</a>
+                    <a href="#" class="view-all" id="viewAllCombos">View All Combos →</a>
                 </div>
                 
                 <div class="restaurant-grid">
-                    <div class="restaurant-card">
+                    <div class="restaurant-card" id="combo1">
                         <div class="restaurant-img" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                             <span class="restaurant-badge multi-restaurant">COMBO DEAL</span>
                         </div>
@@ -685,12 +681,12 @@
                                     <div class="delivery-time">35-45 min</div>
                                     <div class="min-order">Min: TZS 15,000</div>
                                 </div>
-                                <button class="cta-button" style="padding: 8px 20px;">Order Combo</button>
+                                <button class="cta-button" style="padding: 8px 20px;" data-combo="nyama-choma">Order Combo</button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="restaurant-card">
+                    <div class="restaurant-card" id="combo2">
                         <div class="restaurant-img" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
                             <span class="restaurant-badge multi-restaurant">COMBO DEAL</span>
                         </div>
@@ -714,7 +710,7 @@
                                     <div class="delivery-time">40-50 min</div>
                                     <div class="min-order">Min: TZS 25,000</div>
                                 </div>
-                                <button class="cta-button" style="padding: 8px 20px;">Order Combo</button>
+                                <button class="cta-button" style="padding: 8px 20px;" data-combo="zanzibar-feast">Order Combo</button>
                             </div>
                         </div>
                     </div>
@@ -723,7 +719,6 @@
         </div>
     </section>
 
-    <!-- REGIONAL CUISINES -->
     <section class="regional-cuisines">
         <div class="container">
             <div class="section-title">
@@ -732,7 +727,7 @@
             </div>
             
             <div class="cuisine-grid">
-                <div class="cuisine-card">
+                <div class="cuisine-card" id="zanzibarCuisine">
                     <div class="cuisine-icon zanzibar">
                         <i class="fas fa-fish"></i>
                     </div>
@@ -741,7 +736,7 @@
                     <button class="cta-button" style="margin-top: 15px; padding: 8px 20px;">Explore</button>
                 </div>
                 
-                <div class="cuisine-card">
+                <div class="cuisine-card" id="mainlandCuisine">
                     <div class="cuisine-icon mainland">
                         <i class="fas fa-drumstick-bite"></i>
                     </div>
@@ -750,7 +745,7 @@
                     <button class="cta-button" style="margin-top: 15px; padding: 8px 20px;">Explore</button>
                 </div>
                 
-                <div class="cuisine-card">
+                <div class="cuisine-card" id="highlandsCuisine">
                     <div class="cuisine-icon coastal">
                         <i class="fas fa-pepper-hot"></i>
                     </div>
@@ -759,7 +754,7 @@
                     <button class="cta-button" style="margin-top: 15px; padding: 8px 20px;">Explore</button>
                 </div>
                 
-                <div class="cuisine-card">
+                <div class="cuisine-card" id="vegetarianCuisine">
                     <div class="cuisine-icon highlands">
                         <i class="fas fa-leaf"></i>
                     </div>
@@ -771,7 +766,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -779,10 +773,10 @@
                     <h2>Pamoja<span style="color: var(--accent);">Eats</span></h2>
                     <p>Tanzania's first digital food ecosystem. Your taste, your way.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" id="facebookLink"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" id="twitterLink"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="instagramLink"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="linkedinLink"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -791,7 +785,7 @@
                     <ul>
                         <li><a href="how-it-works.html">How It Works</a></li>
                         <li><a href="restaurants.html">Browse Restaurants</a></li>
-                        <li><a href="#">Download App</a></li>
+                        <li><a href="#" id="downloadAppLink">Download App</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Gift Cards</a></li>
                     </ul>
@@ -826,18 +820,14 @@
         </div>
     </footer>
 
-    <!-- RESTAURANT MODAL -->
     <div class="restaurant-modal" id="restaurantModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <div id="modalContent">
-                <!-- Modal content will be loaded here -->
-            </div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
     <script>
-        // Restaurant Data
         const restaurants = [
             {
                 id: 1,
@@ -913,21 +903,50 @@
             }
         ];
 
-        // Mobile Menu Toggle
+        // Mobile Menu
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             const navMenu = document.getElementById('navMenu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navMenu.style.flexDirection = 'column';
-            navMenu.style.position = 'absolute';
-            navMenu.style.top = '70px';
-            navMenu.style.left = '0';
-            navMenu.style.width = '100%';
-            navMenu.style.backgroundColor = 'white';
-            navMenu.style.padding = '20px';
-            navMenu.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            navMenu.classList.toggle('show');
         });
 
-        // Render Restaurants
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        // Start Order Button
+        document.getElementById('startOrderBtn').addEventListener('click', function() {
+            alert('Starting your order...');
+        });
+
+        // Get star rating HTML
+        function getStarRating(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Render restaurants
         function renderRestaurants(filteredRestaurants = restaurants) {
             const grid = document.getElementById('restaurantGrid');
             const count = document.getElementById('restaurantCount');
@@ -970,28 +989,7 @@
             });
         }
 
-        function getStarRating(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            
-            if (hasHalfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            
-            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            
-            return stars;
-        }
-
-        // Filter Functions
+        // Filter functions
         function applyFilters() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const location = document.getElementById('locationFilter').value;
@@ -999,19 +997,16 @@
             const sort = document.getElementById('sortFilter').value;
             
             let filtered = restaurants.filter(restaurant => {
-                // Search filter
                 if (search && !restaurant.name.toLowerCase().includes(search) && 
                     !restaurant.cuisine.toLowerCase().includes(search) &&
                     !restaurant.description.toLowerCase().includes(search)) {
                     return false;
                 }
                 
-                // Location filter
                 if (location !== 'all' && restaurant.location !== location) {
                     return false;
                 }
                 
-                // Cuisine filter (simplified)
                 if (cuisine !== 'all') {
                     if (cuisine === 'tanzanian' && !restaurant.cuisine.includes('Tanzanian')) return false;
                     if (cuisine === 'swahili' && !restaurant.cuisine.includes('Swahili')) return false;
@@ -1021,7 +1016,6 @@
                 return true;
             });
             
-            // Sort filtered results
             filtered.sort((a, b) => {
                 switch(sort) {
                     case 'rating':
@@ -1046,7 +1040,7 @@
             renderRestaurants(restaurants);
         }
 
-        // Restaurant Modal
+        // Restaurant modal
         function viewRestaurant(id) {
             const restaurant = restaurants.find(r => r.id === id);
             const modal = document.getElementById('restaurantModal');
@@ -1076,8 +1070,8 @@
                                 </div>
                             </div>
                             <div style="display: flex; gap: 15px; margin-top: 30px;">
-                                <button class="cta-button" style="flex: 1;">View Full Menu</button>
-                                <button class="cta-button" style="flex: 1; background-color: var(--accent); color: var(--dark);">Add to Multi-Cart</button>
+                                <button class="cta-button" onclick="alert('Opening full menu...')" style="flex: 1;">View Full Menu</button>
+                                <button class="cta-button" onclick="alert('Added to multi-cart!')" style="flex: 1; background-color: var(--accent); color: var(--dark);">Add to Multi-Cart</button>
                             </div>
                         </div>
                     </div>
@@ -1111,15 +1105,87 @@
             }
         });
 
-        // Initialize
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
             renderRestaurants();
             
-            // Add event listeners to filters
+            // Filter buttons
+            document.getElementById('applyFiltersBtn').addEventListener('click', applyFilters);
+            document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
+            
+            // Search input
             document.getElementById('searchInput').addEventListener('input', applyFilters);
+            
+            // Filter selects
             document.getElementById('locationFilter').addEventListener('change', applyFilters);
             document.getElementById('cuisineFilter').addEventListener('change', applyFilters);
             document.getElementById('sortFilter').addEventListener('change', applyFilters);
+            
+            // View All Combos link
+            document.getElementById('viewAllCombos').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Loading all combo deals...');
+            });
+            
+            // Combo order buttons
+            document.querySelectorAll('[data-combo]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const combo = this.getAttribute('data-combo');
+                    alert(`Ordering ${combo} combo...`);
+                });
+            });
+            
+            // Cuisine explore buttons
+            document.getElementById('zanzibarCuisine').addEventListener('click', function() {
+                alert('Exploring Zanzibar & Coastal cuisine...');
+            });
+            
+            document.getElementById('mainlandCuisine').addEventListener('click', function() {
+                alert('Exploring Mainland Specialties...');
+            });
+            
+            document.getElementById('highlandsCuisine').addEventListener('click', function() {
+                alert('Exploring Spicy Highlands cuisine...');
+            });
+            
+            document.getElementById('vegetarianCuisine').addEventListener('click', function() {
+                alert('Exploring Vegetarian & Vegan options...');
+            });
+            
+            // Pagination buttons
+            document.querySelectorAll('.page-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    alert(`Loading page ${this.textContent}...`);
+                });
+            });
+            
+            // Footer links
+            document.getElementById('downloadAppLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening download page...');
+            });
+            
+            document.getElementById('facebookLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening Facebook...');
+            });
+            
+            document.getElementById('twitterLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening Twitter...');
+            });
+            
+            document.getElementById('instagramLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening Instagram...');
+            });
+            
+            document.getElementById('linkedinLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Opening LinkedIn...');
+            });
         });
     </script>
 </body>
