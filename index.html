@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pamoja Eats - Your Taste, Your Way</title>
+    <title>Pamoja Eats | Order From Multiple Restaurants in One Delivery — AI-Powered</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== ROOT & RESET ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
-            --primary: #FF6B35;
-            --secondary: #004E89;
-            --accent: #00A896;
+            --primary: #FF6B35; /* Tanzanian orange/sunset */
+            --secondary: #004E89; /* Tanzanian blue */
+            --accent: #00A896; /* Tanzanian green */
             --dark: #1A1A2E;
-            --light: #F8F9FA;
-            --gray: #6C757D;
-            --success: #28a745;
+            --light: #FFFFFF;
+            --gray: #5A6D7C;
+            --success: #28A745;
+            --warning: #FFC107;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(255, 107, 53, 0.15);
         }
         
         body {
-            background-color: var(--light);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F9FAFB;
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -35,445 +40,626 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
         
-        .navbar {
+        h1 {
+            font-size: 3.5rem;
+            color: var(--dark);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+        }
+        
+        p {
+            font-size: 1.125rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        
+        /* ===== HEADER - COMPLETELY REDESIGNED ===== */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.75rem;
+            text-decoration: none;
         }
         
-        .logo h1 {
-            color: var(--primary);
-            font-size: 28px;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.25rem;
         }
         
-        .logo span {
-            color: var(--secondary);
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 500;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 2rem;
+            align-items: center;
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
+            font-size: 1rem;
             transition: color 0.3s;
+            position: relative;
         }
         
         .nav-links a:hover {
             color: var(--primary);
         }
         
-        .cta-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
         }
         
-        .cta-button:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .header-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
         
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 1.5rem;
+            color: var(--dark);
             cursor: pointer;
         }
         
-        /* Hero Section */
-        .hero {
-            padding: 100px 0;
-            background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(0,78,137,0.1) 100%);
+        /* ===== BUTTONS - IMPROVED ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
             position: relative;
             overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #FF8B35);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 78, 137, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 78, 137, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        /* ===== HERO SECTION - COMPLETELY REDESIGNED ===== */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 53, 0.05) 0%, 
+                rgba(0, 78, 137, 0.05) 100%),
+                url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
         }
         
         .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-        
-        .hero-text {
-            flex: 1;
-        }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .hero h2 span {
-            color: var(--primary);
-        }
-        
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: var(--gray);
-        }
-        
-        .tagline {
-            font-size: 24px;
-            color: var(--secondary);
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-        
-        /* Features Grid */
-        .features-section {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-            border: 1px solid #eee;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-icon {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 15px;
-            color: var(--secondary);
-        }
-        
-        /* Taste Adventure Game */
-        .taste-game-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .game-container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .game-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--secondary);
-        }
-        
-        .flavor-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .flavor-btn {
-            padding: 12px 24px;
-            border: 2px solid var(--primary);
-            background: white;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-        
-        .flavor-btn:hover, .flavor-btn.active {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .mood-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .mood-btn {
-            padding: 10px 20px;
-            border: 2px solid var(--accent);
-            background: white;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .mood-btn:hover, .mood-btn.active {
-            background-color: var(--accent);
-            color: white;
-        }
-        
-        .game-action {
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        #suggestions {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            display: none;
-        }
-        
-        .suggestion-item {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .suggestion-item:last-child {
-            border-bottom: none;
-        }
-        
-        /* Restaurant Showcase */
-        .restaurants-section {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
-        .restaurant-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 30px;
-            justify-content: center;
-        }
-        
-        .filter-btn {
-            padding: 10px 20px;
-            border: 1px solid var(--gray);
-            background: white;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--secondary);
-            color: white;
-            border-color: var(--secondary);
-        }
-        
-        .restaurants-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .restaurant-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        
-        .restaurant-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .restaurant-img {
-            height: 200px;
-            background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-        }
-        
-        .restaurant-info {
-            padding: 20px;
-        }
-        
-        .restaurant-rating {
-            color: #FFC107;
-            margin: 10px 0;
-        }
-        
-        .restaurant-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-        
-        .tag {
-            background: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-        }
-        
-        /* AI Combo Builder */
-        .combo-builder-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, rgba(0,168,150,0.1) 0%, rgba(255,107,53,0.1) 100%);
-        }
-        
-        .combo-builder {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .builder-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .step {
-            text-align: center;
             position: relative;
             z-index: 1;
+            max-width: 800px;
         }
         
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: #ddd;
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .value-props {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .value-prop {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            font-weight: 600;
+        }
+        
+        .value-prop i {
+            color: var(--primary);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .trust-badges {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .trust-badge i {
+            color: var(--success);
+            font-size: 1.25rem;
+        }
+        
+        /* ===== PAYMENT METHODS - ADDED ===== */
+        .payment-section {
+            padding: 3rem 0;
+            background: white;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .payment-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 15px;
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 107, 53, 0.05);
+        }
+        
+        .payment-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
-            font-weight: bold;
-        }
-        
-        .step.active .step-number {
-            background: var(--primary);
             color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
         }
         
-        .builder-content {
-            display: none;
+        .payment-label {
+            font-weight: 600;
+            color: var(--dark);
         }
         
-        .builder-content.active {
-            display: block;
+        /* ===== HOW IT WORKS - IMPROVED ===== */
+        .how-it-works {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F0F7FF 100%);
         }
         
-        .dish-options {
+        .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
         
-        .dish-option {
-            border: 2px solid #eee;
-            border-radius: 10px;
-            padding: 15px;
+        .step-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .step-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ===== AI ASSISTANT - NEW SECTION ===== */
+        .ai-assistant {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .ai-container {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0056A3 100%);
+            border-radius: 30px;
+            padding: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .ai-icon {
+            font-size: 3rem;
+        }
+        
+        .mood-selector {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .mood-btn {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .mood-btn:hover, .mood-btn.active {
+            background: white;
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .ai-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .recommendation-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
             transition: all 0.3s;
         }
         
-        .dish-option:hover, .dish-option.selected {
-            border-color: var(--primary);
-            background-color: rgba(255,107,53,0.05);
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
         
-        .combo-summary {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
+        .recommendation-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), #FF8B35);
             color: white;
-            padding: 60px 0 20px;
+        }
+        
+        .recommendation-body {
+            padding: 1.5rem;
+        }
+        
+        /* ===== RESTAURANT PARTNER - IMPROVED ===== */
+        .restaurant-partner {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F0F7FF 100%);
+        }
+        
+        .partner-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ===== BUSINESS MODEL - NEW SECTION ===== */
+        .business-model {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .model-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .model-card {
+            background: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .model-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .model-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        /* ===== MOBILE OPTIMIZATION ===== */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .mobile-cta .btn {
+            width: 100%;
+        }
+        
+        /* ===== FOOTER - IMPROVED ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
         
-        .footer-logo h2 {
+        .footer-logo .logo-text h1 {
             color: white;
-            margin-bottom: 15px;
+            -webkit-text-fill-color: white;
+            background: none;
         }
         
-        .footer-links h3, .footer-contact h3 {
-            margin-bottom: 20px;
+        .footer-links h3 {
             color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
         }
         
         .footer-links ul {
@@ -481,26 +667,26 @@
         }
         
         .footer-links a {
-            color: #ccc;
+            color: #B0B7C3;
             text-decoration: none;
-            line-height: 2;
+            line-height: 2.5;
             transition: color 0.3s;
         }
         
         .footer-links a:hover {
-            color: var(--primary);
+            color: white;
         }
         
-        .social-icons {
+        .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -510,790 +696,871 @@
             transition: all 0.3s;
         }
         
-        .social-icon:hover {
+        .social-link:hover {
             background: var(--primary);
             transform: translateY(-3px);
         }
         
-        .copyright {
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
+            color: #B0B7C3;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
+        .footer-credits {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 2.75rem;
             }
             
-            .hero h2 {
-                font-size: 36px;
+            h2 {
+                font-size: 2rem;
             }
         }
         
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
             .mobile-menu-btn {
                 display: block;
             }
             
-            .features-grid, .restaurants-grid {
-                grid-template-columns: 1fr;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .header-cta {
+                display: none;
+            }
+            
+            .mobile-cta {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .value-props {
+                gap: 1rem;
+            }
+            
+            .value-prop {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .trust-badges {
+                gap: 1rem;
+            }
+            
+            .payment-methods {
+                gap: 1.5rem;
+            }
+            
+            .payment-method {
+                min-width: 100px;
             }
         }
         
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .step-card, .benefit-card, .model-card {
+                padding: 2rem;
+            }
+            
+            .ai-container {
+                padding: 2rem;
+            }
+            
+            .mood-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.875rem;
+            }
         }
         
-        .mb-20 {
-            margin-bottom: 20px;
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .mb-30 {
-            margin-bottom: 30px;
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        .mt-30 {
-            margin-top: 30px;
+        /* ===== STICKY CART ===== */
+        .sticky-cart {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        
+        .sticky-cart:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .sticky-cart .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <h1>Pamoja<span>Eats</span></h1>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">PE</div>
+                <div class="logo-text">
+                    <h1>Pamoja Eats</h1>
+                    <div class="tagline">Smart Food Delivery for Tanzania</div>
                 </div>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="how-it-works.html">How It Works</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="restaurants.html">Restaurants</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                
-                <button class="cta-button" onclick="location.href='restaurants.html'">Order Now</button>
-            </nav>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li>
+                <li><a href="features.html">AI Features</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="header-cta">
+                <a href="restaurants.html" class="btn btn-outline btn-sm">For Restaurants</a>
+                <a href="restaurants.html#order" class="btn btn-primary btn-sm">Order Now</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO SECTION ===== -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h2>Experience Food Like <span>Never Before</span></h2>
-                    <div class="tagline">"Your Taste, Your Way"</div>
-                    <p>Order from multiple restaurants in one seamless checkout. Our AI-powered platform creates perfect meal combos tailored to your preferences, bringing together the best of Tanzanian cuisine and international flavors.</p>
-                    <div class="hero-buttons">
-                        <button class="cta-button" onclick="location.href='restaurants.html'">Start Ordering</button>
-                        <button class="cta-button" style="background-color: var(--secondary); margin-left: 15px;" onclick="location.href='how-it-works.html'">How It Works</button>
+            <div class="hero-content animate-fade-in-up">
+                <h1>Order From Multiple Restaurants in One Delivery</h1>
+                <p class="hero-subtitle">Powered by Smart AI • Save Time • One Checkout • Local Tanzanian Restaurants</p>
+                
+                <div class="value-props">
+                    <div class="value-prop">
+                        <i class="fas fa-bolt"></i>
+                        <span>Save 30+ Minutes</span>
+                    </div>
+                    <div class="value-prop">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>One Payment</span>
+                    </div>
+                    <div class="value-prop">
+                        <i class="fas fa-truck"></i>
+                        <span>One Delivery</span>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
-                        <div style="text-align: center; padding: 20px;">
-                            <i class="fas fa-utensils" style="font-size: 60px; margin-bottom: 20px;"></i>
-                            <p>Multi-Restaurant Ordering</p>
-                            <p>AI-Powered Recommendations</p>
-                            <p>Real-Time Tracking</p>
-                        </div>
+                
+                <div class="hero-buttons">
+                    <a href="restaurants.html#order" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Order Now
+                    </a>
+                    <a href="restaurants.html#partner" class="btn btn-secondary">
+                        <i class="fas fa-handshake"></i>
+                        Partner Your Restaurant
+                    </a>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Founded in Tanzania 🇹🇿</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>500+ Restaurant Partners</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>10,000+ Happy Customers</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Taste Adventure Game -->
-    <section class="taste-game-section">
-        <div class="container">
-            <div class="game-container">
-                <h2 class="game-title">🎮 Taste Adventure Game</h2>
-                <p class="text-center mb-30">Find your perfect meal by selecting your flavor profile and mood!</p>
-                
-                <div class="flavor-selection">
-                    <h3 class="mb-20">Choose Your Flavor Profile:</h3>
-                    <div class="flavor-options">
-                        <button class="flavor-btn" data-flavor="spicy">🌶️ Spicy Lover</button>
-                        <button class="flavor-btn" data-flavor="savory">🍖 Savory & Meaty</button>
-                        <button class="flavor-btn" data-flavor="sweet">🍰 Sweet Tooth</button>
-                        <button class="flavor-btn" data-flavor="fresh">🥗 Fresh & Healthy</button>
-                        <button class="flavor-btn" data-flavor="umami">🍣 Umami Rich</button>
-                        <button class="flavor-btn" data-flavor="tangy">🍋 Tangy & Zesty</button>
+    <!-- ===== PAYMENT METHODS ===== -->
+    <section class="payment-section">
+        <div class="container text-center">
+            <h2>Local Payments Made Easy</h2>
+            <p class="lead">Pay your way with Tanzania's favorite payment methods</p>
+            
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
+                    <div class="payment-label">M-Pesa</div>
                 </div>
                 
-                <div class="mood-selection mt-30">
-                    <h3 class="mb-20">What's Your Mood?</h3>
-                    <div class="mood-options">
-                        <button class="mood-btn" data-mood="comfort">😌 Comfort Food</button>
-                        <button class="mood-btn" data-mood="adventurous">🤠 Adventurous</button>
-                        <button class="mood-btn" data-mood="healthy">💪 Healthy</button>
-                        <button class="mood-btn" data-mood="indulgent">🎉 Indulgent</button>
-                        <button class="mood-btn" data-mood="quick">⚡ Quick Bite</button>
-                        <button class="mood-btn" data-mood="shareable">👥 Shareable</button>
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-sim-card"></i>
                     </div>
+                    <div class="payment-label">Tigo Pesa</div>
                 </div>
                 
-                <div class="game-action">
-                    <button class="cta-button" id="findMealBtn">Find My Perfect Meal!</button>
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div class="payment-label">Airtel Money</div>
                 </div>
                 
-                <div id="suggestions">
-                    <h3>AI Suggestions For You:</h3>
-                    <div id="suggestionsList"></div>
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="payment-label">Halopesa</div>
+                </div>
+                
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-cash-register"></i>
+                    </div>
+                    <div class="payment-label">Cash on Delivery</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Key Features -->
-    <section class="features-section">
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works">
         <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Pamoja Eats?</h2>
-                <p>Discover our unique features that make us different</p>
+            <div class="text-center">
+                <h2>How Pamoja Eats Works</h2>
+                <p class="lead">Three simple steps to get food from multiple restaurants in one delivery</p>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shopping-cart"></i>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-utensils"></i>
                     </div>
-                    <h3>Multi-Restaurant Cart</h3>
-                    <p>Order from multiple restaurants in one seamless checkout. Mix and match dishes from your favorite places!</p>
+                    <h3>Choose from Multiple Restaurants</h3>
+                    <p>Browse menus from different restaurants and add dishes to your single cart. Mix Nyama Choma from one place with pilau from another!</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-cash-register"></i>
+                    </div>
+                    <h3>One Checkout & Split Payments</h3>
+                    <p>Check out once with our secure payment system. Split the bill automatically with friends, family, or colleagues.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>One Rider Delivers Everything</h3>
+                    <p>Our AI optimizes the delivery route. One rider picks up from multiple restaurants and delivers everything together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AI ASSISTANT ===== -->
+    <section class="ai-assistant">
+        <div class="container">
+            <div class="ai-container">
+                <div class="ai-header">
+                    <div class="ai-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3>AI Combo Suggestions</h3>
-                    <p>Our AI suggests perfect meal combinations from different restaurants based on your taste profile.</p>
+                    <div>
+                        <h2 style="color: white;">Not sure what to eat?</h2>
+                        <p style="color: rgba(255,255,255,0.9);">Tell us your mood and our AI will suggest perfect combos</p>
+                    </div>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Real-Time Tracking</h3>
-                    <p>Track every dish in your cart, even from different kitchens, with live ETAs for each item.</p>
+                <div class="mood-selector">
+                    <button class="mood-btn" data-mood="hungry">
+                        <i class="fas fa-hamburger"></i> Hungry
+                    </button>
+                    <button class="mood-btn" data-mood="healthy">
+                        <i class="fas fa-heart"></i> Healthy
+                    </button>
+                    <button class="mood-btn" data-mood="romantic">
+                        <i class="fas fa-heart"></i> Romantic
+                    </button>
+                    <button class="mood-btn active" data-mood="party">
+                        <i class="fas fa-glass-cheers"></i> Party
+                    </button>
+                    <button class="mood-btn" data-mood="budget">
+                        <i class="fas fa-wallet"></i> Budget
+                    </button>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
+                <div class="ai-recommendations" id="aiRecommendations">
+                    <div class="recommendation-card">
+                        <div class="recommendation-header">
+                            <h4 style="color: white; margin: 0;">🎉 Party Platter Combo</h4>
+                        </div>
+                        <div class="recommendation-body">
+                            <p><strong>Perfect for:</strong> Group gatherings, celebrations</p>
+                            <p><strong>Includes:</strong> Nyama Choma + Chips Mayai + Fresh Juice</p>
+                            <p><strong>From:</strong> 3 different restaurants</p>
+                            <p><strong>Total:</strong> TSh 25,000</p>
+                            <button class="btn btn-primary btn-sm" style="margin-top: 1rem;">Add to Cart</button>
+                        </div>
                     </div>
-                    <h3>Group Orders & Split Payments</h3>
-                    <p>Order with friends, family, or colleagues and split payments automatically. Perfect for offices and parties!</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-trophy"></i>
+                    
+                    <div class="recommendation-card">
+                        <div class="recommendation-header">
+                            <h4 style="color: white; margin: 0;">🥗 Healthy Lunch Combo</h4>
+                        </div>
+                        <div class="recommendation-body">
+                            <p><strong>Perfect for:</strong> Healthy lifestyle, weight management</p>
+                            <p><strong>Includes:</strong> Grilled Fish + Ugali + Sukuma Wiki</p>
+                            <p><strong>From:</strong> 2 different restaurants</p>
+                            <p><strong>Total:</strong> TSh 18,500</p>
+                            <button class="btn btn-primary btn-sm" style="margin-top: 1rem;">Add to Cart</button>
+                        </div>
                     </div>
-                    <h3>Gamified Loyalty</h3>
-                    <p>Earn points, unlock badges, and get free meals. Our loyalty program makes every order rewarding.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3>Scheduled & Recurring Orders</h3>
-                    <p>Set recurring meals or schedule orders for future dates. Never forget to order lunch again!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI Combo Builder -->
-    <section class="combo-builder-section">
+    <!-- ===== RESTAURANT PARTNER SECTION ===== -->
+    <section class="restaurant-partner">
         <div class="container">
-            <div class="section-title">
-                <h2>AI Combo Builder</h2>
-                <p>Create your perfect multi-restaurant meal</p>
+            <div class="text-center">
+                <h2>Why Restaurants Love Pamoja Eats</h2>
+                <p class="lead">Join 500+ restaurants already growing with us</p>
             </div>
             
-            <div class="combo-builder">
-                <div class="builder-steps">
-                    <div class="step active" id="step1">
-                        <div class="step-number">1</div>
-                        <p>Choose Main</p>
+            <div class="partner-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="step" id="step2">
-                        <div class="step-number">2</div>
-                        <p>Choose Sides</p>
-                    </div>
-                    <div class="step" id="step3">
-                        <div class="step-number">3</div>
-                        <p>Choose Drinks</p>
-                    </div>
-                    <div class="step" id="step4">
-                        <div class="step-number">4</div>
-                        <p>Checkout</p>
-                    </div>
+                    <h3>More Orders, No Extra Riders</h3>
+                    <p>Get group orders from multiple customers without managing your own delivery fleet.</p>
                 </div>
                 
-                <div class="builder-content active" id="step1Content">
-                    <h3>Select Your Main Dish</h3>
-                    <div class="dish-options">
-                        <div class="dish-option" data-dish="nyama-choma" data-price="12000">
-                            <h4>Nyama Choma (Grilled Meat)</h4>
-                            <p>TSh 12,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="pilau" data-price="8000">
-                            <h4>Pilau Rice with Beef</h4>
-                            <p>TSh 8,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="fish" data-price="15000">
-                            <h4>Grilled Tilapia</h4>
-                            <p>TSh 15,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="chicken" data-price="10000">
-                            <h4>Chicken Curry</h4>
-                            <p>TSh 10,000</p>
-                        </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-handshake"></i>
                     </div>
-                    <button class="cta-button next-step" data-next="2">Next: Choose Sides</button>
+                    <h3>Shared Delivery Costs</h3>
+                    <p>Split delivery costs with other restaurants when customers order from multiple places.</p>
                 </div>
                 
-                <div class="builder-content" id="step2Content">
-                    <h3>Select Your Side Dishes</h3>
-                    <div class="dish-options">
-                        <div class="dish-option" data-dish="ugali" data-price="3000">
-                            <h4>Ugali</h4>
-                            <p>TSh 3,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="chapati" data-price="2000">
-                            <h4>Chapati (2 pieces)</h4>
-                            <p>TSh 2,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="salad" data-price="4000">
-                            <h4>Fresh Garden Salad</h4>
-                            <p>TSh 4,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="chips" data-price="3500">
-                            <h4>French Fries</h4>
-                            <p>TSh 3,500</p>
-                        </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <div style="display: flex; gap: 15px;">
-                        <button class="cta-button" style="background-color: var(--gray);" data-next="1">Back</button>
-                        <button class="cta-button next-step" data-next="3">Next: Choose Drinks</button>
-                    </div>
+                    <h3>AI Promotes Your Best Dishes</h3>
+                    <p>Our AI suggests your dishes to customers based on their preferences and ordering history.</p>
                 </div>
                 
-                <div class="builder-content" id="step3Content">
-                    <h3>Select Your Drinks</h3>
-                    <div class="dish-options">
-                        <div class="dish-option" data-dish="soda" data-price="1500">
-                            <h4>Soda (500ml)</h4>
-                            <p>TSh 1,500</p>
-                        </div>
-                        <div class="dish-option" data-dish="juice" data-price="2500">
-                            <h4>Fresh Juice</h4>
-                            <p>TSh 2,500</p>
-                        </div>
-                        <div class="dish-option" data-dish="water" data-price="1000">
-                            <h4>Bottled Water</h4>
-                            <p>TSh 1,000</p>
-                        </div>
-                        <div class="dish-option" data-dish="tea" data-price="2000">
-                            <h4>Masala Tea</h4>
-                            <p>TSh 2,000</p>
-                        </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tachometer-alt"></i>
                     </div>
-                    <div style="display: flex; gap: 15px;">
-                        <button class="cta-button" style="background-color: var(--gray);" data-next="2">Back</button>
-                        <button class="cta-button next-step" data-next="4">Review Order</button>
-                    </div>
+                    <h3>Dashboard & Sales Insights</h3>
+                    <p>Track performance, customer feedback, and sales trends in real-time.</p>
                 </div>
-                
-                <div class="builder-content" id="step4Content">
-                    <h3>Your AI-Generated Combo</h3>
-                    <div class="combo-summary" id="comboSummary">
-                        <p>Your selected items will appear here</p>
-                    </div>
-                    <p>Total: <span id="totalPrice">TSh 0</span></p>
-                    <div style="display: flex; gap: 15px;">
-                        <button class="cta-button" style="background-color: var(--gray);" data-next="3">Back</button>
-                        <button class="cta-button" onclick="checkoutCombo()">Proceed to Checkout</button>
-                    </div>
-                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="restaurants.html#partner" class="btn btn-secondary">
+                    <i class="fas fa-store"></i>
+                    Join as Restaurant Partner
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Restaurant Showcase -->
-    <section class="restaurants-section">
+    <!-- ===== BUSINESS MODEL ===== -->
+    <section class="business-model">
         <div class="container">
-            <div class="section-title">
-                <h2>Featured Restaurants</h2>
-                <p>Order from top restaurants across Tanzania</p>
+            <div class="text-center">
+                <h2>How We Make Money (Transparent & Fair)</h2>
+                <p class="lead">Sustainable business model that benefits everyone</p>
             </div>
             
-            <div class="restaurant-filters">
-                <button class="filter-btn active" data-cuisine="all">All Cuisines</button>
-                <button class="filter-btn" data-cuisine="tanzanian">Tanzanian</button>
-                <button class="filter-btn" data-cuisine="international">International</button>
-                <button class="filter-btn" data-cuisine="fast-food">Fast Food</button>
-                <button class="filter-btn" data-cuisine="healthy">Healthy</button>
-            </div>
-            
-            <div class="restaurants-grid">
-                <div class="restaurant-card" data-cuisine="tanzanian">
-                    <div class="restaurant-img">
-                        <i class="fas fa-utensils" style="font-size: 50px; color: var(--gray);"></i>
-                    </div>
-                    <div class="restaurant-info">
-                        <h3>Mama's Kitchen</h3>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: var(--gray); margin-left: 5px;">4.5</span>
+            <div class="model-cards">
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">
+                            <i class="fas fa-percentage"></i>
                         </div>
-                        <p>Authentic Tanzanian home-cooked meals</p>
-                        <div class="restaurant-tags">
-                            <span class="tag">Nyama Choma</span>
-                            <span class="tag">Pilau</span>
-                            <span class="tag">Ugali</span>
+                        <div>
+                            <h3>Commission Per Order</h3>
+                            <p style="color: var(--primary); font-weight: 600;">10-15%</p>
                         </div>
-                        <button class="cta-button" style="margin-top: 15px; padding: 8px 20px;" onclick="viewRestaurant('Mama\'s Kitchen')">View Menu</button>
                     </div>
+                    <p>Small commission from restaurants for each order. Only pay when you get business.</p>
                 </div>
                 
-                <div class="restaurant-card" data-cuisine="international">
-                    <div class="restaurant-img">
-                        <i class="fas fa-pizza-slice" style="font-size: 50px; color: var(--gray);"></i>
-                    </div>
-                    <div class="restaurant-info">
-                        <h3>Zanzibar Pizza House</h3>
-                        <div class="restaurant-rating">
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">
                             <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span style="color: var(--gray); margin-left: 5px;">4.0</span>
                         </div>
-                        <p>International cuisine with local twist</p>
-                        <div class="restaurant-tags">
-                            <span class="tag">Pizza</span>
-                            <span class="tag">Pasta</span>
-                            <span class="tag">Burgers</span>
+                        <div>
+                            <h3>Sponsored Restaurants</h3>
+                            <p style="color: var(--primary); font-weight: 600;">Optional</p>
                         </div>
-                        <button class="cta-button" style="margin-top: 15px; padding: 8px 20px;" onclick="viewRestaurant('Zanzibar Pizza House')">View Menu</button>
                     </div>
+                    <p>Restaurants can pay for premium placement and featured spots in search results.</p>
                 </div>
                 
-                <div class="restaurant-card" data-cuisine="healthy">
-                    <div class="restaurant-img">
-                        <i class="fas fa-leaf" style="font-size: 50px; color: var(--gray);"></i>
-                    </div>
-                    <div class="restaurant-info">
-                        <h3>Green Bowl</h3>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span style="color: var(--gray); margin-left: 5px;">5.0</span>
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">
+                            <i class="fas fa-shipping-fast"></i>
                         </div>
-                        <p>Fresh salads, smoothies & healthy meals</p>
-                        <div class="restaurant-tags">
-                            <span class="tag">Salads</span>
-                            <span class="tag">Smoothies</span>
-                            <span class="tag">Vegan</span>
+                        <div>
+                            <h3>Premium Delivery</h3>
+                            <p style="color: var(--primary); font-weight: 600;">Customer Choice</p>
                         </div>
-                        <button class="cta-button" style="margin-top: 15px; padding: 8px 20px;" onclick="viewRestaurant('Green Bowl')">View Menu</button>
                     </div>
+                    <p>Optional faster delivery or special handling for delicate food items.</p>
                 </div>
-            </div>
-            
-            <div class="text-center mt-30">
-                <button class="cta-button" onclick="location.href='restaurants.html'">View All Restaurants</button>
+                
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h3>Group Order Fees</h3>
+                            <p style="color: var(--primary); font-weight: 600;">Small Fee</p>
+                        </div>
+                    </div>
+                    <p>Minimal fee for organizing and managing large group or corporate orders.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h2>Pamoja<span style="color: var(--primary);">Eats</span></h2>
-                    <p>"Your Taste, Your Way" - Bringing Tanzania's best restaurants to your doorstep.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="index.html" class="logo" style="justify-content: flex-start;">
+                        <div class="logo-icon">PE</div>
+                        <div class="logo-text">
+                            <h1>Pamoja Eats</h1>
+                            <div class="tagline" style="color: #B0B7C3;">Smart Food Delivery for Tanzania</div>
+                        </div>
+                    </a>
+                    <p style="color: #B0B7C3; margin-top: 1rem;">Building Tanzania's first AI-powered food ecosystem since 2023.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-links">
-                    <h3>Quick Links</h3>
+                    <h3>For Customers</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
                         <li><a href="how-it-works.html">How It Works</a></li>
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="restaurants.html">Restaurants</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="features.html">AI Features</a></li>
+                        <li><a href="restaurants.html">Browse Restaurants</a></li>
+                        <li><a href="contact.html">Help & Support</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Dar es Salaam, Tanzania</p>
-                    <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +255 123 456 789</p>
-                    <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@pamojaeats.co.tz</p>
                 </div>
                 
                 <div class="footer-links">
                     <h3>For Restaurants</h3>
                     <ul>
-                        <li><a href="restaurants.html#join">Join Our Platform</a></li>
-                        <li><a href="restaurants.html#benefits">Restaurant Benefits</a></li>
-                        <li><a href="restaurants.html#dashboard">Dashboard Demo</a></li>
+                        <li><a href="restaurants.html#partner">Partner With Us</a></li>
+                        <li><a href="restaurants.html#benefits">Benefits</a></li>
+                        <li><a href="restaurants.html#dashboard">Restaurant Dashboard</a></li>
+                        <li><a href="restaurants.html#pricing">Pricing</a></li>
+                        <li><a href="contact.html">Partner Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html#press">Press</a></li>
+                        <li><a href="contact.html#terms">Terms & Privacy</a></li>
+                        <li><a href="contact.html#safety">Safety</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2023 Pamoja Eats. Built by I&G Technologies. All rights reserved.</p>
-                <p>CEO: Irene Mgimba | Director: George William</p>
+            <div class="footer-bottom">
+                <p>© 2023 Pamoja Eats. All rights reserved. Built for Tanzania, by Tanzanians.</p>
+                <div class="footer-credits">
+                    <span>CEO: Irene Mgimba</span>
+                    <span>Director: George William</span>
+                    <span>Built by I&G Technologies</span>
+                    <span>📍 Dar es Salaam, Tanzania</span>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- ===== MOBILE CTA ===== -->
+    <div class="mobile-cta">
+        <a href="restaurants.html#order" class="btn btn-primary">
+            <i class="fas fa-shopping-cart"></i>
+            Order Now
+        </a>
+    </div>
+
+    <!-- ===== STICKY CART ===== -->
+    <div class="sticky-cart" id="stickyCart">
+        <i class="fas fa-shopping-cart"></i>
+        <div class="badge">3</div>
+    </div>
+
     <script>
-        // Mobile Menu Toggle
+        // ===== MOBILE MENU =====
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
         
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
         
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.querySelector('i').classList.remove('fa-times');
                 mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-            });
-        });
-        
-        // Taste Adventure Game
-        const flavorBtns = document.querySelectorAll('.flavor-btn');
-        const moodBtns = document.querySelectorAll('.mood-btn');
-        const findMealBtn = document.getElementById('findMealBtn');
-        const suggestionsDiv = document.getElementById('suggestions');
-        const suggestionsList = document.getElementById('suggestionsList');
-        
-        let selectedFlavor = null;
-        let selectedMood = null;
-        
-        // Flavor selection
-        flavorBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                flavorBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                selectedFlavor = btn.getAttribute('data-flavor');
-            });
-        });
-        
-        // Mood selection
-        moodBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                moodBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                selectedMood = btn.getAttribute('data-mood');
-            });
-        });
-        
-        // AI Meal Suggestions
-        findMealBtn.addEventListener('click', () => {
-            if (!selectedFlavor || !selectedMood) {
-                alert('Please select both a flavor profile and mood!');
-                return;
             }
-            
-            suggestionsDiv.style.display = 'block';
-            suggestionsList.innerHTML = '';
-            
-            // AI-generated suggestions based on selections
-            const suggestions = generateSuggestions(selectedFlavor, selectedMood);
-            
-            suggestions.forEach(suggestion => {
-                const item = document.createElement('div');
-                item.className = 'suggestion-item';
-                item.innerHTML = `
-                    <h4>${suggestion.name}</h4>
-                    <p>${suggestion.description}</p>
-                    <p><strong>Restaurant:</strong> ${suggestion.restaurant}</p>
-                    <p><strong>Price:</strong> ${suggestion.price}</p>
-                    <button class="cta-button" style="padding: 5px 15px; font-size: 14px; margin-top: 10px;" onclick="addToCart('${suggestion.name}', ${suggestion.price.replace('TSh ', '').replace(',', '')})">Add to Cart</button>
-                `;
-                suggestionsList.appendChild(item);
-            });
         });
         
-        function generateSuggestions(flavor, mood) {
-            const suggestions = {
-                spicy: {
-                    comfort: [
-                        {name: 'Spicy Chicken Curry', description: 'Rich curry with local spices', restaurant: 'Mama\'s Kitchen', price: 'TSh 12,000'},
-                        {name: 'Pili Pili Grilled Fish', description: 'Tilapia with spicy pili pili sauce', restaurant: 'Coastal Delights', price: 'TSh 15,000'}
-                    ],
-                    adventurous: [
-                        {name: 'Fire Dragon Noodles', description: 'Extra spicy noodles with beef', restaurant: 'Asian Fusion', price: 'TSh 10,000'}
-                    ]
+        // ===== AI ASSISTANT =====
+        const moodBtns = document.querySelectorAll('.mood-btn');
+        const aiRecommendations = document.getElementById('aiRecommendations');
+        
+        const recommendations = {
+            hungry: [
+                {
+                    title: "🍖 Meat Lover's Feast",
+                    description: "Hearty meal for serious appetites",
+                    includes: "Nyama Choma + Pilau + Kachumbari",
+                    restaurants: "3 restaurants",
+                    price: "TSh 28,000"
                 },
-                savory: {
-                    comfort: [
-                        {name: 'Nyama Choma Special', description: 'Grilled beef with traditional sides', restaurant: 'Mama\'s Kitchen', price: 'TSh 18,000'}
-                    ],
-                    indulgent: [
-                        {name: 'Mixed Grill Platter', description: 'Assorted meats with 4 sauces', restaurant: 'BBQ Masters', price: 'TSh 25,000'}
-                    ]
-                },
-                sweet: {
-                    indulgent: [
-                        {name: 'Chocolate Mandazi', description: 'Sweet fried dough with chocolate', restaurant: 'Sweet Treats', price: 'TSh 5,000'},
-                        {name: 'Tropical Fruit Platter', description: 'Fresh local fruits with honey', restaurant: 'Green Bowl', price: 'TSh 8,000'}
-                    ]
-                },
-                fresh: {
-                    healthy: [
-                        {name: 'Superfood Salad Bowl', description: 'Mixed greens with avocado & seeds', restaurant: 'Green Bowl', price: 'TSh 9,000'},
-                        {name: 'Fresh Spring Rolls', description: 'Vegetable rolls with peanut sauce', restaurant: 'Asian Fusion', price: 'TSh 7,000'}
-                    ]
+                {
+                    title: "🔥 Spicy Adventure Combo",
+                    description: "For those who love heat",
+                    includes: "Spicy Chicken Curry + Chapati + Mango Lassi",
+                    restaurants: "2 restaurants",
+                    price: "TSh 22,500"
                 }
-            };
-            
-            return suggestions[flavor]?.[mood] || [
-                {name: 'Chef\'s Special Combo', description: 'AI-generated perfect meal based on your preferences', restaurant: 'Multiple Restaurants', price: 'TSh 15,000'},
-                {name: 'Tanzanian Sampler Platter', description: 'Taste of different regional specialties', restaurant: 'Cultural Kitchen', price: 'TSh 20,000'}
-            ];
-        }
-        
-        // AI Combo Builder
-        const nextStepBtns = document.querySelectorAll('.next-step');
-        const steps = document.querySelectorAll('.step');
-        const stepContents = document.querySelectorAll('.builder-content');
-        const dishOptions = document.querySelectorAll('.dish-option');
-        const comboSummary = document.getElementById('comboSummary');
-        const totalPrice = document.getElementById('totalPrice');
-        
-        let selectedDishes = {
-            main: null,
-            sides: [],
-            drinks: []
+            ],
+            healthy: [
+                {
+                    title: "🥗 Superfood Bowl",
+                    description: "Nutrient-packed meal",
+                    includes: "Grilled Tilapia + Vegetable Rice + Avocado Salad",
+                    restaurants: "2 restaurants",
+                    price: "TSh 19,500"
+                },
+                {
+                    title: "🌱 Vegan Delight",
+                    description: "Plant-based perfection",
+                    includes: "Lentil Curry + Brown Rice + Fresh Salad",
+                    restaurants: "2 restaurants",
+                    price: "TSh 16,000"
+                }
+            ],
+            romantic: [
+                {
+                    title: "💕 Romantic Dinner for Two",
+                    description: "Perfect date night",
+                    includes: "Grilled Prawns + Garlic Bread + Chocolate Dessert",
+                    restaurants: "3 restaurants",
+                    price: "TSh 35,000"
+                },
+                {
+                    title: "🕯️ Candlelight Special",
+                    description: "Elegant dining experience",
+                    includes: "Beef Wellington + Red Wine + Cheesecake",
+                    restaurants: "3 restaurants",
+                    price: "TSh 42,000"
+                }
+            ],
+            party: [
+                {
+                    title: "🎉 Party Platter Combo",
+                    description: "Perfect for group gatherings",
+                    includes: "Nyama Choma + Chips Mayai + Fresh Juice",
+                    restaurants: "3 restaurants",
+                    price: "TSh 25,000"
+                },
+                {
+                    title: "🥂 Celebration Feast",
+                    description: "For special occasions",
+                    includes: "Mixed Grill + Pilau + Fruit Platter",
+                    restaurants: "3 restaurants",
+                    price: "TSh 38,000"
+                }
+            ],
+            budget: [
+                {
+                    title: "💰 Budget Friendly Combo",
+                    description: "Great value meal",
+                    includes: "Chicken Curry + Ugali + Soda",
+                    restaurants: "2 restaurants",
+                    price: "TSh 12,500"
+                },
+                {
+                    title: "🎯 Value Meal Deal",
+                    description: "Maximum satisfaction, minimum cost",
+                    includes: "Beef Stew + Rice + Vegetables",
+                    restaurants: "2 restaurants",
+                    price: "TSh 14,000"
+                }
+            ]
         };
         
-        let total = 0;
-        
-        // Step navigation
-        nextStepBtns.forEach(btn => {
+        moodBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const nextStep = btn.getAttribute('data-next');
-                goToStep(nextStep);
+                // Remove active class from all buttons
+                moodBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const mood = btn.getAttribute('data-mood');
+                const moodRecommendations = recommendations[mood];
+                
+                // Update recommendations
+                aiRecommendations.innerHTML = moodRecommendations.map(rec => `
+                    <div class="recommendation-card">
+                        <div class="recommendation-header">
+                            <h4 style="color: white; margin: 0;">${rec.title}</h4>
+                        </div>
+                        <div class="recommendation-body">
+                            <p><strong>Perfect for:</strong> ${rec.description}</p>
+                            <p><strong>Includes:</strong> ${rec.includes}</p>
+                            <p><strong>From:</strong> ${rec.restaurants}</p>
+                            <p><strong>Total:</strong> ${rec.price}</p>
+                            <button class="btn btn-primary btn-sm" style="margin-top: 1rem;">Add to Cart</button>
+                        </div>
+                    </div>
+                `).join('');
             });
         });
         
-        function goToStep(stepNumber) {
-            // Update step indicators
-            steps.forEach(step => step.classList.remove('active'));
-            document.getElementById(`step${stepNumber}`).classList.add('active');
-            
-            // Update content
-            stepContents.forEach(content => content.classList.remove('active'));
-            document.getElementById(`step${stepNumber}Content`).classList.add('active');
-            
-            // Update summary if we're on step 4
-            if (stepNumber == 4) {
-                updateComboSummary();
-            }
-        }
+        // ===== STICKY CART =====
+        const stickyCart = document.getElementById('stickyCart');
+        let cartItems = 3;
         
-        // Dish selection
-        dishOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                // Determine which step we're on
-                const activeStep = document.querySelector('.builder-content.active');
-                const stepId = activeStep.id;
+        stickyCart.addEventListener('click', () => {
+            alert(`You have ${cartItems} items in your cart! In the full app, this would open your cart.`);
+        });
+        
+        // ===== ANIMATIONS ON SCROLL =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
                 
-                // Remove selection from siblings
-                option.parentElement.querySelectorAll('.dish-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
                 
-                // Select this option
-                option.classList.add('selected');
-                
-                // Store selection
-                const dishName = option.querySelector('h4').textContent;
-                const dishPrice = parseInt(option.getAttribute('data-price'));
-                
-                if (stepId === 'step1Content') {
-                    selectedDishes.main = {name: dishName, price: dishPrice};
-                } else if (stepId === 'step2Content') {
-                    // Allow multiple sides
-                    if (!selectedDishes.sides.find(side => side.name === dishName)) {
-                        selectedDishes.sides.push({name: dishName, price: dishPrice});
-                    }
-                } else if (stepId === 'step3Content') {
-                    selectedDishes.drinks = [{name: dishName, price: dishPrice}];
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
         
-        function updateComboSummary() {
-            if (!selectedDishes.main) {
-                comboSummary.innerHTML = '<p>Please go back and select at least a main dish</p>';
-                totalPrice.textContent = 'TSh 0';
-                return;
+        // ===== INITIALIZE =====
+        window.addEventListener('load', () => {
+            // Trigger initial AI recommendations
+            document.querySelector('.mood-btn.active').click();
+            
+            // Add cart items from local storage if any
+            const savedCart = localStorage.getItem('pamojaCart');
+            if (savedCart) {
+                cartItems = parseInt(savedCart);
+                stickyCart.querySelector('.badge').textContent = cartItems;
             }
-            
-            let html = '<h4>Your Combo:</h4><ul>';
-            total = 0;
-            
-            if (selectedDishes.main) {
-                html += `<li><strong>Main:</strong> ${selectedDishes.main.name} - TSh ${selectedDishes.main.price.toLocaleString()}</li>`;
-                total += selectedDishes.main.price;
-            }
-            
-            if (selectedDishes.sides.length > 0) {
-                html += '<li><strong>Sides:</strong><ul>';
-                selectedDishes.sides.forEach(side => {
-                    html += `<li>${side.name} - TSh ${side.price.toLocaleString()}</li>`;
-                    total += side.price;
-                });
-                html += '</ul></li>';
-            }
-            
-            if (selectedDishes.drinks.length > 0) {
-                html += '<li><strong>Drink:</strong> ';
-                selectedDishes.drinks.forEach(drink => {
-                    html += `${drink.name} - TSh ${drink.price.toLocaleString()}`;
-                    total += drink.price;
-                });
-                html += '</li>';
-            }
-            
-            html += '</ul>';
-            comboSummary.innerHTML = html;
-            totalPrice.textContent = `TSh ${total.toLocaleString()}`;
-        }
-        
-        function checkoutCombo() {
-            if (total === 0) {
-                alert('Please select at least one item');
-                return;
-            }
-            
-            alert(`Order placed successfully! Total: TSh ${total.toLocaleString()}\n\nYour AI-generated combo is being prepared by multiple restaurants. You will receive tracking updates soon.`);
-            
-            // Reset for next order
-            selectedDishes = {main: null, sides: [], drinks: []};
-            dishOptions.forEach(opt => opt.classList.remove('selected'));
-            goToStep(1);
-        }
-        
-        // Restaurant filtering
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const restaurantCards = document.querySelectorAll('.restaurant-card');
-        
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const cuisine = btn.getAttribute('data-cuisine');
-                
-                restaurantCards.forEach(card => {
-                    if (cuisine === 'all' || card.getAttribute('data-cuisine') === cuisine) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
         });
         
-        // Shopping cart simulation
-        let cart = [];
-        
-        function addToCart(itemName, itemPrice) {
-            cart.push({name: itemName, price: itemPrice});
-            alert(`Added ${itemName} to cart!\n\nCart now has ${cart.length} items`);
+        // ===== ADD TO CART FUNCTION =====
+        window.addToCart = function(itemName, price) {
+            cartItems++;
+            stickyCart.querySelector('.badge').textContent = cartItems;
+            localStorage.setItem('pamojaCart', cartItems);
             
-            // Update cart indicator if we had one
-            const cartIndicator = document.getElementById('cartCount');
-            if (cartIndicator) {
-                cartIndicator.textContent = cart.length;
+            // Show notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 30px;
+                background: var(--success);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i> Added ${itemName} to cart!
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        };
+        
+        // Add styles for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
             }
-        }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
         
-        function viewRestaurant(restaurantName) {
-            alert(`Opening menu for ${restaurantName}...\n\nIn the full app, this would show the restaurant's full menu with multi-restaurant ordering options.`);
-            
-            // Simulate navigation to restaurant page
-            localStorage.setItem('selectedRestaurant', restaurantName);
-            // In real app: window.location.href = `restaurant.html?name=${encodeURIComponent(restaurantName)}`;
-        }
-        
-        // Back button handlers for combo builder
-        document.querySelectorAll('.cta-button[data-next]').forEach(btn => {
-            if (btn.textContent === 'Back') {
-                btn.addEventListener('click', () => {
-                    const step = btn.getAttribute('data-next');
-                    goToStep(step);
-                });
+        // Attach addToCart to all buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-primary') && e.target.textContent.includes('Add to Cart')) {
+                const card = e.target.closest('.recommendation-card');
+                if (card) {
+                    const title = card.querySelector('h4').textContent;
+                    const price = card.querySelector('p:last-child').textContent;
+                    window.addToCart(title, price);
+                }
             }
         });
     </script>
