@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Pamoja Eats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #00A896;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero */
+        .features-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(0,78,137,0.1) 100%);
+            text-align: center;
+        }
+        
+        .features-hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .features-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--gray);
+        }
+        
+        /* Feature Categories */
+        .categories-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            padding: 12px 25px;
+            background: var(--light);
+            border: 2px solid #eee;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Features Grid */
+        .features-grid-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-header {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-content {
+            padding: 25px;
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .feature-tag {
+            background: rgba(255,107,53,0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Interactive Demos */
+        .demo-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .demo-container {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .demo-tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 30px;
+        }
+        
+        .demo-tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            color: var(--gray);
+        }
+        
+        .demo-tab.active {
+            color: var(--primary);
+        }
+        
+        .demo-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .demo-content {
+            min-height: 400px;
+        }
+        
+        /* Loyalty Demo */
+        .loyalty-demo {
+            display: none;
+        }
+        
+        .loyalty-demo.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .loyalty-levels {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .level {
+            text-align: center;
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            margin: 0 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .level.active {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .level-icon {
+            width: 60px;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+        }
+        
+        .level.active .level-icon {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .points-counter {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .points-display {
+            font-size: 48px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 1s;
+        }
+        
+        /* Tracking Demo */
+        .tracking-demo {
+            display: none;
+        }
+        
+        .tracking-demo.active {
+            display: block;
+        }
+        
+        .tracking-map {
+            height: 300px;
+            background: #e9ecef;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .restaurant-marker, .user-marker, .rider-marker {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .restaurant-marker {
+            top: 50px;
+            left: 100px;
+            background: var(--primary);
+            color: white;
+        }
+        
+        .user-marker {
+            bottom: 50px;
+            right: 100px;
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .rider-marker {
+            top: 150px;
+            left: 200px;
+            background: var(--accent);
+            color: white;
+            animation: moveRider 10s linear infinite;
+        }
+        
+        @keyframes moveRider {
+            0% { left: 200px; }
+            50% { left: 400px; top: 100px; }
+            100% { left: 800px; top: 250px; }
+        }
+        
+        .tracking-status {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .status-item {
+            text-align: center;
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .status-item.active .status-icon {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .status-icon {
+            width: 50px;
+            height: 50px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: var(--secondary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .table-cell {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .table-row:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .checkmark {
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .crossmark {
+            color: #dc3545;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Tech Stack */
+        .tech-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .tech-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+        
+        .tech-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .tech-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Future Roadmap */
+        .roadmap-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(0,78,137,0.1) 0%, rgba(255,107,53,0.1) 100%);
+        }
+        
+        .roadmap-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+        }
+        
+        .roadmap-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .roadmap-date {
+            width: 100px;
+            text-align: right;
+            padding-right: 30px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .roadpoint-marker {
+            position: absolute;
+            left: 46px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .roadmap-content {
+            flex: 1;
+            padding-left: 40px;
+        }
+        
+        .roadmap-content h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .loyalty-levels {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .level {
+                margin: 0;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .roadmap-timeline::before {
+                left: 30px;
+            }
+            
+            .roadmap-date {
+                width: 70px;
+                padding-right: 20px;
+            }
+            
+            .roadpoint-marker {
+                left: 26px;
+            }
+            
+            .roadmap-content {
+                padding-left: 30px;
+            }
+            
+            .tracking-status {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+        
+        .mt-30 {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Pamoja<span>Eats</span></h1>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="features.html" class="active">Features</a></li>
+                    <li><a href="restaurants.html">For Restaurants</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <button class="cta-button" onclick="location.href='restaurants.html'">Order Now</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="features-hero">
+        <div class="container">
+            <h2>Powerful Features</h2>
+            <p>Discover the innovative technology that makes Pamoja Eats Tanzania's most advanced food delivery platform.</p>
+            <button class="cta-button" onclick="location.href='#demos'">Try Live Demos</button>
+        </div>
+    </section>
+
+    <!-- Feature Categories -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="categories">
+                <button class="category-btn active" data-category="all">All Features</button>
+                <button class="category-btn" data-category="ai">AI-Powered</button>
+                <button class="category-btn" data-category="ordering">Ordering</button>
+                <button class="category-btn" data-category="delivery">Delivery</button>
+                <button class="category-btn" data-category="social">Social</button>
+                <button class="category-btn" data-category="business">Business</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-grid-section">
+        <div class="container">
+            <div class="features-grid" id="featuresGrid">
+                <!-- Feature 1 -->
+                <div class="feature-card" data-categories="ordering ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Multi-Restaurant Cart</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Order from multiple restaurants in one seamless checkout. Mix and match dishes from your favorite places without multiple orders or deliveries.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Ordering</span>
+                            <span class="feature-tag">AI</span>
+                        </div>
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 15px;" onclick="showDemo('multi-restaurant')">Try Demo</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card" data-categories="ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Smart Combo Suggestions</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>AI-driven suggestions for meals from different restaurants based on user taste, dietary preferences, or previous orders. Discover perfect combinations.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">AI</span>
+                            <span class="feature-tag">Personalization</span>
+                        </div>
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 15px;" onclick="showDemo('ai-combos')">Try Demo</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card" data-categories="ordering">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3>Cultural & Regional Menus</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Highlight authentic Tanzanian dishes by region. Explore "Nyama Choma Combos" or "Zanzibar Spice Specials" in one order.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Cultural</span>
+                            <span class="feature-tag">Local</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card" data-categories="social">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Social Sharing & Group Orders</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Allow friends/family to join a single order and split payments automatically. Perfect for offices, parties, or family gatherings.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Social</span>
+                            <span class="feature-tag">Group</span>
+                        </div>
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 15px;" onclick="showDemo('group-orders')">Try Demo</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card" data-categories="delivery ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Real-Time Order Tracking</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Track every dish in your cart even if it comes from different kitchens. Live ETA for each item with delay notifications.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Delivery</span>
+                            <span class="feature-tag">Real-Time</span>
+                        </div>
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 15px;" onclick="showDemo('tracking')">Try Demo</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card" data-categories="ordering">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h3>Meal Customization Engine</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Customize dishes (spice level, portion size, add-ons) per restaurant. More flexible than competitors with detailed customization options.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Customization</span>
+                            <span class="feature-tag">Personalization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 7 -->
+                <div class="feature-card" data-categories="ordering">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Scheduled & Recurring Orders</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Set recurring meals (e.g., lunch every Monday) or schedule orders for future dates/events. Never forget to order again.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Scheduling</span>
+                            <span class="feature-tag">Automation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 8 -->
+                <div class="feature-card" data-categories="ordering business">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Subscription Meal Plans</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Daily/weekly meal subscriptions with multi-restaurant options. Perfect for busy professionals, offices, or students.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Subscription</span>
+                            <span class="feature-tag">Business</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 9 -->
+                <div class="feature-card" data-categories="social ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Gamified Loyalty Program</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Earn points for every order, unlock badges, level up to get discounts, free meals or exclusive deals. Accumulate points for year-end rewards.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Loyalty</span>
+                            <span class="feature-tag">Gamification</span>
+                        </div>
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 15px;" onclick="showDemo('loyalty')">Try Demo</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 10 -->
+                <div class="feature-card" data-categories="delivery ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>AI-Optimized Delivery Routes</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>AI calculates the fastest route for multiple restaurant pickups, reducing delays and ensuring hot food delivery.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">AI</span>
+                            <span class="feature-tag">Delivery</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 11 -->
+                <div class="feature-card" data-categories="business">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Restaurant Collaboration Deals</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Feature "combo deals" from multiple restaurants like pairing drinks from one, mains from another. Boost sales through collaboration.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Business</span>
+                            <span class="feature-tag">Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 12 -->
+                <div class="feature-card" data-categories="ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Customer Taste Profiles</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>AI remembers user preferences, allergies, spice tolerance, and suggests meals automatically. Personalized experience for every user.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">AI</span>
+                            <span class="feature-tag">Personalization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 13 -->
+                <div class="feature-card" data-categories="business ai">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Dynamic Pricing & Flash Deals</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Limited-time discounts based on stock, time of day, or popularity to boost sales for restaurants and save money for customers.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Business</span>
+                            <span class="feature-tag">AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 14 -->
+                <div class="feature-card" data-categories="social">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h3>Interactive Feedback System</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Instead of just ratings, users can give dish-level feedback with photos and comments. Helps restaurants improve and builds trust.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Social</span>
+                            <span class="feature-tag">Feedback</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 15 -->
+                <div class="feature-card" data-categories="ordering business">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <h3>Event & Party Planning</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Order for weddings, house parties, birthdays or corporate events from multiple restaurants at once with optional catering add-ons.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Events</span>
+                            <span class="feature-tag">Business</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 16 -->
+                <div class="feature-card" data-categories="social business">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Influencer & Celebrity Menus</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p>Partner with Tanzanian chefs or influencers to create exclusive dishes that can only be ordered through our platform.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Social</span>
+                            <span class="feature-tag">Marketing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demos -->
+    <section class="demo-section" id="demos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Interactive Feature Demos</h2>
+                <p>Experience our innovative features in action</p>
+            </div>
+            
+            <div class="demo-container">
+                <div class="demo-tabs">
+                    <button class="demo-tab active" data-demo="loyalty">Loyalty Program</button>
+                    <button class="demo-tab" data-demo="tracking">Live Tracking</button>
+                    <button class="demo-tab" data-demo="group">Group Orders</button>
+                    <button class="demo-tab" data-demo="ai">AI Combos</button>
+                </div>
+                
+                <div class="demo-content">
+                    <!-- Loyalty Demo -->
+                    <div class="loyalty-demo active">
+                        <h3>Gamified Loyalty Program</h3>
+                        <p>Earn points with every order, unlock badges, and level up for exclusive rewards!</p>
+                        
+                        <div class="points-counter">
+                            <div class="points-display" id="pointsDisplay">1,250</div>
+                            <p>Your Points Balance</p>
+                            
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 45%;"></div>
+                            </div>
+                            <p>45% to next level (2,500 points for Gold)</p>
+                            
+                            <div style="margin: 20px 0;">
+                                <button class="cta-button" onclick="earnPoints(100)" style="margin-right: 10px;">Simulate Order (+100 pts)</button>
+                                <button class="cta-button" onclick="earnPoints(500)" style="background-color: var(--secondary);">Simulate Big Order (+500 pts)</button>
+                            </div>
+                        </div>
+                        
+                        <div class="loyalty-levels">
+                            <div class="level">
+                                <div class="level-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h4>Bronze</h4>
+                                <p>0-999 points</p>
+                                <small>5% discount</small>
+                            </div>
+                            
+                            <div class="level active">
+                                <div class="level-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <h4>Silver</h4>
+                                <p>1,000-2,499 points</p>
+                                <small>10% discount</small>
+                            </div>
+                            
+                            <div class="level">
+                                <div class="level-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <h4>Gold</h4>
+                                <p>2,500+ points</p>
+                                <small>15% discount + Free delivery</small>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4>Your Badges</h4>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+                                <div style="background: #FFD700; color: #856404; padding: 10px 20px; border-radius: 20px; font-weight: 600;">🥘 Spice Master</div>
+                                <div style="background: #007BFF; color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600;">👥 Group Order Pro</div>
+                                <div style="background: #28A745; color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600;">💎 Early Adopter</div>
+                                <div style="background: #6F42C1; color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600;">🌟 Review Contributor</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tracking Demo -->
+                    <div class="tracking-demo">
+                        <h3>Multi-Restaurant Order Tracking</h3>
+                        <p>Track your order from multiple restaurants in real-time</p>
+                        
+                        <div class="tracking-map">
+                            <div class="restaurant-marker" title="Mama's Kitchen">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="restaurant-marker" style="top: 200px; left: 300px;" title="Green Bowl">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="user-marker" title="Your Location">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="rider-marker" title="Delivery Rider">
+                                <i class="fas fa-motorcycle"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="tracking-status">
+                            <div class="status-item active">
+                                <div class="status-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <p>Order Confirmed</p>
+                            </div>
+                            
+                            <div class="status-item active">
+                                <div class="status-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <p>Mama's Kitchen: Preparing</p>
+                            </div>
+                            
+                            <div class="status-item">
+                                <div class="status-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <p>Green Bowl: Preparing</p>
+                            </div>
+                            
+                            <div class="status-item">
+                                <div class="status-icon">
+                                    <i class="fas fa-motorcycle"></i>
+                                </div>
+                                <p>Delivery in Progress</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4>Order Details</h4>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <div>
+                                    <strong>Mama's Kitchen</strong>
+                                    <p>Nyama Choma, Ugali</p>
+                                    <p style="color: var(--accent);">✓ Ready in 15 min</p>
+                                </div>
+                                <div>
+                                    <strong>Green Bowl</strong>
+                                    <p>Fresh Juice</p>
+                                    <p style="color: var(--gray);">⏱️ Ready in 25 min</p>
+                                </div>
+                            </div>
+                            <p style="margin-top: 15px; color: var(--primary);"><strong>AI Prediction:</strong> All items will be delivered together in 45 minutes</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Group Orders Demo -->
+                    <div class="loyalty-demo" id="groupDemo">
+                        <h3>Group Orders & Split Payments</h3>
+                        <p>Create a group order and split the bill automatically with friends, family, or colleagues.</p>
+                        
+                        <div style="margin: 30px 0;">
+                            <h4>Create Group Order</h4>
+                            <input type="text" id="groupName" placeholder="Group Name (e.g., Office Lunch)" style="padding: 10px; width: 300px; border: 2px solid #eee; border-radius: 10px; margin-right: 10px;">
+                            <button class="cta-button" onclick="createGroupOrder()">Create Group</button>
+                        </div>
+                        
+                        <div id="groupOrderSection" style="display: none;">
+                            <h4>Group Order: <span id="currentGroupName"></span></h4>
+                            <p>Share this code with friends: <strong id="groupCode">ABCD123</strong></p>
+                            
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                                <h5>Order Items</h5>
+                                <div id="groupItems">
+                                    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+                                        <span>Nyama Choma (Mama's Kitchen)</span>
+                                        <span>TSh 12,000</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+                                        <span>Fresh Juice (Green Bowl)</span>
+                                        <span>TSh 2,500</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                                        <span><strong>Total</strong></span>
+                                        <span><strong>TSh 14,500</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="groupMembers">
+                                <h5>Group Members (2/5)</h5>
+                                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                                    <div style="background: var(--primary); color: white; padding: 10px 20px; border-radius: 20px;">You (Host)</div>
+                                    <div style="background: var(--secondary); color: white; padding: 10px 20px; border-radius: 20px;">John M.</div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 20px;">
+                                <button class="cta-button" onclick="addGroupMember()">+ Add Member</button>
+                                <button class="cta-button" style="background-color: var(--accent); margin-left: 10px;" onclick="splitBill()">Split Bill</button>
+                            </div>
+                            
+                            <div id="splitResult" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 10px;">
+                                <h5>Bill Split Successfully!</h5>
+                                <p>Each person pays: <strong>TSh 7,250</strong></p>
+                                <p>Payment links have been sent to all group members.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Combos Demo -->
+                    <div class="loyalty-demo" id="aiDemo">
+                        <h3>AI-Powered Combo Suggestions</h3>
+                        <p>Our AI analyzes your preferences and suggests perfect meal combinations from different restaurants.</p>
+                        
+                        <div style="margin: 30px 0;">
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h4>Your Taste Profile</h4>
+                                <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                                    <div style="background: white; padding: 10px 20px; border-radius: 20px; border: 2px solid var(--primary);">
+                                        <i class="fas fa-fire" style="color: var(--primary);"></i> Spicy Lover
+                                    </div>
+                                    <div style="background: white; padding: 10px 20px; border-radius: 20px; border: 2px solid var(--secondary);">
+                                        <i class="fas fa-drumstick-bite" style="color: var(--secondary);"></i> Meat Enthusiast
+                                    </div>
+                                    <div style="background: white; padding: 10px 20px; border-radius: 20px; border: 2px solid var(--accent);">
+                                        <i class="fas fa-users" style="color: var(--accent);"></i> Social Eater
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4>AI-Generated Combos For You</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                                <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                    <h5>🔥 Spicy Adventure Combo</h5>
+                                    <p><strong>Mama's Kitchen:</strong> Spicy Chicken Curry</p>
+                                    <p><strong>Green Bowl:</strong> Mango Lassi (to cool down)</p>
+                                    <p><strong>Total:</strong> TSh 14,500</p>
+                                    <p style="color: var(--accent); margin-top: 10px;"><i class="fas fa-brain"></i> AI Match: 92%</p>
+                                    <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 10px;">Add to Cart</button>
+                                </div>
+                                
+                                <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                    <h5>🎉 Party Platter Combo</h5>
+                                    <p><strong>Mama's Kitchen:</strong> Nyama Choma Platter</p>
+                                    <p><strong>Zanzibar Pizza House:</strong> Garlic Bread</p>
+                                    <p><strong>Green Bowl:</strong> Fruit Platter</p>
+                                    <p><strong>Total:</strong> TSh 28,000</p>
+                                    <p style="color: var(--accent); margin-top: 10px;"><i class="fas fa-brain"></i> AI Match: 88%</p>
+                                    <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 10px;">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4>Try AI Taste Test</h4>
+                            <p>Answer a few questions for personalized combo suggestions:</p>
+                            <button class="cta-button" onclick="startTasteTest()">Start Taste Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why We're Different</h2>
+                <p>Compare Pamoja Eats with traditional food delivery platforms</p>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="table-header">
+                    <div class="table-cell">Feature</div>
+                    <div class="table-cell">Pamoja Eats</div>
+                    <div class="table-cell">Traditional Apps</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Multi-Restaurant Orders</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Yes</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> No</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">AI-Powered Combos</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Smart Suggestions</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Basic Filters</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Group Order Splitting</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Automatic</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Manual Only</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Real-Time Multi-Tracking</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Per Dish Tracking</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Single Tracking</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Gamified Loyalty</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Points & Badges</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Basic Points</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Restaurant Collaborations</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Combo Deals</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Independent Only</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Cultural Menus</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Regional Specials</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Standard Only</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell">Event & Catering</div>
+                    <div class="table-cell"><span class="checkmark">✓</span> Full Support</div>
+                    <div class="table-cell"><span class="crossmark">✗</span> Limited</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technology Powering Our Platform</h2>
+                <p>Built with cutting-edge technology for the best user experience</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Personalized recommendations, route optimization, and predictive analytics</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile-First Design</h3>
+                    <p>Responsive design that works perfectly on all devices</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Bank-Level Security</h3>
+                    <p>End-to-end encryption for all payments and personal data</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Real-Time Processing</h3>
+                    <p>Live order tracking and instant updates across the platform</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Roadmap -->
+    <section class="roadmap-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Feature Roadmap</h2>
+                <p>What's coming next to Pamoja Eats</p>
+            </div>
+            
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <div class="roadmap-date">Q4 2023</div>
+                    <div class="roadpoint-marker"></div>
+                    <div class="roadmap-content">
+                        <h3>Digital Twin Integration</h3>
+                        <p>Live kitchen views and food preparation tracking for premium restaurants</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">Q1 2024</div>
+                    <div class="roadpoint-marker"></div>
+                    <div class="roadmap-content">
+                        <h3>Voice Ordering</h3>
+                        <p>Order food using voice commands in Swahili and English</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">Q2 2024</div>
+                    <div class="roadpoint-marker"></div>
+                    <div class="roadmap-content">
+                        <h3>AR Menu Previews</h3>
+                        <p>Augmented Reality food preview using your phone camera</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">Q3 2024</div>
+                    <div class="roadpoint-marker"></div>
+                    <div class="roadmap-content">
+                        <h3>Smart Kitchen IoT</h3>
+                        <p>Integration with smart kitchen appliances for automated ordering</p>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">Q4 2024</div>
+                    <div class="roadpoint-marker"></div>
+                    <div class="roadmap-content">
+                        <h3>East Africa Expansion</h3>
+                        <p>Launch in Kenya, Uganda, and Rwanda with local adaptations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Pamoja<span style="color: var(--primary);">Eats</span></h2>
+                    <p>"Your Taste, Your Way" - Bringing Tanzania's best restaurants to your doorstep.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="restaurants.html">For Restaurants</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +255 123 456 789</p>
+                    <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@pamojaeats.co.tz</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#demos">Feature Demos</a></li>
+                        <li><a href="#comparison">Comparison</a></li>
+                        <li><a href="#tech">Technology</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pamoja Eats. Built by I&G Technologies. All rights reserved.</p>
+                <p>CEO: Irene Mgimba | Director: George William</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Feature Categories Filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.getAttribute('data-category');
+                
+                // Filter features
+                featureCards.forEach(card => {
+                    const categories = card.getAttribute('data-categories');
+                    
+                    if (category === 'all' || categories.includes(category)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        // Demo Tabs
+        const demoTabs = document.querySelectorAll('.demo-tab');
+        const demoContents = document.querySelectorAll('.loyalty-demo, .tracking-demo');
+        
+        demoTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                demoTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const demoType = tab.getAttribute('data-demo');
+                
+                // Show corresponding demo
+                demoContents.forEach(content => {
+                    content.classList.remove('active');
+                    
+                    if (demoType === 'tracking' && content.classList.contains('tracking-demo')) {
+                        content.classList.add('active');
+                    } else if (demoType === 'group' && content.id === 'groupDemo') {
+                        content.classList.add('active');
+                    } else if (demoType === 'ai' && content.id === 'aiDemo') {
+                        content.classList.add('active');
+                    } else if (demoType === 'loyalty' && content.classList.contains('loyalty-demo') && !content.id) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Loyalty Program Demo
+        let points = 1250;
+        const pointsDisplay = document.getElementById('pointsDisplay');
+        const progressFill = document.getElementById('progressFill');
+        
+        function earnPoints(amount) {
+            points += amount;
+            pointsDisplay.textContent = points.toLocaleString();
+            
+            // Update progress
+            let progress = 0;
+            if (points < 1000) {
+                progress = (points / 1000) * 100;
+            } else if (points < 2500) {
+                progress = ((points - 1000) / 1500) * 100;
+            } else {
+                progress = 100;
+            }
+            
+            progressFill.style.width = `${progress}%`;
+            
+            // Update level
+            const levels = document.querySelectorAll('.level');
+            levels.forEach(level => level.classList.remove('active'));
+            
+            if (points < 1000) {
+                levels[0].classList.add('active');
+            } else if (points < 2500) {
+                levels[1].classList.add('active');
+            } else {
+                levels[2].classList.add('active');
+            }
+            
+            // Show notification
+            if (amount >= 500) {
+                alert(`🎉 Congratulations! You earned ${amount} points and unlocked a new badge: "Big Spender"!`);
+            } else {
+                alert(`+${amount} points added! Your new total: ${points.toLocaleString()} points`);
+            }
+        }
+        
+        // Group Order Demo
+        function createGroupOrder() {
+            const groupName = document.getElementById('groupName').value;
+            if (!groupName) {
+                alert('Please enter a group name');
+                return;
+            }
+            
+            document.getElementById('groupOrderSection').style.display = 'block';
+            document.getElementById('currentGroupName').textContent = groupName;
+            document.getElementById('groupCode').textContent = Math.random().toString(36).substring(2, 10).toUpperCase();
+            
+            alert(`Group "${groupName}" created! Share the code with friends to start ordering together.`);
+        }
+        
+        function addGroupMember() {
+            const name = prompt("Enter member's name:");
+            if (name) {
+                const membersDiv = document.querySelector('#groupMembers div:last-child');
+                const newMember = document.createElement('div');
+                newMember.style.background = '#6c757d';
+                newMember.style.color = 'white';
+                newMember.style.padding = '10px 20px';
+                newMember.style.borderRadius = '20px';
+                newMember.textContent = name;
+                membersDiv.appendChild(newMember);
+                
+                // Update member count
+                const memberCount = document.querySelector('#groupMembers h5');
+                const current = parseInt(memberCount.textContent.split('(')[1].split('/')[0]) + 1;
+                memberCount.textContent = `Group Members (${current}/5)`;
+            }
+        }
+        
+        function splitBill() {
+            const members = document.querySelectorAll('#groupMembers div:last-child div');
+            const total = 14500;
+            const perPerson = Math.round(total / members.length);
+            
+            document.getElementById('splitResult').style.display = 'block';
+            document.getElementById('splitResult').querySelector('strong').textContent = `TSh ${perPerson.toLocaleString()}`;
+            
+            alert(`Bill split successfully! ${members.length} people, each pays TSh ${perPerson.toLocaleString()}`);
+        }
+        
+        // AI Taste Test
+        function startTasteTest() {
+            alert("Starting AI Taste Test...\n\nIn the full app, you would answer questions about your flavor preferences, dietary restrictions, and mood to get personalized combo suggestions.");
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                const aiDemo = document.getElementById('aiDemo');
+                const newCombo = document.createElement('div');
+                newCombo.style.background = 'white';
+                newCombo.style.borderRadius = '10px';
+                newCombo.style.padding = '20px';
+                newCombo.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)';
+                newCombo.style.marginTop = '20px';
+                newCombo.innerHTML = `
+                    <h5>🍛 Based on Your Taste Test:</h5>
+                    <p><strong>Perfect Match Combo (95% match)</strong></p>
+                    <p><strong>Mama's Kitchen:</strong> Pilau Rice with Beef</p>
+                    <p><strong>Green Bowl:</strong> Fresh Garden Salad</p>
+                    <p><strong>Total:</strong> TSh 12,000</p>
+                    <p style="color: var(--accent); margin-top: 10px;"><i class="fas fa-brain"></i> AI Recommendation: "Your preference for savory dishes with healthy sides"</p>
+                    <button class="cta-button" style="padding: 8px 20px; font-size: 14px; margin-top: 10px;">Add to Cart</button>
+                `;
+                
+                aiDemo.querySelector('div:last-child').before(newCombo);
+            }, 1000);
+        }
+        
+        // Feature Demo Links
+        function showDemo(feature) {
+            let demoType = 'loyalty';
+            
+            switch(feature) {
+                case 'multi-restaurant':
+                    alert("Multi-restaurant cart demo: You can add items from different restaurants to a single cart and checkout once.");
+                    break;
+                case 'ai-combos':
+                    demoType = 'ai';
+                    break;
+                case 'group-orders':
+                    demoType = 'group';
+                    break;
+                case 'tracking':
+                    demoType = 'tracking';
+                    break;
+                case 'loyalty':
+                    demoType = 'loyalty';
+                    break;
+            }
+            
+            // Scroll to demos section
+            document.getElementById('demos').scrollIntoView({ behavior: 'smooth' });
+            
+            // Switch to correct tab after a delay
+            setTimeout(() => {
+                document.querySelector(`.demo-tab[data-demo="${demoType}"]`).click();
+            }, 500);
+        }
+        
+        // Auto-rotate tracking status
+        setInterval(() => {
+            const statusItems = document.querySelectorAll('.status-item');
+            if (statusItems.length > 0) {
+                let activeIndex = -1;
+                statusItems.forEach((item, index) => {
+                    if (item.classList.contains('active')) {
+                        activeIndex = index;
+                    }
+                });
+                
+                statusItems.forEach(item => item.classList.remove('active'));
+                
+                if (activeIndex < statusItems.length - 1) {
+                    statusItems[activeIndex + 1].classList.add('active');
+                } else {
+                    statusItems[0].classList.add('active');
+                }
+            }
+        }, 3000);
+        
+        // Initialize with some points
+        window.addEventListener('load', () => {
+            earnPoints(0); // Initialize display
+        });
+    </script>
+</body>
+</html>
