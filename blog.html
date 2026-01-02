@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja Eats Blog | Food Tech News & Tanzanian Culinary Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B35;
+            --secondary: #1A535C;
+            --accent: #FFE66D;
+            --light: #F7FFF7;
+            --dark: #292F36;
+            --gray: #6C757D;
+            --food-red: #E63946;
+            --tech-blue: #457B9D;
+            --culture-gold: #E9C46A;
+            --sustainability-green: #2A9D8F;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff9f7 0%, #f7f9fc 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, .active {
+            color: var(--primary) !important;
+        }
+        
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+        
+        /* Hero Section */
+        .blog-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .blog-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        /* Blog Categories */
+        .blog-categories {
+            padding: 60px 0;
+            background: white;
+        }
+        
+        .categories-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .category-card {
+            min-width: 200px;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .category-card:hover, .category-card.active {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .category-card.food {
+            background: linear-gradient(135deg, #ffddd2 0%, #ffc2b4 100%);
+            border-color: var(--food-red);
+        }
+        
+        .category-card.tech {
+            background: linear-gradient(135deg, #a8dadc 0%, #8ecae6 100%);
+            border-color: var(--tech-blue);
+        }
+        
+        .category-card.culture {
+            background: linear-gradient(135deg, #f4e285 0%, #f2cc8f 100%);
+            border-color: var(--culture-gold);
+        }
+        
+        .category-card.sustainability {
+            background: linear-gradient(135deg, #a8e6cf 0%, #7bc9ac 100%);
+            border-color: var(--sustainability-green);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .category-card.food .category-icon {
+            color: var(--food-red);
+        }
+        
+        .category-card.tech .category-icon {
+            color: var(--tech-blue);
+        }
+        
+        .category-card.culture .category-icon {
+            color: var(--culture-gold);
+        }
+        
+        .category-card.sustainability .category-icon {
+            color: var(--sustainability-green);
+        }
+        
+        /* Featured Articles */
+        .featured-articles {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .featured-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .article-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .article-category {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .article-content {
+            padding: 30px;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        /* Popular Tags */
+        .popular-tags {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .tags-cloud {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .tag {
+            padding: 10px 25px;
+            background: #f8f9fa;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Recent Posts */
+        .recent-posts {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .posts-sidebar {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        
+        .post-sidebar {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar-title {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .sidebar-list {
+            list-style: none;
+        }
+        
+        .sidebar-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Author Spotlight */
+        .author-spotlight {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .authors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .author-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .author-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .author-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--primary);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e0e0e0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-links h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            background: var(--gray);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .posts-sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                width: 100%;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper" style="font-size: 2rem; color: var(--primary);"></i>
+                <h1>Pamoja<span>Blog</span></h1>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="cultural-menus.html">Food Culture</a></li>
+                    <li><a href="technology.html">Tech</a></li>
+                    <li><a href="sustainability.html">Sustainability</a></li>
+                </ul>
+            </nav>
+            
+            <button class="cta-button" onclick="scrollToSection('newsletter')">
+                <i class="fas fa-envelope"></i> Subscribe
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Stories That Nourish</h1>
+            <p>Explore the intersection of food, technology, culture, and sustainability in Tanzania's evolving culinary landscape.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px; flex-wrap: wrap;">
+                <button class="cta-button" onclick="filterArticles('food')">
+                    <i class="fas fa-utensils"></i> Food Stories
+                </button>
+                <button class="cta-button" style="background: transparent; border: 2px solid white;" onclick="filterArticles('tech')">
+                    <i class="fas fa-robot"></i> Tech Insights
+                </button>
+                <button class="cta-button" style="background: transparent; border: 2px solid white;" onclick="filterArticles('culture')">
+                    <i class="fas fa-music"></i> Culture & Tradition
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Categories -->
+    <section class="blog-categories">
+        <div class="container">
+            <div class="categories-grid">
+                <div class="category-card food active" onclick="filterArticles('food')">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">Food & Recipes</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Traditional dishes and modern twists</p>
+                </div>
+                
+                <div class="category-card tech" onclick="filterArticles('tech')">
+                    <div class="category-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">Technology</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">AI, IoT, and food tech innovations</p>
+                </div>
+                
+                <div class="category-card culture" onclick="filterArticles('culture')">
+                    <div class="category-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">Culture</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Tanzanian culinary heritage</p>
+                </div>
+                
+                <div class="category-card sustainability" onclick="filterArticles('sustainability')">
+                    <div class="category-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">Sustainability</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Green initiatives and impact</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section class="featured-articles">
+        <div class="container">
+            <div class="featured-header">
+                <div>
+                    <h2 style="color: var(--secondary); margin-bottom: 10px;">Featured Stories</h2>
+                    <p style="color: var(--gray);">Latest insights from our food tech ecosystem</p>
+                </div>
+                <button class="cta-button" onclick="viewAllArticles()">
+                    <i class="fas fa-book-open"></i> View All Articles
+                </button>
+            </div>
+            
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Articles will be loaded here -->
+            </div>
+            
+            <div class="pagination">
+                <button class="page-btn active" onclick="changePage(1)">1</button>
+                <button class="page-btn" onclick="changePage(2)">2</button>
+                <button class="page-btn" onclick="changePage(3)">3</button>
+                <button class="page-btn" onclick="changePage(4)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-container">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Stay Updated</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">
+                    Get weekly insights on Tanzanian food tech, exclusive recipes, and sustainability tips.
+                </p>
+                
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                    <button type="submit" class="cta-button" style="padding: 15px 40px;">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </form>
+                
+                <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">
+                    No spam ever. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Tags -->
+    <section class="popular-tags">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--secondary); margin-bottom: 20px;">Explore Topics</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 30px; max-width: 800px; margin: 0 auto 30px;">
+                Discover articles by popular topics and trending discussions
+            </p>
+            
+            <div class="tags-cloud">
+                <span class="tag" onclick="filterByTag('AI')">AI in Food</span>
+                <span class="tag" onclick="filterByTag('Traditional Recipes')">Traditional Recipes</span>
+                <span class="tag" onclick="filterByTag('Sustainability')">Sustainability</span>
+                <span class="tag" onclick="filterByTag('Food Tech')">Food Tech</span>
+                <span class="tag" onclick="filterByTag('Zanzibar Cuisine')">Zanzibar Cuisine</span>
+                <span class="tag" onclick="filterByTag('Delivery Innovation')">Delivery Innovation</span>
+                <span class="tag" onclick="filterByTag('Farm to Table')">Farm to Table</span>
+                <span class="tag" onclick="filterByTag('Digital Transformation')">Digital Transformation</span>
+                <span class="tag" onclick="filterByTag('Maasai Food')">Maasai Food</span>
+                <span class="tag" onclick="filterByTag('Green Packaging')">Green Packaging</span>
+                <span class="tag" onclick="filterByTag('IoT Sensors')">IoT Sensors</span>
+                <span class="tag" onclick="filterByTag('Urban Farming')">Urban Farming</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts & Sidebar -->
+    <section class="recent-posts">
+        <div class="container">
+            <div class="posts-sidebar">
+                <div>
+                    <h2 style="color: var(--secondary); margin-bottom: 30px;">Latest Updates</h2>
+                    <div class="articles-grid" id="recentArticles">
+                        <!-- Recent articles will be loaded here -->
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="post-sidebar">
+                        <h3 class="sidebar-title">Most Popular</h3>
+                        <ul class="sidebar-list" id="popularArticles">
+                            <!-- Popular articles will be loaded here -->
+                        </ul>
+                    </div>
+                    
+                    <div class="post-sidebar" style="margin-top: 30px;">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="sidebar-list">
+                            <li style="display: flex; justify-content: space-between;">
+                                <span>Food & Recipes</span>
+                                <span style="color: var(--primary); font-weight: bold;">24</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between;">
+                                <span>Technology</span>
+                                <span style="color: var(--primary); font-weight: bold;">18</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between;">
+                                <span>Culture & Heritage</span>
+                                <span style="color: var(--primary); font-weight: bold;">15</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between;">
+                                <span>Sustainability</span>
+                                <span style="color: var(--primary); font-weight: bold;">12</span>
+                            </li>
+                            <li style="display: flex; justify-content: space-between;">
+                                <span>Restaurant Stories</span>
+                                <span style="color: var(--primary); font-weight: bold;">9</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="post-sidebar" style="margin-top: 30px;">
+                        <h3 class="sidebar-title">Upcoming Events</h3>
+                        <ul class="sidebar-list">
+                            <li>
+                                <div style="font-weight: bold; color: var(--secondary);">Mar 15</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">Zanzibar Food Festival</div>
+                            </li>
+                            <li>
+                                <div style="font-weight: bold; color: var(--secondary);">Mar 22</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">AI in Food Tech Webinar</div>
+                            </li>
+                            <li>
+                                <div style="font-weight: bold; color: var(--secondary);">Apr 5</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">Sustainable Packaging Workshop</div>
+                            </li>
+                            <li>
+                                <div style="font-weight: bold; color: var(--secondary);">Apr 18</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">Traditional Cooking Masterclass</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Spotlight -->
+    <section class="author-spotlight">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--secondary); margin-bottom: 20px;">Featured Authors</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 50px; max-width: 800px; margin: 0 auto 50px;">
+                Meet the voices behind our stories - chefs, technologists, and cultural experts
+            </p>
+            
+            <div class="authors-grid">
+                <div class="author-card">
+                    <div class="author-avatar" style="background-image: url('https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <h3 style="margin-bottom: 10px;">Chef Asma</h3>
+                    <p style="color: var(--primary); margin-bottom: 15px; font-weight: 600;">Zanzibari Cuisine Expert</p>
+                    <p style="color: var(--gray); font-size: 0.9rem;">5th generation spice trader sharing traditional Swahili recipes and modern adaptations.</p>
+                    <div style="margin-top: 20px;">
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 0.9rem;">
+                            <i class="fas fa-book"></i> View Articles
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="author-card">
+                    <div class="author-avatar" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <h3 style="margin-bottom: 10px;">David Mwanga</h3>
+                    <p style="color: var(--primary); margin-bottom: 15px; font-weight: 600;">AI Research Lead</p>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Exploring how machine learning can transform food systems and reduce waste.</p>
+                    <div style="margin-top: 20px;">
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 0.9rem;">
+                            <i class="fas fa-book"></i> View Articles
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="author-card">
+                    <div class="author-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');"></div>
+                    <h3 style="margin-bottom: 10px;">Fatuma Ali</h3>
+                    <p style="color: var(--primary); margin-bottom: 15px; font-weight: 600;">Sustainability Director</p>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Documenting green initiatives and sustainable practices in Tanzania's food industry.</p>
+                    <div style="margin-top: 20px;">
+                        <button class="cta-button" style="padding: 8px 20px; font-size: 0.9rem;">
+                            <i class="fas fa-book"></i> View Articles
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2 style="color: white; margin-bottom: 15px;">Pamoja<span style="color: var(--accent);">Blog</span></h2>
+                    <p style="color: #ccc; margin-bottom: 20px;">Stories that connect food, technology, and culture in Tanzania.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-rss"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Blog Categories</h3>
+                    <ul>
+                        <li><a href="#" onclick="filterArticles('food')">Food & Recipes</a></li>
+                        <li><a href="#" onclick="filterArticles('tech')">Technology</a></li>
+                        <li><a href="#" onclick="filterArticles('culture')">Culture & Heritage</a></li>
+                        <li><a href="#" onclick="filterArticles('sustainability')">Sustainability</a></li>
+                        <li><a href="#">Restaurant Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Recipe Archive</a></li>
+                        <li><a href="#">Food Tech Reports</a></li>
+                        <li><a href="#">Cultural Guides</a></li>
+                        <li><a href="#">Sustainability Toolkit</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="contact.html">Write for Us</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Media Inquiries</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pamoja Eats Blog. All rights reserved.</p>
+                <p style="margin-top: 10px;">"Sharing Stories That Connect Plate to Planet" - Tanzania's Food Tech Voice</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Article Data
+        const articles = [
+            {
+                id: 1,
+                title: "The AI Behind Perfect Pilau: How Machine Learning is Revolutionizing Traditional Recipes",
+                category: "tech",
+                tags: ["AI", "Traditional Recipes", "Food Tech"],
+                excerpt: "Discover how our AI analyzes thousands of pilau recipes to create the perfect balance of spices for every palate.",
+                author: "David Mwanga",
+                date: "Mar 10, 2023",
+                readTime: "8 min read",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: true
+            },
+            {
+                id: 2,
+                title: "Zanzibar's Spice Legacy: From Ancient Trade Routes to Modern Kitchens",
+                category: "culture",
+                tags: ["Zanzibar Cuisine", "History", "Spices"],
+                excerpt: "Explore how Zanzibar's position on ancient trade routes shaped its unique culinary identity and spice culture.",
+                author: "Chef Asma",
+                date: "Mar 8, 2023",
+                readTime: "12 min read",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: true
+            },
+            {
+                id: 3,
+                title: "From Farm to Fork: IoT Sensors Ensuring Freshness in Every Delivery",
+                category: "tech",
+                tags: ["IoT Sensors", "Freshness", "Delivery Innovation"],
+                excerpt: "How our IoT sensors track temperature and humidity from farm to your door, guaranteeing optimal freshness.",
+                author: "Tech Team",
+                date: "Mar 5, 2023",
+                readTime: "6 min read",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: true
+            },
+            {
+                id: 4,
+                title: "Sugarcane to Sustainable Packaging: Tanzania's Green Innovation",
+                category: "sustainability",
+                tags: ["Sustainability", "Green Packaging", "Innovation"],
+                excerpt: "How sugarcane waste is being transformed into compostable packaging for our delivery ecosystem.",
+                author: "Fatuma Ali",
+                date: "Mar 3, 2023",
+                readTime: "10 min read",
+                image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: false
+            },
+            {
+                id: 5,
+                title: "Maasai Culinary Traditions: More Than Just Nyama Choma",
+                category: "culture",
+                tags: ["Maasai Food", "Traditional Recipes", "Culture"],
+                excerpt: "Exploring the diverse and nutritious culinary traditions of Tanzania's Maasai communities.",
+                author: "Cultural Team",
+                date: "Feb 28, 2023",
+                readTime: "15 min read",
+                image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: false
+            },
+            {
+                id: 6,
+                title: "The Mathematics of Multi-Restaurant Delivery: Optimizing Routes with AI",
+                category: "tech",
+                tags: ["AI", "Delivery Innovation", "Optimization"],
+                excerpt: "How complex algorithms ensure your food from multiple restaurants arrives hot and fresh.",
+                author: "Logistics Team",
+                date: "Feb 25, 2023",
+                readTime: "7 min read",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: false
+            },
+            {
+                id: 7,
+                title: "Urban Farming in Dar es Salaam: Growing Food in the City",
+                category: "sustainability",
+                tags: ["Urban Farming", "Sustainability", "Farm to Table"],
+                excerpt: "How urban agriculture is transforming Dar es Salaam's food landscape and reducing food miles.",
+                author: "Sustainability Team",
+                date: "Feb 22, 2023",
+                readTime: "9 min read",
+                image: "https://images.unsplash.com/photo-1592841200221-7ef6f5e7d9d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: false
+            },
+            {
+                id: 8,
+                title: "The Science of Swahili Samosas: Perfecting Crispiness",
+                category: "food",
+                tags: ["Traditional Recipes", "Food Science", "Swahili Cuisine"],
+                excerpt: "A deep dive into the physics and chemistry behind the perfect Swahili samosa.",
+                author: "Chef Asma",
+                date: "Feb 20, 2023",
+                readTime: "11 min read",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                featured: false
+            }
+        ];
+
+        // Initialize blog
+        let currentFilter = 'all';
+        let currentPage = 1;
+        const articlesPerPage = 4;
+
+        function initBlog() {
+            loadFeaturedArticles();
+            loadRecentArticles();
+            loadPopularArticles();
+            
+            // Set up category click handlers
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+        
+        // Load featured articles
+        function loadFeaturedArticles() {
+            const articlesGrid = document.getElementById('articlesGrid');
+            const featuredArticles = articles.filter(article => article.featured);
+            
+            articlesGrid.innerHTML = featuredArticles.map(article => `
+                <div class="article-card fade-in" data-category="${article.category}">
+                    <div class="article-image" style="background-image: url('${article.image}')">
+                        <div class="article-category" style="color: ${getCategoryColor(article.category)}">
+                            ${getCategoryName(article.category)}
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> ${article.date}</span>
+                            <span><i class="far fa-clock"></i> ${article.readTime}</span>
+                            <span><i class="fas fa-user"></i> ${article.author}</span>
+                        </div>
+                        <h3 style="margin-bottom: 15px; color: var(--secondary);">${article.title}</h3>
+                        <p style="color: var(--gray); margin-bottom: 20px;">${article.excerpt}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                ${article.tags.slice(0, 2).map(tag => `
+                                    <span style="background: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
+                                        ${tag}
+                                    </span>
+                                `).join('')}
+                            </div>
+                            <button class="cta-button" style="padding: 8px 20px;" onclick="readArticle(${article.id})">
+                                <i class="fas fa-book-open"></i> Read
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Load recent articles
+        function loadRecentArticles() {
+            const recentArticles = document.getElementById('recentArticles');
+            const recent = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 2);
+            
+            recentArticles.innerHTML = recent.map(article => `
+                <div class="article-card fade-in" data-category="${article.category}">
+                    <div class="article-image" style="background-image: url('${article.image}'); height: 200px;">
+                        <div class="article-category" style="color: ${getCategoryColor(article.category)}">
+                            ${getCategoryName(article.category)}
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h4 style="margin-bottom: 10px; color: var(--secondary);">${article.title}</h4>
+                        <div class="article-meta" style="margin-bottom: 10px;">
+                            <span><i class="far fa-calendar"></i> ${article.date}</span>
+                            <span><i class="fas fa-user"></i> ${article.author}</span>
+                        </div>
+                        <button class="cta-button" style="padding: 8px 20px; width: 100%;" onclick="readArticle(${article.id})">
+                            <i class="fas fa-book-open"></i> Read Article
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Load popular articles
+        function loadPopularArticles() {
+            const popularArticles = document.getElementById('popularArticles');
+            const popular = [...articles].slice(0, 5);
+            
+            popularArticles.innerHTML = popular.map(article => `
+                <li>
+                    <a href="#" onclick="readArticle(${article.id}); return false;" style="color: var(--dark); text-decoration: none; display: block;">
+                        <div style="font-weight: 600; margin-bottom: 5px;">${article.title}</div>
+                        <div style="color: var(--gray); font-size: 0.9rem; display: flex; justify-content: space-between;">
+                            <span>${article.author}</span>
+                            <span>${article.date}</span>
+                        </div>
+                    </a>
+                </li>
+            `).join('');
+        }
+        
+        // Filter articles by category
+        function filterArticles(category) {
+            currentFilter = category;
+            currentPage = 1;
+            
+            // Update active category
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`.category-card.${category}`).classList.add('active');
+            
+            // Filter and display articles
+            const filteredArticles = category === 'all' 
+                ? articles 
+                : articles.filter(article => article.category === category);
+            
+            displayFilteredArticles(filteredArticles);
+            
+            // Scroll to articles
+            document.querySelector('.featured-articles').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Display filtered articles
+        function displayFilteredArticles(filteredArticles) {
+            const articlesGrid = document.getElementById('articlesGrid');
+            const startIndex = (currentPage - 1) * articlesPerPage;
+            const endIndex = startIndex + articlesPerPage;
+            const paginatedArticles = filteredArticles.slice(startIndex, endIndex);
+            
+            if (paginatedArticles.length === 0) {
+                articlesGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <i class="fas fa-newspaper" style="font-size: 3rem; color: var(--gray); margin-bottom: 20px; opacity: 0.5;"></i>
+                        <h3 style="color: var(--gray); margin-bottom: 15px;">No articles found</h3>
+                        <p style="color: var(--gray);">Try selecting a different category or check back later for new content.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            articlesGrid.innerHTML = paginatedArticles.map(article => `
+                <div class="article-card fade-in" data-category="${article.category}">
+                    <div class="article-image" style="background-image: url('${article.image}')">
+                        <div class="article-category" style="color: ${getCategoryColor(article.category)}">
+                            ${getCategoryName(article.category)}
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> ${article.date}</span>
+                            <span><i class="far fa-clock"></i> ${article.readTime}</span>
+                            <span><i class="fas fa-user"></i> ${article.author}</span>
+                        </div>
+                        <h3 style="margin-bottom: 15px; color: var(--secondary);">${article.title}</h3>
+                        <p style="color: var(--gray); margin-bottom: 20px;">${article.excerpt}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                ${article.tags.slice(0, 2).map(tag => `
+                                    <span style="background: #f0f0f0; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
+                                        ${tag}
+                                    </span>
+                                `).join('')}
+                            </div>
+                            <button class="cta-button" style="padding: 8px 20px;" onclick="readArticle(${article.id})">
+                                <i class="fas fa-book-open"></i> Read
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update pagination
+            updatePagination(filteredArticles.length);
+        }
+        
+        // Filter by tag
+        function filterByTag(tag) {
+            const filteredArticles = articles.filter(article => 
+                article.tags.includes(tag)
+            );
+            
+            // Update UI
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            displayFilteredArticles(filteredArticles);
+            
+            // Show tag filter notification
+            showNotification(`Showing articles tagged: ${tag}`, 'info');
+        }
+        
+        // Update pagination
+        function updatePagination(totalArticles) {
+            const totalPages = Math.ceil(totalArticles / articlesPerPage);
+            const pagination = document.querySelector('.pagination');
+            
+            let paginationHTML = '';
+            
+            for (let i = 1; i <= Math.min(totalPages, 3); i++) {
+                paginationHTML += `
+                    <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            if (totalPages > 3) {
+                paginationHTML += `
+                    <button class="page-btn" onclick="changePage(${currentPage + 1})">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                `;
+            }
+            
+            pagination.innerHTML = paginationHTML;
+        }
+        
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            
+            // Update pagination buttons
+            document.querySelectorAll('.page-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (btn.textContent == page) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Reload filtered articles
+            const filteredArticles = currentFilter === 'all' 
+                ? articles 
+                : articles.filter(article => article.category === currentFilter);
+            
+            displayFilteredArticles(filteredArticles);
+        }
+        
+        // Read article
+        function readArticle(id) {
+            const article = articles.find(a => a.id === id);
+            if (article) {
+                // In a real application, this would navigate to a full article page
+                // For this demo, we'll show a modal or alert
+                showNotification(`Loading: ${article.title}`, 'info');
+                
+                // Store for potential full article view
+                localStorage.setItem('currentArticle', JSON.stringify(article));
+                
+                // You could redirect to article.html?id=${id} in a real implementation
+                setTimeout(() => {
+                    // Simulate opening article
+                    const modal = document.createElement('div');
+                    modal.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(0,0,0,0.9);
+                        z-index: 3000;
+                        padding: 40px;
+                        overflow-y: auto;
+                        color: white;
+                    `;
+                    
+                    modal.innerHTML = `
+                        <div style="max-width: 800px; margin: 0 auto;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                                <h2 style="font-size: 2rem;">${article.title}</h2>
+                                <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
+                                    &times;
+                                </button>
+                            </div>
+                            <div style="margin-bottom: 30px;">
+                                <img src="${article.image}" alt="${article.title}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div style="display: flex; gap: 30px; margin-bottom: 30px; color: #aaa;">
+                                <span><i class="far fa-calendar"></i> ${article.date}</span>
+                                <span><i class="far fa-clock"></i> ${article.readTime}</span>
+                                <span><i class="fas fa-user"></i> ${article.author}</span>
+                                <span style="color: ${getCategoryColor(article.category)}">
+                                    ${getCategoryName(article.category)}
+                                </span>
+                            </div>
+                            <div style="font-size: 1.1rem; line-height: 1.8;">
+                                <p style="margin-bottom: 20px;">${article.excerpt}</p>
+                                <p style="margin-bottom: 20px;">This is where the full article content would appear. In a real implementation, this would be a complete article with paragraphs, images, and rich content.</p>
+                                <p style="margin-bottom: 20px;">The article would delve deeper into the topic, providing insights, data, and expert perspectives on ${article.tags.join(', ')}.</p>
+                                <p>Thank you for reading! This demonstrates how articles would be displayed in the full version.</p>
+                            </div>
+                            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #444;">
+                                <h3 style="margin-bottom: 20px;">Share this article</h3>
+                                <div style="display: flex; gap: 15px;">
+                                    <button class="cta-button" style="background: #1DA1F2;">
+                                        <i class="fab fa-twitter"></i> Twitter
+                                    </button>
+                                    <button class="cta-button" style="background: #4267B2;">
+                                        <i class="fab fa-facebook-f"></i> Facebook
+                                    </button>
+                                    <button class="cta-button" style="background: #0077B5;">
+                                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(modal);
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Add close on escape key
+                    modal.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') {
+                            modal.remove();
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                    
+                    // Focus for accessibility
+                    modal.focus();
+                    modal.tabIndex = -1;
+                    
+                }, 500);
+            }
+        }
+        
+        // View all articles
+        function viewAllArticles() {
+            currentFilter = 'all';
+            currentPage = 1;
+            displayFilteredArticles(articles);
+            
+            // Update UI
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector('.category-card.food').classList.add('active');
+        }
+        
+        // Subscribe to newsletter
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simulate subscription
+            showNotification(`Thanks for subscribing, ${email.split('@')[0]}! Welcome to our community.`, 'success');
+            
+            // Clear form
+            event.target.reset();
+            
+            // In real app, send to backend
+            console.log('Newsletter subscription:', email);
+            
+            // Save subscription
+            const subscriptions = JSON.parse(localStorage.getItem('pamojaNewsletterSubs')) || [];
+            subscriptions.push({ email, date: new Date().toISOString() });
+            localStorage.setItem('pamojaNewsletterSubs', JSON.stringify(subscriptions));
+        }
+        
+        // Helper functions
+        function getCategoryColor(category) {
+            const colors = {
+                food: '#E63946',
+                tech: '#457B9D',
+                culture: '#E9C46A',
+                sustainability: '#2A9D8F'
+            };
+            return colors[category] || '#6C757D';
+        }
+        
+        function getCategoryName(category) {
+            const names = {
+                food: 'Food & Recipes',
+                tech: 'Technology',
+                culture: 'Culture',
+                sustainability: 'Sustainability'
+            };
+            return names[category] || 'General';
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'info' ? '#2196F3' : '#FF6B35'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initBlog();
+            
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+                
+                .article-card {
+                    animation: fadeIn 0.5s ease;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
