@@ -6,7 +6,6 @@
     <title>How Pamoja Eats Works | Multi-Restaurant Food Delivery</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* === GLOBAL STYLES === */
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +35,6 @@
             padding: 0 20px;
         }
         
-        /* === HEADER & NAVIGATION === */
         header {
             background-color: white;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
@@ -110,9 +108,9 @@
             background: none;
             border: none;
             cursor: pointer;
+            color: var(--dark);
         }
         
-        /* === PAGE HEADER === */
         .page-header {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
@@ -120,17 +118,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-        
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
         }
         
         .page-header h1 {
@@ -146,7 +133,6 @@
             position: relative;
         }
         
-        /* === HOW IT WORKS STEPS === */
         .steps-section {
             padding: 100px 0;
             background-color: white;
@@ -191,6 +177,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             position: relative;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .step-content.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .step-number {
@@ -241,7 +235,6 @@
             gap: 8px;
         }
         
-        /* === MULTI-RESTAURANT DEMO === */
         .demo-section {
             padding: 100px 0;
             background-color: #f9f9f9;
@@ -299,7 +292,6 @@
             font-weight: bold;
         }
         
-        /* === PAYMENT METHODS === */
         .payment-section {
             padding: 80px 0;
             background-color: white;
@@ -338,7 +330,6 @@
         .card { color: #0066CC; }
         .wallet { color: var(--primary); }
         
-        /* === FEATURES GRID === */
         .features-grid-section {
             padding: 80px 0;
             background-color: #f9f9f9;
@@ -358,11 +349,23 @@
             text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .feature-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-item.animated:hover {
+            transform: translateY(-10px);
         }
         
         .feature-icon {
@@ -371,7 +374,6 @@
             margin-bottom: 20px;
         }
         
-        /* === FAQ SECTION === */
         .faq-section {
             padding: 80px 0;
             background-color: white;
@@ -411,7 +413,6 @@
             max-height: 500px;
         }
         
-        /* === CTA SECTION === */
         .cta-section {
             padding: 100px 0;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -431,7 +432,6 @@
             margin-top: 40px;
         }
         
-        /* === FOOTER === */
         footer {
             background-color: var(--dark);
             color: white;
@@ -504,7 +504,6 @@
             font-size: 0.9rem;
         }
         
-        /* === RESPONSIVE DESIGN === */
         @media (max-width: 992px) {
             .steps-timeline::before {
                 left: 40px;
@@ -528,6 +527,19 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
             }
             
             .mobile-menu-btn {
@@ -550,7 +562,6 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -573,11 +584,10 @@
                 </ul>
             </nav>
             
-            <button class="cta-button">Download App</button>
+            <button class="cta-button" id="downloadBtn">Download App</button>
         </div>
     </header>
 
-    <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container">
             <h1>How Pamoja Eats Works</h1>
@@ -585,13 +595,11 @@
         </div>
     </section>
 
-    <!-- STEPS TIMELINE -->
     <section class="steps-section">
         <div class="container">
             <div class="steps-timeline">
-                <!-- Step 1 -->
                 <div class="step-item">
-                    <div class="step-content">
+                    <div class="step-content" id="step1">
                         <h3>1. Sign Up & Set Your Taste Profile</h3>
                         <p>Create your account in seconds using your phone, email, or social media. Tell us about your preferences - spice level, dietary restrictions, favorite cuisines, and allergies. Our AI will use this to personalize your experience.</p>
                         <div class="step-features">
@@ -616,9 +624,8 @@
                     <div class="step-number">1</div>
                 </div>
                 
-                <!-- Step 2 -->
                 <div class="step-item">
-                    <div class="step-content">
+                    <div class="step-content" id="step2">
                         <h3>2. Browse & Build Your Multi-Restaurant Cart</h3>
                         <p>Explore restaurants by cuisine, ratings, location, or delivery time. Our unique feature lets you add dishes from multiple restaurants into one cart. Customize each item - portion size, add-ons, spice level - to make it truly yours.</p>
                         <div class="step-features">
@@ -643,9 +650,8 @@
                     <div class="step-number">2</div>
                 </div>
                 
-                <!-- Step 3 -->
                 <div class="step-item">
-                    <div class="step-content">
+                    <div class="step-content" id="step3">
                         <h3>3. Smart Checkout & Payment</h3>
                         <p>Check out with one seamless payment for all restaurants. Choose from multiple payment options including M-Pesa, Tigo Pesa, Airtel Money, cards, or wallet. Schedule deliveries or set up recurring orders. Get AI-suggested complementary dishes for the perfect meal combination.</p>
                         <div class="step-features">
@@ -670,9 +676,8 @@
                     <div class="step-number">3</div>
                 </div>
                 
-                <!-- Step 4 -->
                 <div class="step-item">
-                    <div class="step-content">
+                    <div class="step-content" id="step4">
                         <h3>4. Real-Time Tracking & Enjoyment</h3>
                         <p>Track each dish from different restaurants separately with live updates. Get dynamic ETA updates and notifications if any item is delayed. Our AI-optimized delivery routing ensures your multi-restaurant order arrives as coordinated as possible.</p>
                         <div class="step-features">
@@ -700,7 +705,6 @@
         </div>
     </section>
 
-    <!-- MULTI-RESTAURANT DEMO -->
     <section class="demo-section">
         <div class="container">
             <h2 style="text-align: center; font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;">The Multi-Restaurant Advantage</h2>
@@ -755,14 +759,13 @@
         </div>
     </section>
 
-    <!-- PAYMENT METHODS -->
     <section class="payment-section">
         <div class="container">
             <h2 style="text-align: center; font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;">Flexible Payment Options</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 20px;">Pay your way with Tanzania's most popular payment methods</p>
             
             <div class="payment-methods">
-                <div class="payment-method">
+                <div class="payment-method" id="mpesaPayment">
                     <div class="payment-icon mpesa">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
@@ -770,7 +773,7 @@
                     <p>Instant mobile payments</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-method" id="tigoPayment">
                     <div class="payment-icon tigo">
                         <i class="fas fa-signal"></i>
                     </div>
@@ -778,7 +781,7 @@
                     <p>Secure mobile money</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-method" id="airtelPayment">
                     <div class="payment-icon airtel">
                         <i class="fas fa-wifi"></i>
                     </div>
@@ -786,7 +789,7 @@
                     <p>Fast & reliable</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-method" id="cardPayment">
                     <div class="payment-icon card">
                         <i class="fas fa-credit-card"></i>
                     </div>
@@ -794,7 +797,7 @@
                     <p>Visa, Mastercard</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-method" id="walletPayment">
                     <div class="payment-icon wallet">
                         <i class="fas fa-wallet"></i>
                     </div>
@@ -805,14 +808,13 @@
         </div>
     </section>
 
-    <!-- KEY FEATURES -->
     <section class="features-grid-section">
         <div class="container">
             <h2 style="text-align: center; font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;">Why Choose Pamoja Eats?</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 20px;">Features that make us Tanzania's most advanced food delivery platform</p>
             
             <div class="features-grid">
-                <div class="feature-item">
+                <div class="feature-item" id="feature1">
                     <div class="feature-icon">
                         <i class="fas fa-robot"></i>
                     </div>
@@ -820,7 +822,7 @@
                     <p>Our AI learns your preferences and suggests perfect dishes from multiple restaurants.</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-item" id="feature2">
                     <div class="feature-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
@@ -828,7 +830,7 @@
                     <p>Earn points, unlock badges, and level up for discounts and exclusive deals.</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-item" id="feature3">
                     <div class="feature-icon">
                         <i class="fas fa-calendar-check"></i>
                     </div>
@@ -836,7 +838,7 @@
                     <p>Set recurring meals or schedule orders for future dates and events.</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-item" id="feature4">
                     <div class="feature-icon">
                         <i class="fas fa-users-cog"></i>
                     </div>
@@ -844,7 +846,7 @@
                     <p>Share orders with friends and split payments automatically. Perfect for offices.</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-item" id="feature5">
                     <div class="feature-icon">
                         <i class="fas fa-route"></i>
                     </div>
@@ -852,7 +854,7 @@
                     <p>Optimized delivery paths for multi-restaurant orders to minimize wait times.</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-item" id="feature6">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -863,7 +865,6 @@
         </div>
     </section>
 
-    <!-- FAQ -->
     <section class="faq-section">
         <div class="container">
             <h2 style="text-align: center; font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;">Frequently Asked Questions</h2>
@@ -871,7 +872,7 @@
             
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question" id="faq1">
                         How does multi-restaurant ordering work?
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -881,7 +882,7 @@
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question" id="faq2">
                         Can I customize dishes from different restaurants?
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -891,7 +892,7 @@
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question" id="faq3">
                         How are delivery times calculated for multi-restaurant orders?
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -901,7 +902,7 @@
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question" id="faq4">
                         What if one restaurant in my order is delayed?
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -911,7 +912,7 @@
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
+                    <div class="faq-question" id="faq5">
                         How do I split payments for group orders?
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -923,20 +924,18 @@
         </div>
     </section>
 
-    <!-- CTA SECTION -->
     <section class="cta-section">
         <div class="container">
             <h2>Ready to Experience the Future of Food Delivery?</h2>
             <p>Join thousands of Tanzanians who are enjoying the convenience of multi-restaurant ordering.</p>
             
             <div class="cta-buttons">
-                <button class="cta-button" style="background-color: white; color: var(--primary);">Download the App</button>
-                <button class="cta-button" style="background-color: transparent; border: 2px solid white;">Browse Restaurants</button>
+                <button class="cta-button" id="downloadAppBtn" style="background-color: white; color: var(--primary);">Download the App</button>
+                <button class="cta-button" id="browseRestaurantsBtn" style="background-color: transparent; border: 2px solid white;">Browse Restaurants</button>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -944,10 +943,10 @@
                     <h2>Pamoja<span style="color: var(--accent);">Eats</span></h2>
                     <p>Tanzania's first digital food ecosystem. Your taste, your way.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" id="facebookLink"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" id="twitterLink"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="instagramLink"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="linkedinLink"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -956,7 +955,7 @@
                     <ul>
                         <li><a href="how-it-works.html">How It Works</a></li>
                         <li><a href="restaurants.html">Browse Restaurants</a></li>
-                        <li><a href="#">Download App</a></li>
+                        <li><a href="#" id="downloadLinkFooter">Download App</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Gift Cards</a></li>
                     </ul>
@@ -992,18 +991,25 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             const navMenu = document.getElementById('navMenu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navMenu.style.flexDirection = 'column';
-            navMenu.style.position = 'absolute';
-            navMenu.style.top = '70px';
-            navMenu.style.left = '0';
-            navMenu.style.width = '100%';
-            navMenu.style.backgroundColor = 'white';
-            navMenu.style.padding = '20px';
-            navMenu.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            navMenu.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+
+        // Download App Button
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            alert('Opening app download options...');
         });
 
         // FAQ Toggle
@@ -1016,7 +1022,6 @@
                 icon.classList.remove('fa-chevron-up');
                 icon.classList.add('fa-chevron-down');
             } else {
-                // Close all other FAQs
                 document.querySelectorAll('.faq-answer').forEach(item => {
                     item.classList.remove('open');
                 });
@@ -1025,28 +1030,124 @@
                     item.classList.add('fa-chevron-down');
                 });
                 
-                // Open this one
                 answer.classList.add('open');
                 icon.classList.remove('fa-chevron-down');
                 icon.classList.add('fa-chevron-up');
             }
         }
 
+        // Add click handlers to FAQ questions
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                toggleFAQ(this);
+            });
+        });
+
         // Animate steps on scroll
-        const observer = new IntersectionObserver((entries) => {
+        function animateSteps() {
+            const steps = document.querySelectorAll('.step-content');
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.add('animated');
+                }, index * 200);
+            });
+        }
+
+        // Animate feature items on scroll
+        function animateFeatures() {
+            const features = document.querySelectorAll('.feature-item');
+            features.forEach((feature, index) => {
+                setTimeout(() => {
+                    feature.classList.add('animated');
+                }, index * 100);
+            });
+        }
+
+        // Intersection Observers for animations
+        const stepsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    animateSteps();
+                    stepsObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.2 });
 
-        document.querySelectorAll('.step-content').forEach(content => {
-            content.style.opacity = '0';
-            content.style.transform = 'translateY(30px)';
-            content.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(content);
+        const featuresObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateFeatures();
+                    featuresObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        // Payment method click handlers
+        document.getElementById('mpesaPayment').addEventListener('click', function() {
+            alert('Selected M-Pesa payment method');
+        });
+        
+        document.getElementById('tigoPayment').addEventListener('click', function() {
+            alert('Selected Tigo Pesa payment method');
+        });
+        
+        document.getElementById('airtelPayment').addEventListener('click', function() {
+            alert('Selected Airtel Money payment method');
+        });
+        
+        document.getElementById('cardPayment').addEventListener('click', function() {
+            alert('Selected Credit/Debit Card payment method');
+        });
+        
+        document.getElementById('walletPayment').addEventListener('click', function() {
+            alert('Selected Pamoja Wallet payment method');
+        });
+
+        // CTA buttons
+        document.getElementById('downloadAppBtn').addEventListener('click', function() {
+            alert('Opening app download options...');
+        });
+        
+        document.getElementById('browseRestaurantsBtn').addEventListener('click', function() {
+            alert('Opening restaurants page...');
+        });
+
+        // Footer links
+        document.getElementById('downloadLinkFooter').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening app download options...');
+        });
+        
+        document.getElementById('facebookLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Facebook page...');
+        });
+        
+        document.getElementById('twitterLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Twitter page...');
+        });
+        
+        document.getElementById('instagramLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening Instagram page...');
+        });
+        
+        document.getElementById('linkedinLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Opening LinkedIn page...');
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observe sections
+            stepsObserver.observe(document.querySelector('.steps-section'));
+            featuresObserver.observe(document.querySelector('.features-grid-section'));
+            
+            // Animate first step immediately
+            setTimeout(() => {
+                document.getElementById('step1').classList.add('animated');
+            }, 100);
         });
     </script>
 </body>
