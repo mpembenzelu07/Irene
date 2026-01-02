@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Pamoja Eats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #00A896;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero */
+        .careers-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(255,107,53,0.9) 0%, rgba(0,78,137,0.9) 100%), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80');
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+        
+        .careers-hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .careers-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Values */
+        .values-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .value-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,107,53,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 35px;
+            color: var(--primary);
+        }
+        
+        .value-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Job Openings */
+        .jobs-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .job-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .job-header {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+        }
+        
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .job-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .job-content {
+            padding: 25px;
+        }
+        
+        .job-content h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .job-details {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .job-details li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .job-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .job-details i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        /* Application Process */
+        .process-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .step-content {
+            padding: 0 15px;
+        }
+        
+        /* Benefits */
+        .benefits-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Team Culture */
+        .culture-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .culture-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .culture-image {
+            flex: 1;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .culture-text {
+            flex: 1;
+        }
+        
+        .culture-text h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* Application Form */
+        .application-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .culture-content {
+                flex-direction: column;
+            }
+            
+            .culture-image {
+                width: 100%;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .process-steps::before {
+                top: 0;
+                left: 40px;
+                bottom: 0;
+                width: 3px;
+                height: auto;
+            }
+            
+            .process-step {
+                display: flex;
+                text-align: left;
+                gap: 20px;
+            }
+            
+            .step-number {
+                margin: 0;
+                flex-shrink: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+        
+        .mt-30 {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Pamoja<span>Eats</span></h1>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="restaurants.html">For Restaurants</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="careers.html" class="active">Careers</a></li>
+                </ul>
+                
+                <button class="cta-button" onclick="location.href='#openings'">View Openings</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="careers-hero">
+        <div class="container">
+            <h2>Build the Future of Food with Us</h2>
+            <p>Join our mission to revolutionize Tanzania's food delivery ecosystem. Work with cutting-edge technology, solve challenging problems, and make a real impact.</p>
+            <button class="cta-button" onclick="location.href='#apply'">Apply Now</button>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Culture & Values</h2>
+                <p>What makes Pamoja Eats a great place to work</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Innovation First</h3>
+                    <p>We're building Tanzania's first AI-powered food ecosystem. Your ideas can shape the future of food delivery.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Collaborative Spirit</h3>
+                    <p>"Pamoja" means together. We believe in teamwork, transparency, and supporting each other's growth.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Growth Mindset</h3>
+                    <p>We invest in our team's development with training, mentorship, and opportunities for rapid advancement.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Customer Obsession</h3>
+                    <p>Everything we do is focused on delivering exceptional experiences to our customers and restaurant partners.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>Local Impact</h3>
+                    <p>We're proud to be building in Tanzania, for Tanzania. Your work directly impacts local businesses and communities.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Work-Life Balance</h3>
+                    <p>We believe in sustainable productivity with flexible hours, remote options, and genuine respect for personal time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Openings -->
+    <section class="jobs-section" id="openings">
+        <div class="container">
+            <div class="section-title">
+                <h2>Current Openings</h2>
+                <p>Join our team in these exciting roles</p>
+            </div>
+            
+            <div class="job-filters">
+                <button class="filter-btn active" data-department="all">All Departments</button>
+                <button class="filter-btn" data-department="tech">Technology</button>
+                <button class="filter-btn" data-department="operations">Operations</button>
+                <button class="filter-btn" data-department="marketing">Marketing</button>
+                <button class="filter-btn" data-department="business">Business</button>
+            </div>
+            
+            <div class="jobs-grid">
+                <!-- Job 1 -->
+                <div class="job-card" data-department="tech">
+                    <div class="job-header">
+                        <h3>Senior Frontend Developer</h3>
+                        <div class="job-tags">
+                            <span class="job-tag">Dar es Salaam</span>
+                            <span class="job-tag">Full-time</span>
+                            <span class="job-tag">Remote Possible</span>
+                        </div>
+                    </div>
+                    <div class="job-content">
+                        <p>Build the next generation of our customer-facing web and mobile applications using React, React Native, and cutting-edge frontend technologies.</p>
+                        <ul class="job-details">
+                            <li><i class="fas fa-check-circle"></i> 3+ years frontend development experience</li>
+                            <li><i class="fas fa-check-circle"></i> Expert in React/React Native</li>
+                            <li><i class="fas fa-check-circle"></i> Experience with TypeScript</li>
+                            <li><i class="fas fa-check-circle"></i> Competitive salary + equity</li>
+                        </ul>
+                        <button class="cta-button" style="padding: 10px 20px;" onclick="applyForJob('Senior Frontend Developer')">Apply Now</button>
+                    </div>
+                </div>
+                
+                <!-- Job 2 -->
+                <div class="job-card" data-department="operations">
+                    <div class="job-header">
+                        <h3>Operations Manager</h3>
+                        <div class="job-tags">
+                            <span class="job-tag">Arusha</span>
+                            <span class="job-tag">Full-time</span>
+                            <span class="job-tag">On-site</span>
+                        </div>
+                    </div>
+                    <div class="job-content">
+                        <p>Lead our delivery operations in Arusha, optimize logistics, manage rider networks, and ensure exceptional customer delivery experiences.</p>
+                        <ul class="job-details">
+                            <li><i class="fas fa-check-circle"></i> 2+ years operations management</li>
+                            <li><i class="fas fa-check-circle"></i> Logistics or delivery experience</li>
+                            <li><i class="fas fa-check-circle"></i> Strong analytical skills</li>
+                            <li><i class="fas fa-check-circle"></i> Leadership experience</li>
+                        </ul>
+                        <button class="cta-button" style="padding: 10px 20px;" onclick="applyForJob('Operations Manager')">Apply Now</button>
+                    </div>
+                </div>
+                
+                <!-- Job 3 -->
+                <div class="job-card" data-department="marketing">
+                    <div class="job-header">
+                        <h3>Growth Marketing Specialist</h3>
+                        <div class="job-tags">
+                            <span class="job-tag">Dar es Salaam</span>
+                            <span class="job-tag">Full-time</span>
+                            <span class="job-tag">Hybrid</span>
+                        </div>
+                    </div>
+                    <div class="job-content">
+                        <p>Drive user acquisition and retention through data-driven marketing campaigns, influencer partnerships, and creative growth strategies.</p>
+                        <ul class="job-details">
+                            <li><i class="fas fa-check-circle"></i> 2+ years digital marketing</li>
+                            <li><i class="fas fa-check-circle"></i> Experience with analytics tools</li>
+                            <li><i class="fas fa-check-circle"></i> Creative campaign development</li>
+                            <li><i class="fas fa-check-circle"></i> Social media expertise</li>
+                        </ul>
+                        <button class="cta-button" style="padding: 10px 20px;" onclick="applyForJob('Growth Marketing Specialist')">Apply Now</button>
+                    </div>
+                </div>
+                
+                <!-- Job 4 -->
+                <div class="job-card" data-department="business">
+                    <div class="job-header">
+                        <h3>Restaurant Partnership Manager</h3>
+                        <div class="job-tags">
+                            <span class="job-tag">Mwanza</span>
+                            <span class="job-tag">Full-time</span>
+                            <span class="job-tag">On-site</span>
+                        </div>
+                    </div>
+                    <div class="job-content">
+                        <p>Build and nurture relationships with restaurant partners, onboard new businesses, and help them grow through our platform.</p>
+                        <ul class="job-details">
+                            <li><i class="fas fa-check-circle"></i> Sales or partnership experience</li>
+                            <li><i class="fas fa-check-circle"></i> Restaurant industry knowledge</li>
+                            <li><i class="fas fa-check-circle"></i> Excellent communication skills</li>
+                            <li><i class="fas fa-check-circle"></i> Results-driven mindset</li>
+                        </ul>
+                        <button class="cta-button" style="padding: 10px 20px;" onclick="applyForJob('Restaurant Partnership Manager')">Apply Now</button>
+                    </div>
+                </div>
+                
+                <!-- Job 5 -->
+                <div class="job-card" data-department="tech">
+                    <div class="job-header">
+                        <h3>AI/ML Engineer</h3>
+                        <div class="job-tags">
+                            <span class="job-tag">Remote</span>
+                            <span class="job-tag">Full-time</span>
+                            <span class="job-tag">Flexible Hours</span>
+                        </div>
+                    </div>
+                    <div class="job-content">
+                        <p>Develop our AI recommendation engine, optimize delivery routing algorithms, and build predictive models for our food ecosystem.</p>
+                        <ul class="job-details">
+                            <li><i class="fas fa-check-circle"></i> 2+ years ML experience</li>
+                            <li><i class="fas fa-check-circle"></i> Python, TensorFlow/PyTorch</li>
+                            <li><i class="fas fa-check-circle"></i> Data science background</li>
+                            <li><i class="fas fa-check-circle"></i> Strong math fundamentals</li>
+                        </ul>
+                        <button class="cta-button" style="padding: 10px 20px;" onclick="applyForJob('AI/ML Engineer')">Apply Now</button>
+                    </div>
+                </div>
+                
+                <!-- Job 6 -->
+                <div class="job-card" data-department="operations">
+                    <div class="job-header">
+                        <h3>Customer Support Lead</h3>
+                        <div class="job-tags">
+                            <span class="job-tag">Dar es Salaam</span>
+                            <span class="job-tag">Full-time</span>
+                            <span class="job-tag">Shift Work</span>
+                        </div>
+                    </div>
+                    <div class="job-content">
+                        <p>Lead our customer support team, develop support processes, and ensure exceptional service for our users and restaurant partners.</p>
+                        <ul class="job-details">
+                            <li><i class="fas fa-check-circle"></i> 2+ years customer service leadership</li>
+                            <li><i class="fas fa-check-circle"></i> Process improvement experience</li>
+                            <li><i class="fas fa-check-circle"></i> Team management skills</li>
+                            <li><i class="fas fa-check-circle"></i> Tech support background</li>
+                        </ul>
+                        <button class="cta-button" style="padding: 10px 20px;" onclick="applyForJob('Customer Support Lead')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Hiring Process</h2>
+                <p>Transparent and efficient - we respect your time</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Application</h3>
+                        <p>Submit your application through our portal. We review every application personally.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Screening Call</h3>
+                        <p>30-minute chat with our HR team to discuss your experience and career goals.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Skills Assessment</h3>
+                        <p>Practical task or technical interview relevant to the role you're applying for.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Team Interviews</h3>
+                        <p>Meet with potential team members and managers to discuss fit and collaboration.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Offer & Onboarding</h3>
+                        <p>Receive your offer and join our comprehensive onboarding program.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Employee Benefits</h2>
+                <p>We take care of our team so they can do their best work</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Competitive Salary</h3>
+                    <p>Market-competitive compensation with regular reviews and performance bonuses.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Flexible Work</h3>
+                    <p>Remote, hybrid, or office options with flexible hours that work for your life.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Health & Wellness</h3>
+                    <p>Comprehensive health insurance and wellness programs for you and your family.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Learning & Development</h3>
+                    <p>Annual training budget, mentorship programs, and conference attendance.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Food Perks</h3>
+                    <p>Monthly food credits, team lunches, and discounts at partner restaurants.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Time Off</h3>
+                    <p>Generous vacation days, parental leave, and public holidays observed.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Equity Options</h3>
+                    <p>Employee stock options so you can share in the company's success.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools & Equipment</h3>
+                    <p>Latest technology and equipment to do your best work effectively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Culture -->
+    <section class="culture-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Life at Pamoja Eats</h2>
+                <p>More than just a job - it's a community</p>
+            </div>
+            
+            <div class="culture-content">
+                <div class="culture-image">
+                    <div>
+                        <i class="fas fa-users" style="font-size: 60px; margin-bottom: 20px;"></i>
+                        <p>Collaborative Environment</p>
+                        <p>Team Events</p>
+                        <p>Continuous Learning</p>
+                    </div>
+                </div>
+                
+                <div class="culture-text">
+                    <h3>Join Our Growing Family</h3>
+                    <p>At Pamoja Eats, we're more than colleagues - we're a team united by a shared mission to transform Tanzania's food industry.</p>
+                    
+                    <ul class="job-details" style="margin-top: 20px;">
+                        <li><i class="fas fa-check-circle"></i> Weekly team lunches and social events</li>
+                        <li><i class="fas fa-check-circle"></i> Quarterly hackathons and innovation days</li>
+                        <li><i class="fas fa-check-circle"></i> Mentorship from industry veterans</li>
+                        <li><i class="fas fa-check-circle"></i> Community volunteering opportunities</li>
+                        <li><i class="fas fa-check-circle"></i> Regular feedback and growth conversations</li>
+                        <li><i class="fas fa-check-circle"></i> Flat hierarchy with open communication</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px; font-style: italic;">"The best part about working here is seeing your work directly impact thousands of Tanzanians every day." - Current Team Member</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="application-section" id="apply">
+        <div class="container">
+            <div class="form-container">
+                <div class="section-title" style="text-align: left;">
+                    <h2>Apply Now</h2>
+                    <p>Start your journey with Pamoja Eats</p>
+                </div>
+                
+                <form id="careerApplicationForm" onsubmit="submitApplication(event)">
+                    <div class="form-group">
+                        <label>Position Applying For *</label>
+                        <select class="form-control" id="applyPosition" required onchange="updatePositionDetails()">
+                            <option value="">Select a position</option>
+                            <option value="Senior Frontend Developer">Senior Frontend Developer</option>
+                            <option value="Operations Manager">Operations Manager</option>
+                            <option value="Growth Marketing Specialist">Growth Marketing Specialist</option>
+                            <option value="Restaurant Partnership Manager">Restaurant Partnership Manager</option>
+                            <option value="AI/ML Engineer">AI/ML Engineer</option>
+                            <option value="Customer Support Lead">Customer Support Lead</option>
+                            <option value="other">Other (Specify below)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="otherPositionGroup" style="display: none;">
+                        <label>Specify Position</label>
+                        <input type="text" class="form-control" id="otherPosition">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" class="form-control" id="applyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" class="form-control" id="applyEmail" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" class="form-control" id="applyPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Location *</label>
+                            <input type="text" class="form-control" id="applyLocation" placeholder="City, Country" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>LinkedIn Profile</label>
+                        <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Cover Letter *</label>
+                        <textarea class="form-control" id="coverLetter" placeholder="Tell us why you're interested in this position and what you can bring to Pamoja Eats..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Upload Resume/CV *</label>
+                        <input type="file" class="form-control" id="resume" accept=".pdf,.doc,.docx" required>
+                        <small style="color: var(--gray);">PDF, DOC, DOCX files only (Max 5MB)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Portfolio or Work Samples (Optional)</label>
+                        <input type="url" class="form-control" id="portfolio" placeholder="Link to your portfolio, GitHub, or work samples">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How did you hear about us? *</label>
+                        <select class="form-control" id="hearAbout" required>
+                            <option value="">Select option</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="job-board">Job Board</option>
+                            <option value="referral">Employee Referral</option>
+                            <option value="social-media">Social Media</option>
+                            <option value="website">Company Website</option>
+                            <option value="event">Career Event</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Availability to Start</label>
+                        <select class="form-control" id="availability">
+                            <option value="">Select option</option>
+                            <option value="immediate">Immediately</option>
+                            <option value="2weeks">2 Weeks</option>
+                            <option value="1month">1 Month</option>
+                            <option value="2months">2 Months</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Salary Expectations (Optional)</label>
+                        <input type="text" class="form-control" id="salaryExpectations" placeholder="e.g., TSh 3,000,000 - 4,000,000 per annum">
+                    </div>
+                    
+                    <button type="submit" class="cta-button" style="width: 100%;">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Pamoja<span style="color: var(--primary);">Eats</span></h2>
+                    <p>"Your Taste, Your Way" - Bringing Tanzania's best restaurants to your doorstep.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="restaurants.html">For Restaurants</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>HR Contact</h3>
+                    <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> careers@pamojaeats.co.tz</p>
+                    <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +255 555 123 456</p>
+                    <p><i class="fas fa-clock" style="margin-right: 10px;"></i> Mon-Fri: 9AM-5PM</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Career Resources</h3>
+                    <ul>
+                        <li><a href="#openings">Open Positions</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#process">Hiring Process</a></li>
+                        <li><a href="#apply">Apply Now</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pamoja Eats. Built by I&G Technologies. All rights reserved.</p>
+                <p>CEO: Irene Mgimba | Director: George William</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Job Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const jobCards = document.querySelectorAll('.job-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const department = btn.getAttribute('data-department');
+                
+                // Filter jobs
+                jobCards.forEach(card => {
+                    if (department === 'all' || card.getAttribute('data-department') === department) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        // Apply for Job Button
+        function applyForJob(position) {
+            document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+            
+            // Set the position in the form
+            document.getElementById('applyPosition').value = position;
+            updatePositionDetails();
+            
+            // Focus on the form
+            setTimeout(() => {
+                document.getElementById('applyName').focus();
+            }, 500);
+        }
+        
+        // Update position details
+        function updatePositionDetails() {
+            const positionSelect = document.getElementById('applyPosition');
+            const otherPositionGroup = document.getElementById('otherPositionGroup');
+            
+            if (positionSelect.value === 'other') {
+                otherPositionGroup.style.display = 'block';
+            } else {
+                otherPositionGroup.style.display = 'none';
+            }
+        }
+        
+        // Application Form Submission
+        function submitApplication(event) {
+            event.preventDefault();
+            
+            const position = document.getElementById('applyPosition').value === 'other' 
+                ? document.getElementById('otherPosition').value 
+                : document.getElementById('applyPosition').value;
+            const name = document.getElementById('applyName').value;
+            
+            // Validate file
+            const resumeFile = document.getElementById('resume').files[0];
+            if (resumeFile) {
+                const fileSize = resumeFile.size / 1024 / 1024; // in MB
+                if (fileSize > 5) {
+                    alert('Resume file size must be less than 5MB');
+                    return;
+                }
+            }
+            
+            alert(`Thank you, ${name}! Your application for ${position} has been submitted. Our HR team will review it and contact you within 5 business days.`);
+            
+            // Reset form
+            document.getElementById('careerApplicationForm').reset();
+            document.getElementById('otherPositionGroup').style.display = 'none';
+            
+            // Simulate processing
+            setTimeout(() => {
+                const confirmation = document.createElement('div');
+                confirmation.style.background = '#d4edda';
+                confirmation.style.color = '#155724';
+                confirmation.style.padding = '20px';
+                confirmation.style.borderRadius = '10px';
+                confirmation.style.marginTop = '20px';
+                confirmation.innerHTML = `
+                    <h4>Application Submitted Successfully!</h4>
+                    <p>We've sent a confirmation email to ${document.getElementById('applyEmail').value}</p>
+                    <p>Application ID: PE-${Math.floor(Math.random() * 10000)}</p>
+                    <p>Next step: Our HR team will contact you for an initial screening call.</p>
+                `;
+                
+                document.getElementById('careerApplicationForm').appendChild(confirmation);
+                
+                // Scroll to confirmation
+                confirmation.scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        }
+        
+        // Initialize form event listeners
+        document.getElementById('applyPosition').addEventListener('change', updatePositionDetails);
+        
+        // Auto-fill form for demo purposes
+        window.addEventListener('load', () => {
+            // Pre-fill with demo data (in real app, this would not be here)
+            if (window.location.hash === '#demo') {
+                document.getElementById('applyName').value = 'John Mwamba';
+                document.getElementById('applyEmail').value = 'john@example.com';
+                document.getElementById('applyPhone').value = '+255 712 345 678';
+                document.getElementById('applyLocation').value = 'Dar es Salaam, Tanzania';
+                document.getElementById('coverLetter').value = 'I am excited to apply for this position because I believe in Pamoja Eats\' mission to revolutionize Tanzania\'s food delivery ecosystem. With my 3 years of experience in frontend development and passion for creating user-friendly applications, I am confident I can contribute to your team\'s success.';
+                document.getElementById('hearAbout').value = 'website';
+                document.getElementById('availability').value = '1month';
+            }
+        });
+        
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
