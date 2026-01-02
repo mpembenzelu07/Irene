@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How It Works - Pamoja Eats</title>
+    <title>How Pamoja Eats Works | Multi-Restaurant Food Delivery Made Easy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== ROOT & RESET ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
@@ -18,14 +18,20 @@
             --secondary: #004E89;
             --accent: #00A896;
             --dark: #1A1A2E;
-            --light: #F8F9FA;
-            --gray: #6C757D;
+            --light: #FFFFFF;
+            --gray: #5A6D7C;
+            --success: #28A745;
+            --warning: #FFC107;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(255, 107, 53, 0.15);
         }
         
         body {
-            background-color: var(--light);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F9FAFB;
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -34,145 +40,289 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
         
-        .navbar {
+        h1 {
+            font-size: 3.5rem;
+            color: var(--dark);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+        }
+        
+        p {
+            font-size: 1.125rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        
+        /* ===== HEADER - SAME AS HOMEPAGE ===== */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.75rem;
+            text-decoration: none;
         }
         
-        .logo h1 {
-            color: var(--primary);
-            font-size: 28px;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.25rem;
         }
         
-        .logo span {
-            color: var(--secondary);
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-text .tagline {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 500;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 2rem;
+            align-items: center;
         }
         
         .nav-links a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
+            font-size: 1rem;
             transition: color 0.3s;
+            position: relative;
         }
         
         .nav-links a:hover {
             color: var(--primary);
         }
         
-        .cta-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+        .nav-links a.active {
+            color: var(--primary);
         }
         
-        .cta-button:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .header-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
         }
         
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 1.5rem;
+            color: var(--dark);
             cursor: pointer;
         }
         
-        /* Hero */
-        .hero {
-            padding: 100px 0;
-            background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(0,78,137,0.1) 100%);
-            text-align: center;
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 20px;
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #FF8B35);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 78, 137, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 78, 137, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
             color: var(--secondary);
+            border: 2px solid var(--secondary);
         }
         
-        .hero p {
-            font-size: 20px;
-            max-width: 800px;
-            margin: 0 auto 30px;
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        /* ===== HERO ===== */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 53, 0.05) 0%, 
+                rgba(0, 78, 137, 0.05) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
             color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        /* Tabs */
+        /* ===== TABS SECTION ===== */
         .tabs-section {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
-        .tabs-container {
-            max-width: 900px;
-            margin: 0 auto;
+            padding: 5rem 0;
+            background: white;
         }
         
         .tabs-header {
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #eee;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
         
         .tab-btn {
-            padding: 15px 30px;
-            background: none;
+            padding: 1rem 2.5rem;
+            background: #F3F4F6;
             border: none;
-            font-size: 18px;
+            border-radius: 50px;
+            font-size: 1.125rem;
             font-weight: 600;
-            cursor: pointer;
-            position: relative;
             color: var(--gray);
+            cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .tab-btn:hover {
+            background: #E5E7EB;
+            color: var(--dark);
         }
         
         .tab-btn.active {
-            color: var(--primary);
-        }
-        
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
         }
         
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.5s ease;
         }
         
         .tab-content.active {
@@ -180,77 +330,68 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Customer Flow */
-        .flow-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--secondary);
-            margin-bottom: 15px;
+        /* ===== CUSTOMER FLOW ===== */
+        .customer-flow {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F0F7FF 100%);
         }
         
         .flow-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            max-width: 800px;
-            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
         
         .flow-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
         .flow-step:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
         
         .step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
             width: 60px;
             height: 60px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            flex-shrink: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
         }
         
-        .step-content h3 {
-            margin-bottom: 15px;
-            color: var(--secondary);
+        .step-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
         }
         
         .step-features {
             list-style: none;
-            margin-top: 15px;
+            margin-top: 1.5rem;
         }
         
         .step-features li {
-            padding: 5px 0;
-            padding-left: 25px;
+            padding: 0.5rem 0;
+            padding-left: 1.75rem;
             position: relative;
         }
         
@@ -262,109 +403,120 @@
             font-weight: bold;
         }
         
-        /* Interactive Demo */
-        .demo-section {
-            padding: 80px 0;
-            background-color: white;
+        /* ===== INTERACTIVE DEMO ===== */
+        .interactive-demo {
+            padding: 5rem 0;
+            background: white;
         }
         
         .demo-container {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            border-radius: 20px;
-            padding: 40px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #0056A3 100%);
+            border-radius: 30px;
+            padding: 3rem;
             color: white;
-            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
         .demo-steps {
             display: flex;
             justify-content: space-between;
-            margin: 40px 0;
+            margin: 3rem 0;
             position: relative;
+        }
+        
+        .demo-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 1;
         }
         
         .demo-step {
             text-align: center;
             position: relative;
-            z-index: 1;
-            width: 20%;
+            z-index: 2;
+            flex: 1;
         }
         
         .demo-step-circle {
-            width: 70px;
-            height: 70px;
-            background: rgba(255,255,255,0.2);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 30px;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
             cursor: pointer;
             transition: all 0.3s;
+            border: 3px solid transparent;
         }
         
         .demo-step-circle:hover, .demo-step-circle.active {
             background: white;
-            color: var(--primary);
+            color: var(--secondary);
             transform: scale(1.1);
+            border-color: white;
         }
         
         .demo-content {
-            min-height: 200px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 30px;
-            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
         }
         
-        .demo-content h3 {
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        /* Payment Methods */
+        /* ===== PAYMENT METHODS ===== */
         .payment-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F0F7FF 100%);
         }
         
         .payment-methods {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
         
-        .payment-method {
-            width: 150px;
-            height: 100px;
+        .payment-card {
             background: white;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            text-align: center;
         }
         
-        .payment-method:hover {
-            transform: translateY(-5px);
+        .payment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
         
         .payment-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: var(--primary);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            margin: 0 auto 1rem;
         }
         
-        /* FAQ */
+        /* ===== FAQ ===== */
         .faq-section {
-            padding: 80px 0;
-            background-color: white;
+            padding: 5rem 0;
+            background: white;
         }
         
         .faq-container {
@@ -373,31 +525,37 @@
         }
         
         .faq-item {
-            margin-bottom: 15px;
-            border: 1px solid #eee;
-            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 2px solid #F3F4F6;
+            border-radius: 15px;
             overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary);
         }
         
         .faq-question {
-            padding: 20px;
-            background: #f8f9fa;
+            padding: 1.5rem;
+            background: #F9FAFB;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
+            font-size: 1.125rem;
         }
         
         .faq-answer {
-            padding: 0 20px;
+            padding: 0 1.5rem;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s, padding 0.3s;
+            transition: all 0.3s;
         }
         
         .faq-answer.active {
-            padding: 20px;
+            padding: 1.5rem;
             max-height: 500px;
         }
         
@@ -409,28 +567,98 @@
             transform: rotate(180deg);
         }
         
-        /* Footer */
-        footer {
-            background-color: var(--dark);
+        /* ===== COMPARISON TABLE ===== */
+        .comparison-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F0F7FF 100%);
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 3rem;
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: var(--secondary);
             color: white;
-            padding: 60px 0 20px;
+            font-weight: 600;
+            padding: 1.5rem;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 1.5rem;
+            border-bottom: 1px solid #F3F4F6;
+            transition: all 0.3s;
+        }
+        
+        .table-row:hover {
+            background: #F9FAFB;
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .checkmark {
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .crossmark {
+            color: #DC3545;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* ===== MOBILE OPTIMIZATION ===== */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .mobile-cta .btn {
+            width: 100%;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
         
-        .footer-logo h2 {
+        .footer-logo .logo-text h1 {
             color: white;
-            margin-bottom: 15px;
+            -webkit-text-fill-color: white;
+            background: none;
         }
         
-        .footer-links h3, .footer-contact h3 {
-            margin-bottom: 20px;
+        .footer-links h3 {
             color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
         }
         
         .footer-links ul {
@@ -438,26 +666,26 @@
         }
         
         .footer-links a {
-            color: #ccc;
+            color: #B0B7C3;
             text-decoration: none;
-            line-height: 2;
+            line-height: 2.5;
             transition: color 0.3s;
         }
         
         .footer-links a:hover {
-            color: var(--primary);
+            color: white;
         }
         
-        .social-icons {
+        .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -467,187 +695,264 @@
             transition: all 0.3s;
         }
         
-        .social-icon:hover {
+        .social-link:hover {
             background: var(--primary);
             transform: translateY(-3px);
         }
         
-        .copyright {
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
+            color: #B0B7C3;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .footer-credits {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 2.75rem;
             }
             
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .flow-step {
-                flex-direction: column;
-                text-align: center;
+            h2 {
+                font-size: 2rem;
             }
             
             .demo-steps {
                 flex-direction: column;
-                align-items: center;
-                gap: 30px;
+                gap: 2rem;
             }
             
-            .demo-step {
-                width: 100%;
+            .demo-steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .header-cta {
+                display: none;
+            }
+            
+            .mobile-cta {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
             }
             
             .tabs-header {
                 flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .tab-btn {
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
         }
         
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .flow-step, .payment-card {
+                padding: 2rem;
+            }
+            
+            .demo-container {
+                padding: 2rem;
+            }
+        }
+        
+        /* ===== UTILITY CLASSES ===== */
         .text-center {
             text-align: center;
         }
         
         .mb-20 {
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
         
         .mb-30 {
-            margin-bottom: 30px;
+            margin-bottom: 1.875rem;
         }
         
         .mt-30 {
-            margin-top: 30px;
+            margin-top: 1.875rem;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <h1>Pamoja<span>Eats</span></h1>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">PE</div>
+                <div class="logo-text">
+                    <h1>Pamoja Eats</h1>
+                    <div class="tagline">Smart Food Delivery for Tanzania</div>
                 </div>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="how-it-works.html" class="active">How It Works</a></li>
-                    <li><a href="features.html">Features</a></li>
-                    <li><a href="restaurants.html">Restaurants</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                
-                <button class="cta-button" onclick="location.href='restaurants.html'">Order Now</button>
-            </nav>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="how-it-works.html" class="active">How It Works</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li>
+                <li><a href="features.html">AI Features</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="header-cta">
+                <a href="restaurants.html" class="btn btn-outline btn-sm">For Restaurants</a>
+                <a href="restaurants.html#order" class="btn btn-primary btn-sm">Order Now</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="container">
-            <h2>How Pamoja Eats Works</h2>
-            <p>Discover the seamless process of ordering from multiple restaurants, AI-powered recommendations, and real-time tracking - all in one platform.</p>
-            <button class="cta-button" onclick="startDemo()">Try Interactive Demo</button>
+            <h1>How Pamoja Eats Works</h1>
+            <p class="hero-subtitle">Discover the magic of ordering from multiple restaurants in one seamless delivery. Save time, save money, and enjoy more variety.</p>
+            <div class="trust-badges" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-clock" style="color: var(--primary);"></i>
+                    <span>Save 30+ minutes per order</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-money-bill-wave" style="color: var(--success);"></i>
+                    <span>One checkout for all restaurants</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-truck" style="color: var(--secondary);"></i>
+                    <span>One delivery for everything</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Tabs -->
+    <!-- ===== TABS SECTION ===== -->
     <section class="tabs-section">
         <div class="container">
-            <div class="tabs-container">
-                <div class="tabs-header">
-                    <button class="tab-btn active" data-tab="customers">For Customers</button>
-                    <button class="tab-btn" data-tab="restaurants">For Restaurants</button>
-                    <button class="tab-btn" data-tab="delivery">Delivery Partners</button>
-                </div>
-                
-                <div class="tab-content active" id="customersTab">
-                    <div class="text-center">
-                        <h3 style="color: var(--secondary); margin-bottom: 20px;">Customer Experience</h3>
-                        <p>Order food from multiple restaurants in one seamless checkout with AI-powered recommendations and real-time tracking.</p>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="restaurantsTab">
-                    <div class="text-center">
-                        <h3 style="color: var(--secondary); margin-bottom: 20px;">Restaurant Dashboard</h3>
-                        <p>Manage orders, view analytics, run marketing campaigns, and collaborate with other restaurants through our powerful dashboard.</p>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="deliveryTab">
-                    <div class="text-center">
-                        <h3 style="color: var(--secondary); margin-bottom: 20px;">Delivery Network</h3>
-                        <p>AI-optimized delivery routing from multiple restaurants, real-time updates, and priority system for premium orders.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Customer Flow -->
-    <section class="flow-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Customer Journey</h2>
-                <p>From craving to delivery in 6 simple steps</p>
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="customers">
+                    <i class="fas fa-user"></i>
+                    For Customers
+                </button>
+                <button class="tab-btn" data-tab="restaurants">
+                    <i class="fas fa-store"></i>
+                    For Restaurants
+                </button>
+                <button class="tab-btn" data-tab="riders">
+                    <i class="fas fa-motorcycle"></i>
+                    For Riders
+                </button>
             </div>
             
-            <div class="flow-steps">
-                <div class="flow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
+            <!-- Customers Tab -->
+            <div class="tab-content active" id="customersTab">
+                <div class="text-center">
+                    <h2>Customer Experience</h2>
+                    <p class="lead">Order food from multiple restaurants in one seamless checkout with AI-powered recommendations and real-time tracking.</p>
+                </div>
+                
+                <div class="flow-steps">
+                    <div class="flow-step animate-fade-in-up">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
                         <h3>Sign Up & Set Preferences</h3>
-                        <p>Create your account using phone, email, or social media. Set your taste preferences, dietary restrictions, and favorite cuisines.</p>
+                        <p>Create your account in 30 seconds. Tell us your taste preferences, dietary restrictions, and favorite cuisines.</p>
                         <ul class="step-features">
-                            <li>Phone (MPesa), Email, Google/Facebook login</li>
-                            <li>Set spice level and dietary restrictions</li>
+                            <li>Phone (MPesa), Email, or Social login</li>
+                            <li>Set spice level and dietary needs</li>
                             <li>Save favorite cuisines for quick access</li>
                         </ul>
                     </div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
+                    
+                    <div class="flow-step animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
                         <h3>Browse & Discover</h3>
-                        <p>Explore restaurants filtered by cuisine, ratings, location, or try our AI-powered Taste Adventure Game for personalized suggestions.</p>
+                        <p>Explore restaurants filtered by cuisine, ratings, location, or try our AI-powered Taste Adventure Game.</p>
                         <ul class="step-features">
                             <li>Filter by cuisine, ratings, location</li>
                             <li>Cultural menus and influencer menus</li>
                             <li>Flash deals and seasonal specials</li>
                         </ul>
                     </div>
-                </div>
-                
-                <div class="flow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
+                    
+                    <div class="flow-step animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
                         <h3>Build Multi-Restaurant Cart</h3>
-                        <p>Add dishes from different restaurants to your cart. Customize each item and use our AI Combo Builder for perfect meal combinations.</p>
+                        <p>Add dishes from different restaurants to your cart. Customize each item and use AI Combo Builder.</p>
                         <ul class="step-features">
                             <li>Select dishes from multiple restaurants</li>
                             <li>Customize portion size, add-ons, spice level</li>
@@ -655,42 +960,107 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Restaurants Tab -->
+            <div class="tab-content" id="restaurantsTab">
+                <div class="text-center">
+                    <h2>Restaurant Dashboard</h2>
+                    <p class="lead">Manage orders, view analytics, run marketing campaigns, and collaborate with other restaurants through our powerful dashboard.</p>
+                </div>
                 
-                <div class="flow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Checkout & Payment</h3>
-                        <p>Pay using MPesa, Tigo Pesa, Airtel Money, cards, or wallet. Schedule deliveries or set up recurring orders for convenience.</p>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-store-alt"></i>
+                        </div>
+                        <h3>Quick Onboarding</h3>
+                        <p>Get set up in 24 hours. We help with digital menu setup, photography, and staff training.</p>
                         <ul class="step-features">
-                            <li>Multiple payment options</li>
-                            <li>Schedule delivery for future dates</li>
-                            <li>AI-suggested complementary dishes</li>
+                            <li>Free digital menu setup</li>
+                            <li>Professional food photography</li>
+                            <li>Staff training included</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Smart Dashboard</h3>
+                        <p>Manage everything from one place: orders, menu, pricing, and customer feedback.</p>
+                        <ul class="step-features">
+                            <li>Real-time order management</li>
+                            <li>Sales analytics and insights</li>
+                            <li>Customer feedback dashboard</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Collaboration & Growth</h3>
+                        <p>Partner with other restaurants for combo deals and reach new customer segments.</p>
+                        <ul class="step-features">
+                            <li>Create combo deals with other restaurants</li>
+                            <li>Cross-promotion opportunities</li>
+                            <li>Access to group orders and events</li>
                         </ul>
                     </div>
                 </div>
-                
-                <div class="flow-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>Real-Time Tracking</h3>
-                        <p>Track every dish from different kitchens with live updates. Get dynamic ETAs and notifications for any delays or substitutions.</p>
-                        <ul class="step-features">
-                            <li>Live updates from each restaurant</li>
-                            <li>Dynamic ETA updates</li>
-                            <li>Delay/substitution notifications</li>
-                        </ul>
-                    </div>
+            </div>
+            
+            <!-- Riders Tab -->
+            <div class="tab-content" id="ridersTab">
+                <div class="text-center">
+                    <h2>Delivery Partner Program</h2>
+                    <p class="lead">Join our network of delivery partners. Earn competitive rates with AI-optimized routes and multiple pickups per trip.</p>
                 </div>
                 
-                <div class="flow-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h3>Rate & Earn Rewards</h3>
-                        <p>Rate each dish individually, earn loyalty points, unlock badges, and share on social media for referral bonuses.</p>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3>Easy Registration</h3>
+                        <p>Sign up with your documents and start earning within 48 hours.</p>
                         <ul class="step-features">
-                            <li>Dish-level rating system</li>
-                            <li>Earn points and unlock badges</li>
-                            <li>Social sharing for referral bonuses</li>
+                            <li>Simple online registration</li>
+                            <li>Fast verification process</li>
+                            <li>Free starter kit included</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>Smart Routing</h3>
+                        <p>Our AI calculates the most efficient routes with multiple pickups.</p>
+                        <ul class="step-features">
+                            <li>Multiple pickups per trip</li>
+                            <li>Real-time route optimization</li>
+                            <li>Traffic and weather updates</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Earn More</h3>
+                        <p>Higher earnings with multiple deliveries and premium order options.</p>
+                        <ul class="step-features">
+                            <li>Competitive per-delivery rates</li>
+                            <li>Tips from satisfied customers</li>
+                            <li>Performance bonuses</li>
                         </ul>
                     </div>
                 </div>
@@ -698,117 +1068,222 @@
         </div>
     </section>
 
-    <!-- Interactive Demo -->
-    <section class="demo-section">
+    <!-- ===== INTERACTIVE DEMO ===== -->
+    <section class="interactive-demo">
         <div class="container">
             <div class="demo-container">
-                <h2>Interactive Demo</h2>
-                <p>Experience our platform step-by-step</p>
+                <div class="text-center">
+                    <h2 style="color: white;">Try Our Ordering Process</h2>
+                    <p style="color: rgba(255,255,255,0.9);">Experience how easy it is to order from multiple restaurants</p>
+                </div>
                 
                 <div class="demo-steps">
                     <div class="demo-step">
                         <div class="demo-step-circle active" data-step="1">
-                            <i class="fas fa-user-plus"></i>
+                            <i class="fas fa-utensils"></i>
                         </div>
-                        <p>Sign Up</p>
+                        <p style="color: white; font-weight: 600;">Choose Restaurants</p>
                     </div>
                     
                     <div class="demo-step">
                         <div class="demo-step-circle" data-step="2">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-cart-plus"></i>
                         </div>
-                        <p>Browse</p>
+                        <p style="color: rgba(255,255,255,0.8);">Add to Cart</p>
                     </div>
                     
                     <div class="demo-step">
                         <div class="demo-step-circle" data-step="3">
-                            <i class="fas fa-cart-plus"></i>
+                            <i class="fas fa-credit-card"></i>
                         </div>
-                        <p>Add to Cart</p>
+                        <p style="color: rgba(255,255,255,0.8);">Checkout</p>
                     </div>
                     
                     <div class="demo-step">
                         <div class="demo-step-circle" data-step="4">
-                            <i class="fas fa-credit-card"></i>
+                            <i class="fas fa-truck"></i>
                         </div>
-                        <p>Checkout</p>
-                    </div>
-                    
-                    <div class="demo-step">
-                        <div class="demo-step-circle" data-step="5">
-                            <i class="fas fa-shipping-fast"></i>
-                        </div>
-                        <p>Track</p>
+                        <p style="color: rgba(255,255,255,0.8);">Track Delivery</p>
                     </div>
                 </div>
                 
                 <div class="demo-content" id="demoContent">
-                    <h3>Step 1: Sign Up</h3>
-                    <p>Try our signup process! Enter your details below:</p>
-                    <div style="margin-top: 20px;">
-                        <input type="text" id="demoName" placeholder="Your Name" style="padding: 10px; width: 200px; border-radius: 5px; border: none; margin-right: 10px;">
-                        <input type="email" id="demoEmail" placeholder="Email Address" style="padding: 10px; width: 250px; border-radius: 5px; border: none; margin-right: 10px;">
-                        <button onclick="demoSignUp()" style="padding: 10px 20px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Sign Up</button>
+                    <h3 style="color: white; margin-bottom: 1rem;">Step 1: Choose Restaurants</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Select 2-3 restaurants for your order. Try mixing different cuisines!</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; cursor: pointer;" class="restaurant-select" data-restaurant="mama">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div>
+                                    <h4 style="color: white; margin: 0;">Mama's Kitchen</h4>
+                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">Tanzanian • ★★★★☆</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; cursor: pointer;" class="restaurant-select" data-restaurant="greenbowl">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div>
+                                    <h4 style="color: white; margin: 0;">Green Bowl</h4>
+                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">Healthy • ★★★★★</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; cursor: pointer;" class="restaurant-select" data-restaurant="pizzahouse">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--warning);">
+                                    <i class="fas fa-pizza-slice"></i>
+                                </div>
+                                <div>
+                                    <h4 style="color: white; margin: 0;">Zanzibar Pizza</h4>
+                                    <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">International • ★★★★☆</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p id="demoMessage" style="margin-top: 15px;"></p>
+                    
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" id="nextStepBtn">
+                        <i class="fas fa-arrow-right"></i>
+                        Next: Add to Cart
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment Methods -->
+    <!-- ===== PAYMENT METHODS ===== -->
     <section class="payment-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Payment Options</h2>
-                <p>Secure, convenient payment methods for everyone</p>
+            <div class="text-center">
+                <h2>Tanzanian Payment Methods</h2>
+                <p class="lead">Pay your way with familiar, trusted payment options</p>
             </div>
             
             <div class="payment-methods">
-                <div class="payment-method">
+                <div class="payment-card">
                     <div class="payment-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <p>MPesa</p>
+                    <h3>M-Pesa</h3>
+                    <p>Instant mobile payments with Tanzania's most popular mobile money service</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-card">
                     <div class="payment-icon">
                         <i class="fas fa-sim-card"></i>
                     </div>
-                    <p>Tigo Pesa</p>
+                    <h3>Tigo Pesa</h3>
+                    <p>Secure mobile payments with one of Tanzania's leading telecom providers</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-card">
                     <div class="payment-icon">
                         <i class="fas fa-wifi"></i>
                     </div>
-                    <p>Airtel Money</p>
+                    <h3>Airtel Money</h3>
+                    <p>Fast and reliable mobile payments across Tanzania</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Halopesa</h3>
+                    <p>Convenient mobile payments with Halotel's popular service</p>
+                </div>
+                
+                <div class="payment-card">
                     <div class="payment-icon">
                         <i class="fas fa-credit-card"></i>
                     </div>
-                    <p>Credit/Debit Card</p>
+                    <h3>Credit/Debit Cards</h3>
+                    <p>Visa, MasterCard, and other major card networks accepted</p>
                 </div>
                 
-                <div class="payment-method">
+                <div class="payment-card">
                     <div class="payment-icon">
-                        <i class="fas fa-wallet"></i>
+                        <i class="fas fa-cash-register"></i>
                     </div>
-                    <p>Pamoja Wallet</p>
+                    <h3>Cash on Delivery</h3>
+                    <p>Pay in cash when your food arrives at your doorstep</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
+    <!-- ===== COMPARISON TABLE ===== -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="text-center">
+                <h2>Why Choose Pamoja Eats?</h2>
+                <p class="lead">See how we compare to traditional food delivery platforms</p>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="table-header">
+                    <div>Feature</div>
+                    <div>Pamoja Eats</div>
+                    <div>Traditional Apps</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>Multi-Restaurant Orders</div>
+                    <div><span class="checkmark">✓</span> Yes - Our Main Feature</div>
+                    <div><span class="crossmark">✗</span> No - One restaurant at a time</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>AI-Powered Recommendations</div>
+                    <div><span class="checkmark">✓</span> Smart combos from multiple restaurants</div>
+                    <div><span class="crossmark">✗</span> Basic filters only</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>Group Order Splitting</div>
+                    <div><span class="checkmark">✓</span> Automatic bill splitting</div>
+                    <div><span class="crossmark">✗</span> Manual calculation required</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>Real-Time Multi-Tracking</div>
+                    <div><span class="checkmark">✓</span> Track each restaurant separately</div>
+                    <div><span class="crossmark">✗</span> Single order tracking only</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>Local Payment Methods</div>
+                    <div><span class="checkmark">✓</span> All Tanzanian mobile money options</div>
+                    <div><span class="crossmark">✗</span> Limited payment options</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>Restaurant Collaborations</div>
+                    <div><span class="checkmark">✓</span> Combo deals between restaurants</div>
+                    <div><span class="crossmark">✗</span> Restaurants compete independently</div>
+                </div>
+                
+                <div class="table-row">
+                    <div>Tanzanian Focus</div>
+                    <div><span class="checkmark">✓</span> Built for Tanzanian food culture</div>
+                    <div><span class="crossmark">✗</span> Global templates, not localized</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
     <section class="faq-section">
         <div class="container">
-            <div class="section-title">
+            <div class="text-center">
                 <h2>Frequently Asked Questions</h2>
-                <p>Find answers to common questions</p>
+                <p class="lead">Find answers to common questions about Pamoja Eats</p>
             </div>
             
             <div class="faq-container">
@@ -819,16 +1294,6 @@
                     </div>
                     <div class="faq-answer">
                         <p>You can add dishes from different restaurants to a single cart. Our AI optimizes the delivery route and timing so all items arrive together or in the most efficient sequence. Each restaurant prepares their dishes independently, and our delivery network coordinates the final delivery to you.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How does the AI Combo Builder work?</span>
-                        <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Our AI analyzes your taste preferences, previous orders, and popular combinations to suggest perfect meal pairings from different restaurants. For example, it might suggest a main dish from one restaurant, sides from another, and drinks from a third - all based on complementary flavors and delivery optimization.</p>
                     </div>
                 </div>
                 
@@ -859,96 +1324,125 @@
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>How does the loyalty program work?</span>
+                        <span>How does the AI combo builder work?</span>
                         <i class="fas fa-chevron-down faq-toggle"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>You earn points for every order: 1 point per TSh 1,000 spent. Points can be redeemed for discounts, free items, or exclusive deals. You also unlock badges for milestones like "Spice Master," "Local Food Explorer," or "Group Order Champion." Share your orders on social media for bonus points!</p>
+                        <p>Our AI analyzes your taste preferences, previous orders, and popular combinations to suggest perfect meal pairings from different restaurants. For example, it might suggest a main dish from one restaurant, sides from another, and drinks from a third - all based on complementary flavors and delivery optimization.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What cities do you operate in?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently we operate in Dar es Salaam, Arusha, and Mwanza. We're expanding to Dodoma and Zanzibar in the coming months, with plans to cover all major Tanzanian cities by the end of 2024.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h2>Pamoja<span style="color: var(--primary);">Eats</span></h2>
-                    <p>"Your Taste, Your Way" - Bringing Tanzania's best restaurants to your doorstep.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="index.html" class="logo" style="justify-content: flex-start;">
+                        <div class="logo-icon">PE</div>
+                        <div class="logo-text">
+                            <h1>Pamoja Eats</h1>
+                            <div class="tagline" style="color: #B0B7C3;">Smart Food Delivery for Tanzania</div>
+                        </div>
+                    </a>
+                    <p style="color: #B0B7C3; margin-top: 1rem;">Building Tanzania's first AI-powered food ecosystem since 2023.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-links">
-                    <h3>Quick Links</h3>
+                    <h3>For Customers</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
                         <li><a href="how-it-works.html">How It Works</a></li>
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="restaurants.html">Restaurants</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="features.html">AI Features</a></li>
+                        <li><a href="restaurants.html">Browse Restaurants</a></li>
+                        <li><a href="contact.html">Help & Support</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Dar es Salaam, Tanzania</p>
-                    <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +255 123 456 789</p>
-                    <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@pamojaeats.co.tz</p>
                 </div>
                 
                 <div class="footer-links">
                     <h3>For Restaurants</h3>
                     <ul>
-                        <li><a href="restaurants.html#join">Join Our Platform</a></li>
-                        <li><a href="restaurants.html#benefits">Restaurant Benefits</a></li>
-                        <li><a href="restaurants.html#dashboard">Dashboard Demo</a></li>
+                        <li><a href="restaurants.html#partner">Partner With Us</a></li>
+                        <li><a href="restaurants.html#benefits">Benefits</a></li>
+                        <li><a href="restaurants.html#dashboard">Restaurant Dashboard</a></li>
+                        <li><a href="restaurants.html#pricing">Pricing</a></li>
+                        <li><a href="contact.html">Partner Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html#press">Press</a></li>
+                        <li><a href="contact.html#terms">Terms & Privacy</a></li>
+                        <li><a href="contact.html#safety">Safety</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2023 Pamoja Eats. Built by I&G Technologies. All rights reserved.</p>
-                <p>CEO: Irene Mgimba | Director: George William</p>
+            <div class="footer-bottom">
+                <p>© 2023 Pamoja Eats. All rights reserved. Built for Tanzania, by Tanzanians.</p>
+                <div class="footer-credits">
+                    <span>CEO: Irene Mgimba</span>
+                    <span>Director: George William</span>
+                    <span>Built by I&G Technologies</span>
+                    <span>📍 Dar es Salaam, Tanzania</span>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- ===== MOBILE CTA ===== -->
+    <div class="mobile-cta">
+        <a href="restaurants.html#order" class="btn btn-primary">
+            <i class="fas fa-shopping-cart"></i>
+            Try Pamoja Eats Now
+        </a>
+    </div>
+
     <script>
-        // Mobile Menu Toggle
+        // ===== MOBILE MENU =====
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
         
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
         
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.querySelector('i').classList.remove('fa-times');
                 mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-            });
+            }
         });
         
-        // Tab functionality
+        // ===== TABS FUNCTIONALITY =====
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         
@@ -965,224 +1459,234 @@
             });
         });
         
-        // Interactive Demo
-        const demoSteps = document.querySelectorAll('.demo-step-circle');
+        // ===== INTERACTIVE DEMO =====
+        const demoStepCircles = document.querySelectorAll('.demo-step-circle');
         const demoContent = document.getElementById('demoContent');
+        const nextStepBtn = document.getElementById('nextStepBtn');
+        const restaurantSelects = document.querySelectorAll('.restaurant-select');
+        
+        let selectedRestaurants = [];
+        let currentStep = 1;
         
         // Demo steps content
-        const demoContents = {
+        const demoSteps = {
             1: {
-                title: "Step 1: Sign Up",
-                content: `<p>Try our signup process! Enter your details below:</p>
-                <div style="margin-top: 20px;">
-                    <input type="text" id="demoName" placeholder="Your Name" style="padding: 10px; width: 200px; border-radius: 5px; border: none; margin-right: 10px;">
-                    <input type="email" id="demoEmail" placeholder="Email Address" style="padding: 10px; width: 250px; border-radius: 5px; border: none; margin-right: 10px;">
-                    <button onclick="demoSignUp()" style="padding: 10px 20px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Sign Up</button>
-                </div>
-                <p id="demoMessage" style="margin-top: 15px;"></p>`
+                title: "Step 1: Choose Restaurants",
+                content: `<p style="color: rgba(255,255,255,0.9);">Select 2-3 restaurants for your order. Try mixing different cuisines!</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; cursor: pointer;" class="restaurant-select" data-restaurant="mama">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: white; margin: 0;">Mama's Kitchen</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">Tanzanian • ★★★★☆</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; cursor: pointer;" class="restaurant-select" data-restaurant="greenbowl">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: white; margin: 0;">Green Bowl</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">Healthy • ★★★★★</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; cursor: pointer;" class="restaurant-select" data-restaurant="pizzahouse">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 40px; height: 40px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--warning);">
+                                <i class="fas fa-pizza-slice"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: white; margin: 0;">Zanzibar Pizza</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">International • ★★★★☆</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                button: `<i class="fas fa-arrow-right"></i> Next: Add to Cart`
             },
             2: {
-                title: "Step 2: Browse Restaurants",
-                content: `<p>Explore restaurants in your area. Use filters or try our Taste Adventure Game!</p>
-                <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="demo-filter" onclick="filterDemo('tanzanian')" style="padding: 8px 15px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; border-radius: 20px; cursor: pointer;">Tanzanian</button>
-                    <button class="demo-filter" onclick="filterDemo('international')" style="padding: 8px 15px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; border-radius: 20px; cursor: pointer;">International</button>
-                    <button class="demo-filter" onclick="filterDemo('fast-food')" style="padding: 8px 15px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; border-radius: 20px; cursor: pointer;">Fast Food</button>
-                    <button class="demo-filter" onclick="filterDemo('healthy')" style="padding: 8px 15px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; border-radius: 20px; cursor: pointer;">Healthy</button>
+                title: "Step 2: Add to Cart",
+                content: `<p style="color: rgba(255,255,255,0.9);">Add dishes from your selected restaurants to your multi-restaurant cart.</p>
+                
+                <div style="margin-top: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="color: white; margin: 0;">Nyama Choma</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">Mama's Kitchen • TSh 12,000</p>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <button style="width: 30px; height: 30px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; color: white; cursor: pointer;">-</button>
+                                <span style="color: white; font-weight: 600;">1</span>
+                                <button style="width: 30px; height: 30px; background: white; border: none; border-radius: 50%; color: var(--secondary); cursor: pointer;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="color: white; margin: 0;">Fresh Juice</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">Green Bowl • TSh 2,500</p>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <button style="width: 30px; height: 30px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; color: white; cursor: pointer;">-</button>
+                                <span style="color: white; font-weight: 600;">2</span>
+                                <button style="width: 30px; height: 30px; background: white; border: none; border-radius: 50%; color: var(--secondary); cursor: pointer;">+</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p id="filterResult" style="margin-top: 15px;">Select a cuisine to see restaurant suggestions</p>`
+                
+                <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: white; font-weight: 600;">Total (2 restaurants):</span>
+                        <span style="color: white; font-weight: 600;">TSh 17,000</span>
+                    </div>
+                </div>`,
+                button: `<i class="fas fa-arrow-right"></i> Next: Checkout`
             },
             3: {
-                title: "Step 3: Add to Cart",
-                content: `<p>Build your multi-restaurant cart. Try adding items from different restaurants!</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; width: 200px;">
-                            <h4>Nyama Choma</h4>
-                            <p>Mama's Kitchen</p>
-                            <p>TSh 12,000</p>
-                            <button onclick="addToDemoCart('Nyama Choma', 12000)" style="padding: 8px 15px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Add to Cart</button>
+                title: "Step 3: Checkout",
+                content: `<p style="color: rgba(255,255,255,0.9);">Complete your order with one seamless checkout.</p>
+                
+                <div style="margin-top: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-mobile-alt" style="font-size: 1.5rem; color: white; margin-bottom: 0.5rem;"></i>
+                            <p style="color: white; margin: 0; font-size: 0.875rem;">M-Pesa</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; width: 200px;">
-                            <h4>Fresh Juice</h4>
-                            <p>Green Bowl</p>
-                            <p>TSh 2,500</p>
-                            <button onclick="addToDemoCart('Fresh Juice', 2500)" style="padding: 8px 15px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Add to Cart</button>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; width: 200px;">
-                            <h4>Chapati (2 pieces)</h4>
-                            <p>Mama's Kitchen</p>
-                            <p>TSh 2,000</p>
-                            <button onclick="addToDemoCart('Chapati', 2000)" style="padding: 8px 15px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Add to Cart</button>
+                        
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-money-bill-wave" style="font-size: 1.5rem; color: white; margin-bottom: 0.5rem;"></i>
+                            <p style="color: white; margin: 0; font-size: 0.875rem;">Cash</p>
                         </div>
                     </div>
-                    <div id="demoCart" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                        <h4>Your Cart (0 items)</h4>
-                        <p>Total: TSh 0</p>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: rgba(255,255,255,0.8);">Subtotal (2 items)</span>
+                            <span style="color: white;">TSh 17,000</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: rgba(255,255,255,0.8);">Delivery (2 restaurants)</span>
+                            <span style="color: white;">TSh 3,000</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                            <span style="color: white; font-weight: 600;">Total</span>
+                            <span style="color: white; font-weight: 600;">TSh 20,000</span>
+                        </div>
                     </div>
-                </div>`
+                </div>`,
+                button: `<i class="fas fa-arrow-right"></i> Next: Track Delivery`
             },
             4: {
-                title: "Step 4: Checkout",
-                content: `<p>Complete your order with multiple payment options.</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <button class="payment-demo" onclick="selectPayment('mpesa')" style="padding: 10px 20px; background: rgba(255,255,255,0.2); border: 2px solid transparent; color: white; border-radius: 10px; cursor: pointer;">MPesa</button>
-                        <button class="payment-demo" onclick="selectPayment('card')" style="padding: 10px 20px; background: rgba(255,255,255,0.2); border: 2px solid transparent; color: white; border-radius: 10px; cursor: pointer;">Card</button>
-                        <button class="payment-demo" onclick="selectPayment('wallet')" style="padding: 10px 20px; background: rgba(255,255,255,0.2); border: 2px solid transparent; color: white; border-radius: 10px; cursor: pointer;">Wallet</button>
-                    </div>
-                    <div id="paymentForm" style="display: none;">
-                        <input type="text" id="paymentDetails" placeholder="Enter payment details" style="padding: 10px; width: 300px; border-radius: 5px; border: none; margin-right: 10px;">
-                        <button onclick="processPayment()" style="padding: 10px 20px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer;">Pay Now</button>
-                    </div>
-                    <p id="paymentMessage" style="margin-top: 15px;"></p>
-                </div>`
-            },
-            5: {
-                title: "Step 5: Track Your Order",
-                content: `<p>Real-time tracking for your multi-restaurant order.</p>
-                <div style="margin-top: 20px;">
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                        <h4>Order Status</h4>
-                        <div style="margin-top: 15px;">
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 20px; height: 20px; background: var(--accent); border-radius: 50%; margin-right: 10px;"></div>
-                                <span>Order Confirmed</span>
+                title: "Step 4: Track Delivery",
+                content: `<p style="color: rgba(255,255,255,0.9);">Track your multi-restaurant order in real-time.</p>
+                
+                <div style="margin-top: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                <i class="fas fa-check"></i>
                             </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 20px; height: 20px; background: var(--accent); border-radius: 50%; margin-right: 10px;"></div>
-                                <span>Mama's Kitchen: Preparing Nyama Choma</span>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 20px; height: 20px; background: rgba(255,255,255,0.3); border-radius: 50%; margin-right: 10px;"></div>
-                                <span>Green Bowl: Preparing Fresh Juice</span>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 20px; height: 20px; background: rgba(255,255,255,0.3); border-radius: 50%; margin-right: 10px;"></div>
-                                <span>Delivery Partner Assigned</span>
-                            </div>
-                            <div style="display: flex; align-items: center;">
-                                <div style="width: 20px; height: 20px; background: rgba(255,255,255,0.3); border-radius: 50%; margin-right: 10px;"></div>
-                                <span>Estimated Delivery: 45 minutes</span>
+                            <div>
+                                <h4 style="color: white; margin: 0;">Order Confirmed</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">2:30 PM • Today</p>
                             </div>
                         </div>
-                        <button onclick="updateTracking()" style="padding: 10px 20px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Simulate Next Step</button>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: white; margin: 0;">Mama's Kitchen: Preparing</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">ETA: 15 minutes</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: white; margin: 0;">Green Bowl: Preparing</h4>
+                                <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.875rem;">ETA: 10 minutes</p>
+                            </div>
+                        </div>
                     </div>
-                </div>`
+                </div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                    <p style="color: white; margin: 0; font-size: 0.875rem;">
+                        <i class="fas fa-robot" style="margin-right: 0.5rem;"></i>
+                        <strong>AI Prediction:</strong> Your food from 2 restaurants will be delivered together in 25 minutes.
+                    </p>
+                </div>`,
+                button: `<i class="fas fa-redo"></i> Start Over`
             }
         };
         
-        let demoCart = [];
-        let demoCartTotal = 0;
-        let selectedPayment = null;
-        
-        function startDemo() {
-            document.querySelector('.demo-step-circle[data-step="1"]').click();
-        }
-        
-        demoSteps.forEach(step => {
-            step.addEventListener('click', () => {
-                // Remove active class from all steps
-                demoSteps.forEach(s => s.classList.remove('active'));
-                
-                // Add active class to clicked step
-                step.classList.add('active');
-                
-                // Update content
-                const stepNum = step.getAttribute('data-step');
-                const content = demoContents[stepNum];
-                demoContent.innerHTML = `<h3>${content.title}</h3>${content.content}`;
-            });
-        });
-        
-        function demoSignUp() {
-            const name = document.getElementById('demoName').value;
-            const email = document.getElementById('demoEmail').value;
+        function updateDemoStep(step) {
+            currentStep = step;
             
-            if (name && email) {
-                document.getElementById('demoMessage').innerHTML = `<span style="color: #90EE90;">✓ Account created successfully! Welcome, ${name}.</span>`;
-                // Auto-proceed to next step after 1 second
-                setTimeout(() => {
-                    document.querySelector('.demo-step-circle[data-step="2"]').click();
-                }, 1000);
-            } else {
-                document.getElementById('demoMessage').innerHTML = `<span style="color: #FF6B6B;">Please enter both name and email</span>`;
-            }
-        }
-        
-        function filterDemo(cuisine) {
-            const restaurants = {
-                tanzanian: "Mama's Kitchen, Swahili Delights, Nyama House",
-                international: "Zanzibar Pizza House, Asian Fusion, Italian Bistro",
-                'fast-food': "Burger Palace, Chicken Express, Pizza Corner",
-                healthy: "Green Bowl, Fresh & Fit, Vegan Vibes"
-            };
-            
-            document.getElementById('filterResult').innerHTML = 
-                `<span style="color: #90EE90;">✓ Showing ${cuisine} restaurants: ${restaurants[cuisine]}</span>`;
-            
-            // Auto-proceed to next step
-            setTimeout(() => {
-                document.querySelector('.demo-step-circle[data-step="3"]').click();
-            }, 1500);
-        }
-        
-        function addToDemoCart(item, price) {
-            demoCart.push({item, price});
-            demoCartTotal += price;
-            
-            const cartDiv = document.getElementById('demoCart');
-            cartDiv.innerHTML = `
-                <h4>Your Cart (${demoCart.length} items)</h4>
-                <ul>
-                    ${demoCart.map(item => `<li>${item.item} - TSh ${item.price.toLocaleString()}</li>`).join('')}
-                </ul>
-                <p><strong>Total: TSh ${demoCartTotal.toLocaleString()}</strong></p>
-                ${demoCart.length >= 2 ? 
-                    '<button onclick="proceedToCheckout()" style="padding: 8px 15px; background: white; color: var(--primary); border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Proceed to Checkout</button>' : 
-                    '<p style="color: #FFD700;">Add at least 2 items from different restaurants to continue</p>'
+            // Update step circles
+            demoStepCircles.forEach(circle => {
+                circle.classList.remove('active');
+                const circleStep = parseInt(circle.getAttribute('data-step'));
+                if (circleStep <= step) {
+                    circle.classList.add('active');
                 }
-            `;
-        }
-        
-        function proceedToCheckout() {
-            document.querySelector('.demo-step-circle[data-step="4"]').click();
-        }
-        
-        function selectPayment(method) {
-            selectedPayment = method;
-            document.querySelectorAll('.payment-demo').forEach(btn => {
-                btn.style.border = '2px solid transparent';
             });
-            event.target.style.border = '2px solid white';
             
-            document.getElementById('paymentForm').style.display = 'block';
-            document.getElementById('paymentDetails').placeholder = 
-                method === 'mpesa' ? 'Enter your MPesa phone number' :
-                method === 'card' ? 'Enter card number' :
-                'Enter wallet PIN';
-        }
-        
-        function processPayment() {
-            const details = document.getElementById('paymentDetails').value;
-            if (details) {
-                document.getElementById('paymentMessage').innerHTML = 
-                    `<span style="color: #90EE90;">✓ Payment successful via ${selectedPayment.toUpperCase()}!</span>`;
-                
-                setTimeout(() => {
-                    document.querySelector('.demo-step-circle[data-step="5"]').click();
-                }, 1000);
-            } else {
-                document.getElementById('paymentMessage').innerHTML = 
-                    `<span style="color: #FF6B6B;">Please enter payment details</span>`;
+            // Update content
+            const stepData = demoSteps[step];
+            demoContent.innerHTML = `
+                <h3 style="color: white; margin-bottom: 1rem;">${stepData.title}</h3>
+                ${stepData.content}
+                <button class="btn btn-primary" style="margin-top: 1.5rem;" id="nextStepBtn">
+                    ${stepData.button}
+                </button>
+            `;
+            
+            // Re-attach event listeners
+            document.getElementById('nextStepBtn').addEventListener('click', () => {
+                if (step === 4) {
+                    updateDemoStep(1);
+                } else {
+                    updateDemoStep(step + 1);
+                }
+            });
+            
+            // Re-attach restaurant selection
+            if (step === 1) {
+                document.querySelectorAll('.restaurant-select').forEach(select => {
+                    select.addEventListener('click', function() {
+                        const restaurant = this.getAttribute('data-restaurant');
+                        this.style.background = this.style.background.includes('white') 
+                            ? 'rgba(255,255,255,0.1)' 
+                            : 'rgba(255,255,255,0.3)';
+                    });
+                });
             }
         }
         
-        function updateTracking() {
-            alert("Tracking updated! In the real app, you would see live updates as your food is prepared and delivered.");
-        }
+        // Initialize demo
+        updateDemoStep(1);
         
-        // FAQ functionality
+        // ===== FAQ FUNCTIONALITY =====
         const faqQuestions = document.querySelectorAll('.faq-question');
         
         faqQuestions.forEach(question => {
@@ -1201,6 +1705,49 @@
                 // Toggle current FAQ
                 answer.classList.toggle('active');
                 toggle.classList.toggle('active');
+            });
+        });
+        
+        // ===== ANIMATIONS ON SCROLL =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
